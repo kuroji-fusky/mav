@@ -1,5 +1,7 @@
 import type { Metadata } from "next"
+import { redirect } from "next/navigation"
 import { config } from "@/constants"
+import { fetchUserData } from "@/utils/api"
 import { BRAND } from "@myfursona-internal/config"
 
 const title = `${BRAND} — a place where everyfur belongs!`
@@ -17,7 +19,10 @@ export const metadata: Metadata = {
   }
 }
 
-export default function Home() {
+export default async function Home() {
+  const user = await fetchUserData().catch(() => {})
+  if (user) redirect("/browse")
+
   return (
     <>
       <div className="w-full p-8">
