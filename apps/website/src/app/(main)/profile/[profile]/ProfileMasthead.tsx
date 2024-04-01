@@ -65,6 +65,7 @@ export default function ProfileMasthead({
       countIndicator: 69
     }
   ]
+  console.log(profileData)
 
   return (
     <Masthead hasEditAccess={hasEditAccess}>

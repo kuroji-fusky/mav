@@ -22,7 +22,7 @@ export default function Footer() {
     { text: "Status", link: "https://stats.uptimerobot.com/rlVXRfwrKz" }
   ]
 
-  const copyrightOwner = "Fusky Labs Software Ltd and the MyArtverse contributors"
+  const copyrightOwner = "MyArtverse"
 
   return (
     <div className="border-t-400 border-t py-8">
