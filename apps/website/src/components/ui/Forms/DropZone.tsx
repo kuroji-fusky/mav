@@ -11,7 +11,12 @@ import MFImage from "../MFImage"
 const allowedTypes = ["image/png", "image/jpeg", "image/jpg"]
 const maxFileSize = 10 * 1024 * 1024 // 10 MB
 
-export default function DropZone({ setData, className = "", value = undefined }) {
+export default function DropZone({
+  setData,
+  className = "",
+  value = undefined,
+  aspectRatio = "1"
+}) {
   const [isDragging, setIsDragging] = useState(false)
   const [error, setError] = useState(null)
   const [file, setFile] = useState(null)
@@ -142,7 +147,7 @@ export default function DropZone({ setData, className = "", value = undefined })
       {success ? (
         <div className="flex flex-col items-center justify-center">
           <input type="file" className="hidden" onChange={handleFileInputChange} />
-          <img alt="" src={imageUrl} width={200} height={200} />
+          <img alt="" src={imageUrl} />
           <span className="text-lg font-bold">Uploaded!</span>
         </div>
       ) : uploading ? (
@@ -165,7 +170,13 @@ export default function DropZone({ setData, className = "", value = undefined })
           />
 
           {value ? (
-            <MFImage alt="" src={value} width={128} height={128} />
+            <MFImage
+              aspectRatio={aspectRatio}
+              width={"100%"}
+              height={"100%"}
+              alt=""
+              src={value}
+            />
           ) : (
             <>
               <button

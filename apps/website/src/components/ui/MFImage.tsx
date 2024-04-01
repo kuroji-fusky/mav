@@ -10,6 +10,7 @@ export default function MFImage({
   src,
   alt,
   aspectRatio,
+  layout = "fill",
   height,
   width,
   sizes,
@@ -23,6 +24,7 @@ export default function MFImage({
   src: string
   aspectRatio?: string
   height?: string | number
+  layout?: "fill" | "responsive" | "intrinsic" | "fixed"
   width?: string | number
   sizes?: string
   strategy?: ImgLoadStrategy
@@ -72,9 +74,10 @@ export default function MFImage({
           objectFit,
           ...style
         }}
-        fill
+        // fill
         src={src}
         alt={alt ?? ""}
+        layout={layout}
         decoding="async"
         sizes={sizes}
         fetchPriority={setStrategy.fetchPriority}

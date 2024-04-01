@@ -28,12 +28,14 @@ export default function UploadRefsheetModal({
 }) {
   const [mainRefUrl, setMainRefUrl] = useState("")
   const [saved, setSaved] = useState(true)
-  const [formData, setFormData] = useState({
+  const defaultValue = {
     refSheetName: "",
     artist: "",
     colors: [],
     variants: []
-  })
+  }
+
+  const [formData, setFormData] = useState(defaultValue)
 
   useEffect(() => {
     if (editingRefSheet) {
@@ -107,8 +109,8 @@ export default function UploadRefsheetModal({
   }
 
   const close = () => {
+    setFormData(defaultValue)
     toggleUploadRefSheetModal()
-    window.location.reload()
   }
 
   const saveAndClose = () => {
@@ -139,7 +141,12 @@ export default function UploadRefsheetModal({
       <section className="flex flex-row justify-around p-4">
         <div className="w-2/5">
           <span className="mb-4 text-2xl">Primary Ref Sheet</span>
-          <DropZone setData={setMainRefUrl} className="h-full w-full" />
+          <DropZone
+            aspectRatio="16/9"
+            setData={setMainRefUrl}
+            className="w-full"
+            value={formData.variants.length > 0 ? formData.variants[0].url : undefined}
+          />
         </div>
         <div>
           <InputField
