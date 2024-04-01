@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic"
+import cn from "@/utils/cn"
 import CommentSkeleton from "./CommentSkeleton"
 
 const CommentField = dynamic(
@@ -11,12 +12,19 @@ const CommentItem = dynamic(
 )
 
 function Comment({
-  children
-}: Readonly<{ children?: React.ReactNode }>) {
+  children,
+  className
+}: Readonly<{
+  children?: React.ReactNode
+  className?: string
+}>) {
   return (
     <div
       id="comments-renderer"
-      className="flex flex-col gap-y-3.5"
+      className={cn(
+        `flex flex-col gap-y-3.5`,
+        className
+      )}
     >
       {children}
     </div>

@@ -10,6 +10,9 @@ import { FaFolderPlus } from "react-icons/fa6"
 import { LuXCircle } from "react-icons/lu"
 import type { ReferenceSheet } from "@/types/characters"
 
+// TODO: Add Delete
+// TODO: Fix Clear Form
+
 export default function UploadRefsheetModal({
   toggleUploadRefSheetModal,
   uploadRefsheetModal,
@@ -61,6 +64,13 @@ export default function UploadRefsheetModal({
   useEffect(() => {
     setSaved(false)
   }, [formData])
+
+  // useEffect(() => {
+  //   if (uploadRefsheetModal) {
+  //     setMainRefUrl("")
+  //     setFormData(defaultValue)
+  //   }
+  // })
 
   const handleChange = (key, value) => {
     setFormData((prev) => ({ ...prev, [key]: value }))
@@ -140,7 +150,7 @@ export default function UploadRefsheetModal({
       </Modal.Title>
       <section className="flex flex-row justify-around p-4">
         <div className="w-2/5">
-          <span className="mb-4 text-2xl">Primary Ref Sheet</span>
+          <span className="my-4 text-2xl">Primary Ref Sheet</span>
           <DropZone
             aspectRatio="16/9"
             setData={setMainRefUrl}

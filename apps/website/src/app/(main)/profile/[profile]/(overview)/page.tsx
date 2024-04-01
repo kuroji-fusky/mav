@@ -1,7 +1,9 @@
 import type { Metadata } from "next"
 import { Field, Group, MarginClamp } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
+import Comments from "@/components/ui/Comments"
 import { fetchUser, fetchUserData } from "@/utils/api"
+import { LuFilter } from "react-icons/lu"
 import type { SlugRouteProps } from "@/types/utils"
 
 export async function generateMetadata({ params }: SlugRouteProps): Promise<Metadata> {
@@ -54,6 +56,23 @@ export default async function Page({ params }) {
               {/* <Field title="Nationality" content="Murica" /> */}
             </Group.Content>
           </Group>
+          <Comments className="my-6">
+            <div className="flex flex-row items-center justify-between">
+              <div className="flex flex-row items-center space-x-4">
+                <span className="text-2xl font-bold">Comments</span>
+                <span className="border-400 rounded-full border border-solid px-4 py-1">
+                  {32}
+                </span>
+              </div>
+              <Button prefixIcon={<LuFilter size={16} />}>Sort</Button>
+            </div>
+            <div className="bg-200 flex flex-col gap-y-5 rounded px-6 py-4">
+              {/* TODO: Change color */}
+              <Comments.Field />
+              <Comments.Item>nice</Comments.Item>
+              <Comments.Item>very cool</Comments.Item>
+            </div>
+          </Comments>
         </div>
       </div>
     </MarginClamp>

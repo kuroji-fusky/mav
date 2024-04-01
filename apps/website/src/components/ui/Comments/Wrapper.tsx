@@ -1,5 +1,6 @@
 "use client"
 
+import cn from "@/utils/cn"
 import type { UserRoles } from "@/types/users"
 import Author from "../Author"
 import { Avatar } from "../Buttons"
@@ -9,7 +10,8 @@ export default function CommentWrapper({
   children,
   avatar,
   noAuthor,
-  roles
+  roles,
+  className
 }: Readonly<
   Partial<
     {
@@ -17,15 +19,16 @@ export default function CommentWrapper({
       avatar: string
       username: string
       noAuthor: boolean
+      className?: string
     } & React.ComponentProps<typeof Author>
   >
 >) {
   return (
-    <div className="flex items-start gap-x-4">
+    <div className={"flex items-start gap-x-4"}>
       <div className="flex-shrink-0">
         <Avatar size={40} src={avatar ?? "/img/examples/kuro/kuro-example4.png"} />
       </div>
-      <div className="flex w-full flex-col gap-y-1">
+      <div className={cn("flex w-full flex-col gap-y-1", className)}>
         {!noAuthor ? <Author username="MrBeast" roles={roles} /> : null}
         {children}
       </div>
