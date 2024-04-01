@@ -33,7 +33,6 @@ export default function EditCharacterView({ character }: { character: Character 
     }
 
     if (character.refSheets) {
-      console.log(character.refSheets)
       setRefSheetsData(character.refSheets)
     }
   }, [character])

@@ -42,6 +42,9 @@ export default function CharacterView({
     "bg-purple-400",
     "bg-pink-400"
   ]
+  console.log(characters.characters[0].refSheets[0])
+  const refSheets =
+    characters.mainCharacter?.refSheets?.[0]?.variants?.[0]?.url || "/GenericBG.png"
 
   return (
     <FolderView>
@@ -74,7 +77,7 @@ export default function CharacterView({
             avatar={characters.mainCharacter.avatarUrl || "/UserProfile.png"}
             name={characters.mainCharacter.name}
             species={characters.mainCharacter.species}
-            refSheetImg={characters.mainCharacter.reference_sheet_url || "/GenericBG.png"}
+            refSheetImg={refSheets || "/GenericBG.png"}
           />
         )}
 
