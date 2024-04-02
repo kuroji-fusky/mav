@@ -130,3 +130,12 @@ export const fetchSelfCharacter = async (characterName: string) => {
 
   return character
 }
+
+export const fetchCharacter = async (handle: string, characterName: string) => {
+  const character = await apiWithoutAuth<Character>(
+    "GET",
+    `/v1/character/name/${handle}/${characterName}`
+  )
+
+  return character
+}

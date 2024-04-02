@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { fetchUser, fetchUserCharacters } from "@/utils/api"
 import { BRAND } from "@myfursona-internal/config"
 import type { SlugRouteProps } from "@/types/utils"
-import DynamicLayout from "./DynamicLayout"
+import DynamicLayout from "../DynamicLayout"
 
 export async function generateMetadata({ params }: SlugRouteProps): Promise<Metadata> {
   const userHandleParam = params.profile
