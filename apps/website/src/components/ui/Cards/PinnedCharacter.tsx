@@ -20,8 +20,8 @@ export default function PinnedCharacter({
   refSheetImg: string
 }) {
   return (
-    <section className="border-300 mb-5 flex flex-row justify-around rounded border-4 border-solid p-4">
-      <div className="flex flex-col">
+    <section className="border-300 mb-5 flex flex-row justify-between rounded border-4 border-solid p-4">
+      <div className="flex w-full flex-col">
         <span className="mb-2 flex flex-row items-center">
           <LuPin className={"mr-2"} size={18} />
           Pinned Character
