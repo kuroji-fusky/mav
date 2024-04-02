@@ -139,3 +139,13 @@ export const fetchCharacter = async (handle: string, characterName: string) => {
 
   return character
 }
+
+export const getFeatured = async () => {
+  const characters = await apiWithoutAuth<Character[]>("GET", "/v1/character/featured")
+  return characters
+}
+
+export const getNewCharacters = async () => {
+  const characters = await apiWithoutAuth<Character[]>("GET", "/v1/character/new")
+  return characters
+}

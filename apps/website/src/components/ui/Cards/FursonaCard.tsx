@@ -29,7 +29,7 @@ export default function FursonaCard({
   species?: string
   isHybrid?: boolean
   status?: AdoptionStatus
-  palette?: CharacterCardPalette
+  palette?: string[]
   likes?: number
   href?: string
 } & Pick<React.HTMLAttributes<MapElement<"div">>, "role">) {
@@ -53,14 +53,6 @@ export default function FursonaCard({
           alt={`Avatar of ${name}`}
           sizes="(max-width: 1280px) 400px"
           strategy="neutral"
-        />
-        <ColorPalette
-          width="100%"
-          palette={[
-            { color: "red", name: "" },
-            { color: "blue", name: "" },
-            { color: "green", name: "" }
-          ]}
         />
       </div>
       <div className="grid">
