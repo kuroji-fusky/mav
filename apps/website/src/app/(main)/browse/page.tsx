@@ -27,7 +27,6 @@ export default async function Browse() {
               }
               // @ts-expect-error
               href={`/@${character.owner.handle}/character/${character.name}`}
-              isHybrid={character.species.length > 1}
               // likes={character.likes}
               key={index}
             />
@@ -44,7 +43,6 @@ export default async function Browse() {
               }
               // @ts-expect-error
               href={`/@${character.owner.handle}/character/${character.name}`}
-              isHybrid={character.species.length > 1}
               // likes={character.likes}
               key={index}
             />

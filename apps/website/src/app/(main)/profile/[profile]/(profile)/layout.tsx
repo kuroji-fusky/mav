@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { redirect } from "next/navigation"
 import { fetchUser } from "@/utils/api"
 import { BRAND } from "@myfursona-internal/config"
 import type { SlugRouteProps } from "@/types/utils"
@@ -27,6 +28,8 @@ export default async function Layout({
   // Fetch user data from the API
   const userData = await fetchUser(profile)
   if (!userData) return null
+
+  // if (!userData.displayName) return redirect("/onboarding/new-user")
 
   return (
     <>

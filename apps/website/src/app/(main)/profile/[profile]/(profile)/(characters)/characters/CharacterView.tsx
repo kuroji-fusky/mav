@@ -44,9 +44,10 @@ export default function CharacterView({
     "bg-pink-400"
   ]
 
-  const refSheets = characters.characters.find(
-    (char) => char.name == characters.mainCharacter.name
-  ).refSheets?.[0]?.variants?.[0]?.url
+  const refSheets = characters.mainCharacter
+    ? characters.characters.find((char) => char.name == characters.mainCharacter.name)
+        .refSheets?.[0]?.variants?.[0]?.url
+    : null
 
   return (
     <FolderView>
