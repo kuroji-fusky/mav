@@ -21,15 +21,6 @@ export default function DynamicMasthead({
   return !isRouteCharacter ? (
     <ProfileMasthead profileData={profile} />
   ) : (
-    <CharacterMasthead
-      creator={profile.displayName}
-      name={character.name}
-      owner={profile.displayName}
-      pronouns={"TODO"}
-      species={character.species}
-      toyhouseLink={"TODO"}
-      handle={"TODO"}
-      status="Owned"
-    />
+    <CharacterMasthead owner={profile} data={character} />
   )
 }

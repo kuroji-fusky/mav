@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Buttons"
 import { FursonaCard, PinnedCharacter } from "@/components/ui/Cards"
 import { InputField } from "@/components/ui/Forms"
 import SearchBox from "@/components/ui/Forms/SearchBox"
+import { fetchCharacter } from "@/utils/api"
 import cn from "@/utils/cn"
 import {
   LuCheckCircle2 as CheckCircle2Icon,
@@ -42,9 +43,10 @@ export default function CharacterView({
     "bg-purple-400",
     "bg-pink-400"
   ]
-  console.log(characters.characters[0].refSheets[0])
-  const refSheets =
-    characters.mainCharacter?.refSheets?.[0]?.variants?.[0]?.url || "/GenericBG.png"
+
+  const refSheets = characters.characters.find(
+    (char) => char.name == characters.mainCharacter.name
+  ).refSheets?.[0]?.variants?.[0]?.url
 
   return (
     <FolderView>

@@ -8,23 +8,23 @@ export interface ColorPalette {
   color: string
 }
 
-type PronounOriginal = "He/Him" | "She/Her" | "They/Them"
-type Pronouns = (PronounOriginal | Lowercase<PronounOriginal>)[] | string[]
+// type PronounOriginal = "He/Him" | "She/Her" | "They/Them"
+// type Pronouns = (PronounOriginal | Lowercase<PronounOriginal>)[] | string[]
 
 interface CustomAttributes {
   property: string
   value: string
 }
 
-interface CharacterAttributes {
+export interface CharacterAttributes {
   bio: string
   pronouns: string
   gender: string
   preferences: {
-    likes: string
-    dislikes: string
+    likes: string[]
+    dislikes: string[]
   }
-  customFields: CustomAttributes[]
+  custom_fields: CustomAttributes[]
 }
 
 export interface Character {

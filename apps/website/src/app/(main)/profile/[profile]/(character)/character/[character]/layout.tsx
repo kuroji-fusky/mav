@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { fetchCharacter, fetchUser, fetchUserCharacters } from "@/utils/api"
+import { fetchCharacter, fetchUser } from "@/utils/api"
 import { BRAND } from "@myfursona-internal/config"
 import type { SlugRouteProps } from "@/types/utils"
 import DynamicLayout from "../../../DynamicLayout"
