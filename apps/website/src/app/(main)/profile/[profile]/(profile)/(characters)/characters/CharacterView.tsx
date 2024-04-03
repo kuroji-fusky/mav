@@ -1,5 +1,6 @@
 "use client"
 
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { FolderView, GridResponsive, Modal } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
@@ -8,10 +9,12 @@ import { InputField } from "@/components/ui/Forms"
 import SearchBox from "@/components/ui/Forms/SearchBox"
 import { fetchCharacter } from "@/utils/api"
 import cn from "@/utils/cn"
+import { FaPlus } from "react-icons/fa6"
 import {
   LuCheckCircle2 as CheckCircle2Icon,
   LuFilter as FilterIcon,
   LuFolderPlus as FolderPlus,
+  LuCog,
   LuX as XIcon
 } from "react-icons/lu"
 import type { CharacterResponse } from "@/types/characters"
@@ -23,6 +26,7 @@ export default function CharacterView({
   handle: string
   characters: CharacterResponse
 }) {
+  const router = useRouter()
   const [createFolderModal, setFolderModalState] = useState(false)
 
   const toggleCreateFolderModal = () => {
@@ -67,6 +71,12 @@ export default function CharacterView({
         <div className="mb-4 flex w-full gap-x-2.5">
           <SearchBox placeholder="Search for characters" />
           <Button prefixIcon={<FilterIcon size={20} />}>Filter</Button>
+          <Button
+            onClick={() => router.push("/dashboard/characters")}
+            prefixIcon={<LuCog size={20} />}
+          >
+            Manage Character
+          </Button>
         </div>
         {characters.mainCharacter && (
           <PinnedCharacter

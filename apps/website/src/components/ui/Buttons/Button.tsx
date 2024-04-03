@@ -100,7 +100,7 @@ const Button = forwardRef(
         {children ? (
           <span className="select-none overflow-hidden whitespace-nowrap">
             {children}
-            {count && (
+            {(count || count == 0) && (
               <span className="bg-100 text-700 ml-1.5 rounded-xl p-2 font-semibold">
                 {count}
               </span>

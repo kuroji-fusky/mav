@@ -1,9 +1,12 @@
 "use client"
 
 import { useRouter } from "next/navigation"
+import { use, useEffect, useState } from "react"
 import { Avatar, Button } from "@/components/ui/Buttons"
 import { Masthead } from "@/components/ui/Masthead"
 import { displayPronouns, displaySpecies } from "@/utils/displayer"
+import { BACKEND_URL } from "@/utils/env"
+import { set } from "lodash"
 import {
   LuArrowLeft as ArrowLeft,
   LuBookMarked as BookMarked,
@@ -23,7 +26,26 @@ export default function CharacterMasthead({
   owner: UserType
   data: Partial<Character>
 }) {
+  const [favorited, setFavorited] = useState(
+    data.favoritedBy.find((user) => user.id === owner.id) ? true : false
+  )
+
+  const [favCount, setFavCount] = useState(data.favoritedBy.length)
+
   const router = useRouter()
+
+  const favoriteSona = async (id: string) => {
+    const data = await fetch(`${BACKEND_URL}/v1/character/favorite/${id}`, {
+      method: "POST",
+      credentials: "include"
+    })
+
+    setFavorited(!favorited)
+    setFavCount(favorited ? favCount - 1 : favCount + 1)
+
+    return await data.json()
+  }
+
   return (
     <Masthead>
       <Masthead.Wrapper>
@@ -56,7 +78,9 @@ export default function CharacterMasthead({
               <Button
                 prefixIcon={<HeartIcon size={20} />}
                 aria-label="Favorite"
-                count={3}
+                variant={favorited ? "secondary" : "primary"}
+                count={favCount}
+                onClick={() => favoriteSona(data.id)}
               >
                 Favorite
               </Button>

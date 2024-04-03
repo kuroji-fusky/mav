@@ -58,6 +58,7 @@ export interface Character {
     adoptionDate: Date
     adoptee: UserType
   }
+  favoritedBy: UserType[]
 }
 
 export interface Variant {

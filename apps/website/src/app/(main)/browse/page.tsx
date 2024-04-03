@@ -20,7 +20,7 @@ export default async function Browse() {
           {featuredCharacters.map((character, index) => (
             <FursonaCard
               name={character.name}
-              img={character.avatarUrl}
+              img={character.avatarUrl || "/UserProfile.png"}
               species={character.species}
               palette={
                 character.refSheets.length > 0 ? character.refSheets[0].colors : []
@@ -36,7 +36,7 @@ export default async function Browse() {
           {newCharacters.map((character, index) => (
             <FursonaCard
               name={character.name}
-              img={character.avatarUrl}
+              img={character.avatarUrl || "/UserProfile.png"}
               species={character.species}
               palette={
                 character.refSheets.length > 0 ? character.refSheets[0].colors : []
