@@ -149,3 +149,12 @@ export const getNewCharacters = async () => {
   const characters = await apiWithoutAuth<Character[]>("GET", "/v1/character/new")
   return characters
 }
+
+export const getFavorites = async (handle: string) => {
+  const characters = await apiWithoutAuth<Character[]>(
+    "GET",
+    `/v1/profile/favorites/${handle}`
+  )
+
+  return characters
+}

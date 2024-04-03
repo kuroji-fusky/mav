@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link"
 import cn from "@/utils/cn"
+import { displaySpecies } from "@/utils/displayer"
 import { LuHeart as Heart } from "react-icons/lu"
 import type {
   FursonaStatus as AdoptionStatus,
@@ -58,7 +59,7 @@ export default function FursonaCard({
       <div className="grid">
         <Status status={status} />
         <h3 className="not-prose font-inter text-2xl font-bold">{name}</h3>
-        <span>{species}</span>
+        <span>{displaySpecies(species)}</span>
         <span className="text-md my-2 flex flex-row font-semibold">
           <Heart className="mr-1" size={18} />
           {likes}

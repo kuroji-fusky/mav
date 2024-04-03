@@ -10,6 +10,7 @@ export interface UserType {
   bio: string | null
   avatarUrl: LinkedString
   bannerUrl: LinkedString
+  favoriteCharacters: Character[]
   characters: Character[]
   dateRegistered: Date
   dateUpdated: Date

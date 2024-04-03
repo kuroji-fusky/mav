@@ -63,7 +63,7 @@ export default function CharacterMasthead({
           <Masthead.Layer spaceBetween>
             <h2 className="not-prose font-inter flex items-center gap-x-2.5 text-3xl font-bold">
               <span>
-                {data.name} ({data.nickname ? data.nickname : ""})
+                {data.name} {data.nickname ? `(${data.nickname})` : ""}
               </span>
               <span aria-hidden></span>
             </h2>
@@ -92,7 +92,7 @@ export default function CharacterMasthead({
                 {displaySpecies(data.species)}
               </span>
               <span className="text-700">
-                {displayPronouns(data.attributes.pronouns)}
+                {displayPronouns(data.attributes ? data.attributes.pronouns : "Not Set")}
               </span>
             </div>
           </Masthead.Layer>

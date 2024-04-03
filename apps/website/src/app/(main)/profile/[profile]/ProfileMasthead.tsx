@@ -36,6 +36,7 @@ export default function ProfileMasthead({
   }[]
 }) {
   const name = profileData.displayName ? profileData.displayName : profileData.handle
+
   const profileTabs = [
     {
       icon: HomeIcon,
@@ -49,20 +50,12 @@ export default function ProfileMasthead({
       countIndicator: profileData.characters ? profileData.characters.length : 0
     },
     {
-      icon: BrushIcon,
-      text: "Listings",
-      link: "/listings"
-    },
-    {
-      icon: LuImage,
-      text: "Gallery",
-      link: "/gallery"
-    },
-    {
       icon: HeartIcon,
       text: "Favorites",
       link: "/favorites",
-      countIndicator: 69
+      countIndicator: profileData.favoriteCharacters
+        ? profileData.favoriteCharacters.length
+        : 0
     }
   ]
 

@@ -14,10 +14,12 @@ export default async function Character({
     <MarginClamp>
       <div className="flex w-full flex-row justify-between">
         <section className="w-1/2">
-          <ReferenceSheet referenceSheet={data.refSheets[0].variants[0].url} />
+          {data.refSheets.length > 0 && (
+            <ReferenceSheet referenceSheet={data.refSheets[0].variants[0].url} />
+          )}
         </section>
         <section className="w-1/2">
-          <CharacterDetails attributes={data.attributes} />
+          {data.attributes && <CharacterDetails attributes={data.attributes} />}
         </section>
       </div>
     </MarginClamp>

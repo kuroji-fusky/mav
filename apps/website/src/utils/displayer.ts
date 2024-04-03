@@ -1,14 +1,15 @@
+import { furrySpeciesOptions, genderOptions, pronounOptions } from "@/constants"
+
 export const displaySpecies = (species: string) => {
-  const result = species.split("")[0].toUpperCase() + species.slice(1)
-  return result
+  return (
+    furrySpeciesOptions.find((option) => option.value === species)?.label || "Unknown"
+  )
 }
 
 export const displayPronouns = (pronouns: string) => {
-  const PRONOUNS = {
-    hehim: "He/Him",
-    sheher: "She/Her",
-    theythem: "They/Them"
-  }
+  return pronounOptions.find((option) => option.value === pronouns)?.label || "Unknown"
+}
 
-  return PRONOUNS[pronouns]
+export const displayGender = (gender: string) => {
+  return genderOptions.find((option) => option.value == gender)?.label || "Unknown"
 }

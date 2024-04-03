@@ -12,6 +12,7 @@ import {
   SelectField
 } from "@/components/ui/Forms"
 import DropZone from "@/components/ui/Forms/DropZone"
+import { furrySpeciesOptions, genderOptions, pronounOptions } from "@/constants"
 import { BACKEND_URL } from "@/utils/env"
 import { update } from "lodash"
 import type { Character, ReferenceSheet } from "@/types/characters"
@@ -126,35 +127,6 @@ export default function EditCharacterView({ character }: { character: Character 
     { value: "private", label: "Private" }
   ]
 
-  // TODO: Grab pronouns from API
-  const pronounsOptions = [
-    { value: "hehim", label: "He/Him" },
-    { value: "sheher", label: "She/Her" },
-    { value: "theythem", label: "They/Them" }
-  ]
-
-  // TODO: Grab species from API
-  const speiciesOptions = [
-    { value: "otter", label: "Otter" },
-    { value: "husky", label: "Husky" },
-    { value: "custom", label: "Custom" }
-  ]
-
-  const genderOptions = [
-    {
-      value: "male",
-      label: "Male"
-    },
-    {
-      value: "female",
-      label: "Female"
-    },
-    {
-      value: "non-binary",
-      label: "Non-Binary"
-    }
-  ]
-
   return (
     <Container headingTransparent={false} noChildrenPadding heading="Character Details">
       <div className="relative w-3/4">
@@ -261,7 +233,7 @@ export default function EditCharacterView({ character }: { character: Character 
                     updateFormData({ key: "species", value: e.currentTarget.value })
                   }
                   inputName="Species"
-                  options={speiciesOptions}
+                  options={furrySpeciesOptions}
                   value={formData?.species}
                 />
                 <SelectField
@@ -269,7 +241,7 @@ export default function EditCharacterView({ character }: { character: Character 
                     updateAttributes({ key: "pronouns", value: e.currentTarget.value })
                   }
                   inputName="Pronouns"
-                  options={pronounsOptions}
+                  options={pronounOptions}
                   value={formData?.attributes.pronouns}
                 />
                 <SelectField

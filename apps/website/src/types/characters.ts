@@ -32,6 +32,7 @@ export interface Character {
   name: string
   nickname: string
   visibility: Visibility
+  owner: UserType
   mainCharacter: boolean
   fullName: string
   species: string

@@ -25,7 +25,6 @@ export default async function Browse() {
               palette={
                 character.refSheets.length > 0 ? character.refSheets[0].colors : []
               }
-              // @ts-expect-error
               href={`/@${character.owner.handle}/character/${character.name}`}
               // likes={character.likes}
               key={index}
@@ -41,7 +40,6 @@ export default async function Browse() {
               palette={
                 character.refSheets.length > 0 ? character.refSheets[0].colors : []
               }
-              // @ts-expect-error
               href={`/@${character.owner.handle}/character/${character.name}`}
               // likes={character.likes}
               key={index}
