@@ -1,5 +1,5 @@
 import { cookies } from "next/headers"
-import type { Character, CharacterResponse } from "@/types/characters"
+import type { Artwork, Character, CharacterResponse } from "@/types/characters"
 import type { UserType } from "@/types/users"
 import { BACKEND_URL } from "./env"
 
@@ -138,6 +138,15 @@ export const fetchCharacter = async (handle: string, characterName: string) => {
   )
 
   return character
+}
+
+export const getArtworks = async (profile: string, character: string) => {
+  const artworks = await apiWithoutAuth<Artwork[]>(
+    "GET",
+    `/v1/art/characters/${profile}/${character}`
+  )
+
+  return artworks
 }
 
 export const getFeatured = async () => {

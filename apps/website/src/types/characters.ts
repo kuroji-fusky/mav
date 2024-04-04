@@ -62,6 +62,25 @@ export interface Character {
   favoritedBy: UserType[]
 }
 
+export interface Artwork {
+  id: string
+  altText?: string
+  createdAt: Date
+  updatedAt: Date
+  artworkUrl?: string
+  watermarkUrl?: string
+  charactersFeatured?: Character[]
+  artist?: UserType | null
+  artistUrl?: string
+  comments: Comment[]
+  description?: string
+  tags: string[]
+  programUsed?: string
+  title?: string
+  favoritedBy: UserType[]
+  owner: UserType
+}
+
 export interface Variant {
   name: string
   url: string

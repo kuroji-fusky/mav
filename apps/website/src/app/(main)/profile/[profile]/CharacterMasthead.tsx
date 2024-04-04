@@ -1,12 +1,11 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { use, useEffect, useState } from "react"
+import { useState } from "react"
 import { Avatar, Button } from "@/components/ui/Buttons"
 import { Masthead } from "@/components/ui/Masthead"
 import { displayPronouns, displaySpecies } from "@/utils/displayer"
 import { BACKEND_URL } from "@/utils/env"
-import { set } from "lodash"
 import {
   LuArrowLeft as ArrowLeft,
   LuBookMarked as BookMarked,
@@ -14,10 +13,12 @@ import {
   LuHeart as HeartIcon,
   LuHistory as HistoryIcon,
   LuHome as HomeIcon,
-  LuImage
+  LuImage,
+  LuUpload
 } from "react-icons/lu"
 import type { Character } from "@/types/characters"
 import type { UserType } from "@/types/users"
+import UploadArtModal from "./UploadArt"
 
 export default function CharacterMasthead({
   data,
@@ -31,6 +32,8 @@ export default function CharacterMasthead({
   )
 
   const [favCount, setFavCount] = useState(data.favoritedBy.length)
+  const [artUploadModal, setArtUploadModal] = useState(false)
+  const toggleUploadArtModal = () => setArtUploadModal(!artUploadModal)
 
   const router = useRouter()
 
@@ -48,6 +51,11 @@ export default function CharacterMasthead({
 
   return (
     <Masthead>
+      <UploadArtModal
+        toggleUploadArtModal={toggleUploadArtModal}
+        uploadArtModal={artUploadModal}
+        characterId={data.id}
+      />
       <Masthead.Wrapper>
         <Button
           href={`/@${owner.handle}`}
@@ -74,6 +82,13 @@ export default function CharacterMasthead({
                 onClick={() => router.push(`/dashboard/characters/edit/${data.name}`)}
               >
                 Edit Character
+              </Button>
+              <Button
+                prefixIcon={<LuUpload size={20} />}
+                aria-label="Upload Artwork"
+                onClick={toggleUploadArtModal}
+              >
+                Upload Artwork
               </Button>
               <Button
                 prefixIcon={<HeartIcon size={20} />}
