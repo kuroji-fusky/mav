@@ -14,12 +14,22 @@ export default async function GalleryView({ character, profile }) {
   const images = await getArtworks(profile, character)
   return (
     <MarginClamp>
-      {images &&
-        images.map((image) => (
-          <div key={image.id} className="w-1/3">
-            <Image src={image.artworkUrl} alt={image.title} width={300} height={300} />
-          </div>
-        ))}
+      {images && (
+        <div className="flex flex-wrap gap-4">
+          {images.map((image, index) => (
+            <div key={index} className="relative w-1/4">
+              <Image
+                src={image.artworkUrl}
+                alt={image.title}
+                layout="responsive"
+                width={100}
+                height={100}
+                className="rounded-lg"
+              />
+            </div>
+          ))}
+        </div>
+      )}
     </MarginClamp>
   )
 }

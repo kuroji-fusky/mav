@@ -28,19 +28,20 @@ export default function UploadArtModal({
   const [userAsArtist, setUserAsArist] = useState(false)
 
   useEffect(() => {
-    if (!uploadArtModal) {
-      setArtUrl("")
-      setTitle("")
-      setDescription("")
-      setTags([])
-      setUserAsArist(false)
-    }
+    setArtUrl("")
+    setTitle("")
+    setDescription("")
+    setTags([])
+    setUserAsArist(false)
   }, [uploadArtModal])
 
   const uploadArt = async () => {
     const data = await fetch(`${BACKEND_URL}/v1/art/upload/${characterId}`, {
       method: "POST",
       credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify({
         imageUrl: artUrl,
         title,
