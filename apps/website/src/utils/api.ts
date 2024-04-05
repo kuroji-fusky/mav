@@ -167,3 +167,8 @@ export const getFavorites = async (handle: string) => {
 
   return characters
 }
+
+export const getArtwork = async (artworkId) => {
+  const artwork = await apiWithoutAuth<Artwork>("GET", `/v1/art/${artworkId}`)
+  return artwork
+}

@@ -4,8 +4,8 @@ import { Avatar, Button } from "@/components/ui/Buttons"
 import { LuMoreVertical, LuShare, LuStar } from "react-icons/lu"
 
 export default function ArtworkDetails({
-  artTitle = "Title placeholder",
-  artist = "Artist placeholder",
+  artTitle,
+  artist,
   artistImg
 }: Partial<
   Readonly<{
@@ -17,14 +17,10 @@ export default function ArtworkDetails({
 >) {
   return (
     <>
-      <div className="flex gap-x-2.5">
+      <div className="flex items-center gap-x-2.5">
         {/* Artist avatar */}
         <span className="flex-shrink-0">
-          <Avatar
-            username={artist}
-            size={56}
-            src={artistImg ?? "/img/examples/kuro/kuro-example2.png"}
-          />
+          <Avatar username={artist} size={60} src={artistImg ?? "/UserProfile.png"} />
         </span>
         <div className="flex w-full flex-col">
           {/* Titles and stuff */}

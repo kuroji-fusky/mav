@@ -26,7 +26,11 @@ export default async function Layout({
   const { profile } = params
 
   // Fetch user data from the API
-  const userData = await fetchUser(profile)
+  const userData = await fetchUser(profile).then((data) => {
+    if (!data) return null
+    if (!data.displayName) return redirect("/onboarding/new-user")
+    return data
+  })
   if (!userData) return null
 
   // if (!userData.displayName) return redirect("/onboarding/new-user")
