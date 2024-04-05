@@ -3,6 +3,7 @@ import Image from "next/image"
 import { MarginClamp } from "@/components/ui"
 import { getArtworks } from "@/utils/api"
 import { BRAND } from "@myfursona-internal/config"
+import Artwork from "./Artwork"
 
 // TODO get user data from Jotai global store
 export const metadata: Metadata = {
@@ -17,16 +18,7 @@ export default async function GalleryView({ character, profile }) {
       {images && (
         <div className="flex flex-wrap gap-4">
           {images.map((image, index) => (
-            <div key={index} className="relative w-1/4">
-              <Image
-                src={image.artworkUrl}
-                alt={image.title}
-                layout="responsive"
-                width={100}
-                height={100}
-                className="rounded-lg"
-              />
-            </div>
+            <Artwork image={image} key={index} characterName={character} />
           ))}
         </div>
       )}
