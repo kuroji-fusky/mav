@@ -6,6 +6,7 @@ import { Avatar, Button } from "@/components/ui/Buttons"
 import { Masthead } from "@/components/ui/Masthead"
 import { displayPronouns, displaySpecies } from "@/utils/displayer"
 import { BACKEND_URL } from "@/utils/env"
+import { FaTrash } from "react-icons/fa6"
 import {
   LuArrowLeft as ArrowLeft,
   LuBookMarked as BookMarked,
@@ -45,6 +46,15 @@ export default function CharacterMasthead({
 
     setFavorited(!favorited)
     setFavCount(favorited ? favCount - 1 : favCount + 1)
+
+    return await data.json()
+  }
+
+  const deleteSona = async (id: string) => {
+    const data = await fetch(`${BACKEND_URL}/v1/character/delete/${id}`, {
+      method: "DELETE",
+      credentials: "include"
+    })
 
     return await data.json()
   }
@@ -98,6 +108,14 @@ export default function CharacterMasthead({
                 onClick={() => favoriteSona(data.id)}
               >
                 Favorite
+              </Button>
+              <Button
+                prefixIcon={<FaTrash size={20} />}
+                aria-label="Delete"
+                variant={"error"}
+                onClick={() => deleteSona(data.id)}
+              >
+                Delete
               </Button>
             </div>
           </Masthead.Layer>
