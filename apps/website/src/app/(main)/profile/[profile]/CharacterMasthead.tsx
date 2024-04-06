@@ -19,6 +19,7 @@ import {
 } from "react-icons/lu"
 import type { Character } from "@/types/characters"
 import type { UserType } from "@/types/users"
+import DeleteConfirmModal from "./ConfirmModal"
 import UploadArtModal from "./UploadArt"
 
 export default function CharacterMasthead({
@@ -35,6 +36,8 @@ export default function CharacterMasthead({
   const [favCount, setFavCount] = useState(data.favoritedBy.length)
   const [artUploadModal, setArtUploadModal] = useState(false)
   const toggleUploadArtModal = () => setArtUploadModal(!artUploadModal)
+  const [deleteConfirmModal, setDeleteConfirmModal] = useState(false)
+  const toggleDeleteConfirmModal = () => setDeleteConfirmModal(!deleteConfirmModal)
 
   const router = useRouter()
 
@@ -50,20 +53,16 @@ export default function CharacterMasthead({
     return await data.json()
   }
 
-  const deleteSona = async (id: string) => {
-    const data = await fetch(`${BACKEND_URL}/v1/character/delete/${id}`, {
-      method: "DELETE",
-      credentials: "include"
-    })
-
-    return await data.json()
-  }
-
   return (
     <Masthead>
       <UploadArtModal
         toggleUploadArtModal={toggleUploadArtModal}
         uploadArtModal={artUploadModal}
+        characterId={data.id}
+      />
+      <DeleteConfirmModal
+        toggleDeleteConfirmModal={toggleDeleteConfirmModal}
+        deleteConfirmModal={deleteConfirmModal}
         characterId={data.id}
       />
       <Masthead.Wrapper>
@@ -113,7 +112,7 @@ export default function CharacterMasthead({
                 prefixIcon={<FaTrash size={20} />}
                 aria-label="Delete"
                 variant={"error"}
-                onClick={() => deleteSona(data.id)}
+                onClick={toggleDeleteConfirmModal}
               >
                 Delete
               </Button>
