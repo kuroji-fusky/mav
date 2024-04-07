@@ -9,7 +9,6 @@ import type {
 } from "@/types/characters"
 import type { MapElement } from "@/types/utils"
 import MFImage from "../MFImage"
-import ColorPalette from "./ColorPalette"
 import Status from "./Status"
 
 type CharacterCardPalette = [Palette] | [Palette, Palette] | [Palette, Palette, Palette]

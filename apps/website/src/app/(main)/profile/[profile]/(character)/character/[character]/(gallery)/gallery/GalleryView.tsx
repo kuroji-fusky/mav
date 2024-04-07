@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import Image from "next/image"
 import { MarginClamp } from "@/components/ui"
 import { getArtworks } from "@/utils/api"
 import { BRAND } from "@myfursona-internal/config"

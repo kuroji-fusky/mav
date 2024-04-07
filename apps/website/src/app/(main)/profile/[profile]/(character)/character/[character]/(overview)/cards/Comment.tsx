@@ -1,7 +1,7 @@
 import React from "react"
 import Comments from "@/components/ui/Comments"
 import type { Character } from "@/types/characters"
-import type { Comments as UserComments, UserType } from "@/types/users"
+import type { UserType } from "@/types/users"
 
 export default function Comment({
   user,

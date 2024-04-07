@@ -7,7 +7,6 @@ import {
   LuLayers as Layers,
   LuSparkles as Sparkles
 } from "react-icons/lu"
-import type { Character, FursonaStatus } from "@/types/characters"
 import ShelfSection from "./ShelfSection"
 
 export default async function Browse() {

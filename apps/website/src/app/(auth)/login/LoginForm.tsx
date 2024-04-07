@@ -53,7 +53,10 @@ export default function LoginForm() {
     }
 
     if (emailRegex.exec(email)?.length !== 1) {
-      setFormData((prevValue) => ({ ...prevValue, emailErrorMsg: "Invalid email!" }))
+      setFormData((prevValue) => ({
+        ...prevValue,
+        emailErrorMsg: "Invalid email!"
+      }))
       return
     }
 
@@ -99,7 +102,10 @@ export default function LoginForm() {
               break
             case 401:
               // Unauthorized -- Must need to be verified
-              setFormData((prevValue) => ({ ...prevValue, emailErrorMsg: data.email }))
+              setFormData((prevValue) => ({
+                ...prevValue,
+                emailErrorMsg: data.email
+              }))
               setValidEmail(false)
               break
           }

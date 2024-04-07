@@ -1,5 +1,4 @@
-import { LuFlag, LuHeart, LuReply, LuThumbsUp } from "react-icons/lu"
-import { Button } from "../Buttons"
+import { LuFlag, LuHeart } from "react-icons/lu"
 import CommentWrapper from "./Wrapper"
 
 export default function CommentItem({
@@ -7,7 +6,9 @@ export default function CommentItem({
   username,
   children,
   nestLevel
-}: React.ComponentProps<typeof CommentWrapper> & { nestLevel?: number }) {
+}: React.ComponentProps<typeof CommentWrapper> & {
+  nestLevel?: number
+}) {
   return (
     <>
       <CommentWrapper avatar={avatar} username={username} className="bg-100 p-3 ">

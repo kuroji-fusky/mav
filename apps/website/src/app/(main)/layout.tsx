@@ -5,7 +5,10 @@ import type { UserType } from "@/types/users"
 export default async function MainLayout({
   children,
   modal
-}: Readonly<{ children: React.ReactNode; modal: React.ReactNode }>) {
+}: Readonly<{
+  children: React.ReactNode
+  modal: React.ReactNode
+}>) {
   let userData: UserType | null = null
 
   try {

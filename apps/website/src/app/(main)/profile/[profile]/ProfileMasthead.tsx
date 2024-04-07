@@ -9,7 +9,6 @@ import {
   LuCat as CatIcon,
   LuHeart as HeartIcon,
   LuHome as HomeIcon,
-  LuImage,
   LuMoreVertical as MoreVerticalIcon,
   LuUserPlus as UserPlusIcon
 } from "react-icons/lu"

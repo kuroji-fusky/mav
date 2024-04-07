@@ -6,7 +6,9 @@
 
 ## Contributors
 
-- [Kerby Keith Aquino](https://github.com/kuroji-fusky) - frontend, ui/ux design, former project lead
+- [Kerby Keith Aquino](https://github.com/kuroji-fusky) - frontend, ui/ux
+  design, former project lead
 - [LinkTheCoder](https://github.com/LinkTheCoder) - frontend
-- [Nebula Animations](https://twitter.com/nebulaanimation) - ui/ux design, branding
+- [Nebula Animations](https://twitter.com/nebulaanimation) - ui/ux design,
+  branding
 - [Beta Folf](https://github.com/Beta-Folf) - frontend

@@ -1,6 +1,5 @@
 import Image from "next/image"
 import { redirect } from "next/navigation"
-import { useState } from "react"
 import { InputField, RichTextField } from "@/components/ui/Forms"
 import { fetchUserData, getArtwork } from "@/utils/api"
 import CharactersFeatured from "./CharactersFeatured"

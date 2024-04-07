@@ -1,6 +1,5 @@
 import type { Metadata } from "next"
-import { apiWithAuth, fetchSelfCharacters } from "@/utils/api"
-import type { Character } from "@/types/characters"
+import { fetchSelfCharacters } from "@/utils/api"
 import CharacterView from "./CharacterView"
 
 export const metadata: Metadata = {

@@ -1,9 +1,7 @@
 import type { Metadata, ResolvingMetadata } from "next"
-import ShelfSection from "@/app/(main)/browse/ShelfSection"
-import { GridResponsive, MarginClamp } from "@/components/ui"
+import { MarginClamp } from "@/components/ui"
 import { FursonaCard } from "@/components/ui/Cards"
 import { getFavorites } from "@/utils/api"
-import { LuHeart } from "react-icons/lu"
 import type { SlugRouteProps } from "@/types/utils"
 
 export async function generateMetadata(

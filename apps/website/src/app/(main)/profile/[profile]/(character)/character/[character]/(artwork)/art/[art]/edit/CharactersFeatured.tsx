@@ -3,7 +3,6 @@
 import Image from "next/image"
 import { useState } from "react"
 import { InputField } from "@/components/ui/Forms"
-import { BACKEND_URL } from "@/utils/env"
 import type { Artwork } from "@/types/characters"
 
 export default function CharactersFeatured({ artwork }: { artwork: Artwork }) {

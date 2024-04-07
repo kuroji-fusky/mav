@@ -9,7 +9,6 @@ import {
   LuCat,
   LuFileLock,
   LuHelpCircle,
-  LuMegaphone,
   LuPanelLeftClose,
   LuPanelLeftOpen,
   LuPlus,

@@ -4,7 +4,9 @@ import { Button } from "@/components/ui/Buttons"
 
 export default function ListingLayout({
   children
-}: Readonly<{ children: React.ReactNode }>) {
+}: Readonly<{
+  children: React.ReactNode
+}>) {
   return (
     <Container
       headingTransparent

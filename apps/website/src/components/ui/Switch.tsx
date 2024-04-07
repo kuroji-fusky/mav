@@ -4,6 +4,7 @@ import { useState } from "react"
 import { LuPalette as Palette } from "react-icons/lu"
 
 type SwitchTemp = "prices" | "queue"
+
 interface Switch {
   option: SwitchTemp
 }

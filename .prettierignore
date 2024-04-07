@@ -20,3 +20,4 @@ target/
 Cargo.toml
 
 !packages/**
+*.md

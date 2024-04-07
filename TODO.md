@@ -8,7 +8,8 @@
 - [ ] Comments Section
 - [ ] Character Description
 - [ ] Art Modal
-- [ ] General Purpose Modal (Can be used to make reporting modals, block/confirm modals, vice versa)
+- [ ] General Purpose Modal (Can be used to make reporting modals, block/confirm
+  modals, vice versa)
 - [ ] Tooltip
 - [x] Comments
 - [ ] Button group

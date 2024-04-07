@@ -5,7 +5,9 @@ import { LuArrowDownAZ, LuMoreVertical, LuSearch } from "react-icons/lu"
 
 export default function ListingLayout({
   children
-}: Readonly<{ children: React.ReactNode }>) {
+}: Readonly<{
+  children: React.ReactNode
+}>) {
   return (
     <Container
       headingTransparent

@@ -22,7 +22,9 @@ const Sidebar = dynamic(() => import("@/components/dashboard").then((c) => c.Sid
 
 export default async function DashboardLayout({
   children
-}: Readonly<{ children?: React.ReactNode }>) {
+}: Readonly<{
+  children?: React.ReactNode
+}>) {
   // const userData = await fetchUserData().catch(() => {
   //   return redirect("/login")
   // })

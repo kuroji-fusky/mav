@@ -1,6 +1,6 @@
-import type { Metadata, ResolvingMetadata } from "next"
+import type { Metadata } from "next"
 import { redirect } from "next/navigation"
-import { fetchSelfCharacter, fetchUserCharacters } from "@/utils/api"
+import { fetchSelfCharacter } from "@/utils/api"
 import EditCharacterView from "../CharacterEdit"
 
 export async function generateMetadata({

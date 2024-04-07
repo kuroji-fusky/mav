@@ -20,7 +20,9 @@ function THeader({ children }: { children?: React.ReactNode }) {
 function THead({
   children,
   ...attrs
-}: { children?: React.ReactNode } & Pick<ReactMapElement<"th">, "colSpan">) {
+}: {
+  children?: React.ReactNode
+} & Pick<ReactMapElement<"th">, "colSpan">) {
   return (
     <th className="border-separator h-11 border-b px-5 text-left" {...attrs}>
       {children}
@@ -51,7 +53,9 @@ function TBody({
 function TRow({
   children,
   className
-}: { children?: React.ReactNode } & Pick<ReactMapElement<"tr">, "className">) {
+}: {
+  children?: React.ReactNode
+} & Pick<ReactMapElement<"tr">, "className">) {
   return <tr className={cn("border-mute border-0 border-b", className)}>{children}</tr>
 }
 

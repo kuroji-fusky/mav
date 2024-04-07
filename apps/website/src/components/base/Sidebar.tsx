@@ -76,7 +76,11 @@ export default function Sidebar() {
         initial={{ x: "-100%", display: "none" }}
         animate={
           isSidebarOpen
-            ? { x: 0, display: "block", transition: { ...fmDuration, ease: "easeOut" } }
+            ? {
+                x: 0,
+                display: "block",
+                transition: { ...fmDuration, ease: "easeOut" }
+              }
             : {
                 x: "-100%",
                 transition: { ...fmDuration, ease: "easeIn" },
