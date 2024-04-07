@@ -1,4 +1,4 @@
-import type { UserType } from "./users"
+import type { Comments, UserType } from "./users"
 import type { StatusIndicator, Visibility } from "./utils"
 
 export type FursonaStatus = "adopted" | "upForAdopt" | "owned" | "hidden" | "main"
@@ -37,6 +37,7 @@ export interface Character {
   fullName: string
   species: string
   isHybrid: boolean
+  comments: Comments[]
   avatarUrl: string
   refSheets: ReferenceSheet[]
   attributes: CharacterAttributes
@@ -72,7 +73,7 @@ export interface Artwork {
   charactersFeatured?: Character[]
   artist?: UserType | null
   artistUrl?: string
-  comments: Comment[]
+  comments: Comments[]
   description?: string
   tags: string[]
   programUsed?: string

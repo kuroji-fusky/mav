@@ -10,21 +10,26 @@ import CommentWrapper from "./Wrapper"
 export default function CommentField({
   avatar,
   username,
-  commentType
+  commentType,
+  artworkId,
+  characterName
 }: Omit<React.ComponentProps<typeof CommentWrapper>, "children">) {
   const [content, setContent] = useState("")
   const [error, setError] = useState("")
   const post = (content: string) => {
-    fetch(`${BACKEND_URL}/v1/${commentType}/${username}/comment`, {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        content: content
-      })
-    })
+    fetch(
+      `${BACKEND_URL}/v1/${commentType}/${artworkId ? artworkId : username}${characterName ? `/${characterName}` : ""}/comment`,
+      {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          content: content
+        })
+      }
+    )
       .then((res) => {
         if (!res.ok) throw new Error("Failed to post comment")
         window.location.reload()

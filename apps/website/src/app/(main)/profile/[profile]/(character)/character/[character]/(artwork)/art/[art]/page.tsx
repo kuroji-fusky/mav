@@ -4,6 +4,7 @@ import { Avatar, Button } from "@/components/ui/Buttons"
 import Comments from "@/components/ui/Comments"
 import { fetchUser, fetchUserData, getArtwork } from "@/utils/api"
 import { BRAND } from "@myfursona-internal/config"
+import type { UserType } from "@/types/users"
 import ArtworkDetails from "./ArtworkDetails"
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -17,7 +18,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function ArtPage({ params }) {
   const artwork = await getArtwork(params.art)
-  const user = await fetchUserData().catch(() => null)
+  console.log(artwork)
+  const user = (await fetchUserData().catch(() => null)) as UserType | null
   return (
     <div className="flex">
       {/* Artwork image, details, and comments */}
@@ -53,13 +55,30 @@ export default async function ArtPage({ params }) {
             artistImg={artwork.artist && artwork.artist.avatarUrl}
             handle={artwork.artist ? artwork.artist.handle : null}
           />
-          <div>
-            <Comments>
-              <Comments.Field />
-              <Comments.Item>nice</Comments.Item>
-              <Comments.Item>very cool</Comments.Item>
-            </Comments>
-          </div>
+          {user && (
+            <div>
+              <Comments>
+                <Comments.Field
+                  avatar={user.avatarUrl}
+                  username={user.handle}
+                  handle={user.handle}
+                  commentType="art"
+                  artworkId={artwork.id}
+                />
+                {artwork.comments
+                  ? artwork.comments.map((comment, index) => (
+                      <Comments.Item
+                        key={index}
+                        avatar={comment.author.avatarUrl}
+                        username={comment.author.handle}
+                      >
+                        {comment.content}
+                      </Comments.Item>
+                    ))
+                  : null}
+              </Comments>
+            </div>
+          )}
         </div>
       </div>
       {/* More from this artist */}

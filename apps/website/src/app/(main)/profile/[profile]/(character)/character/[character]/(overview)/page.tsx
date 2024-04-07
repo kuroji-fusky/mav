@@ -1,6 +1,7 @@
 import { MarginClamp } from "@/components/ui"
-import { fetchCharacter } from "@/utils/api"
+import { fetchCharacter, fetchUserData } from "@/utils/api"
 import CharacterDetails from "./cards/CharacterDetails"
+import Comment from "./cards/Comment"
 import ReferenceSheet from "./cards/ReferenceSheet"
 
 export default async function Character({
@@ -10,6 +11,7 @@ export default async function Character({
 }) {
   const { character, profile } = params
   const data = await fetchCharacter(profile, character)
+  const user = await fetchUserData().catch(() => null)
   return (
     <MarginClamp>
       <div className="flex w-full flex-row justify-between">
@@ -20,6 +22,7 @@ export default async function Character({
         </section>
         <section className="w-1/2">
           {data.attributes && <CharacterDetails attributes={data.attributes} />}
+          <Comment user={user && user} character={data} />
         </section>
       </div>
     </MarginClamp>

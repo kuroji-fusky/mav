@@ -12,7 +12,9 @@ export default function CommentWrapper({
   noAuthor,
   roles,
   className,
-  commentType
+  commentType,
+  artworkId,
+  characterName
 }: Readonly<
   Partial<
     {
@@ -21,7 +23,9 @@ export default function CommentWrapper({
       username: string
       noAuthor: boolean
       className?: string
-      commentType: "profile" | "post" | "character" | "artwork"
+      commentType: "profile" | "post" | "character" | "art"
+      artworkId: string
+      characterName: string
     } & React.ComponentProps<typeof Author>
   >
 >) {
