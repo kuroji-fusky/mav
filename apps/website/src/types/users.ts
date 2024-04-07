@@ -1,4 +1,4 @@
-import { type Character } from "./characters"
+import type { Artwork, Character } from "./characters"
 import type { LinkedString } from "./utils"
 
 export type UserRoles = ("artist" | "admin" | "contributor" | "early-tester")[]
@@ -24,10 +24,20 @@ export interface UserType {
     roleName: string
     rewardDate: Date
   }
+  comments: Comments[]
   onlineStatus: "offline" | "online"
   customStatus: string | null
   previousAliases: string | null
   pronouns: string
   nationaility: string
   birthday: Date
+}
+
+export interface Comments {
+  id: string
+  content: string
+  author: UserType
+  user: UserType
+  artwork?: Artwork
+  character?: Character
 }
