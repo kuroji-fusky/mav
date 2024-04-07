@@ -1,13 +1,26 @@
 import type { Artwork, Character } from "./characters"
 import type { LinkedString } from "./utils"
 
-export type UserRoles = ("artist" | "admin" | "contributor" | "early-tester")[]
+type NullableString = string | null
+type UserRole = "artist" | "admin" | "contributor" | "early-tester"
+type UserRoles = UserRole[]
+type OnlineStatus = "offline" | "online"
+
+type Link = {
+  url: string
+  label: string
+}
+
+type Badge = {
+  roleName: string
+  rewardDate: Date
+}
 
 export interface UserType {
   id: number
   handle: string
-  displayName: string | null
-  bio: string | null
+  displayName: NullableString
+  bio: NullableString
   avatarUrl: LinkedString
   bannerUrl: LinkedString
   favoriteCharacters: Character[]
@@ -16,20 +29,14 @@ export interface UserType {
   dateUpdated: Date
   roles: UserRoles
   hasBetaAccess: boolean
-  links: {
-    url: string
-    label: string
-  }[]
-  badges: {
-    roleName: string
-    rewardDate: Date
-  }
+  links: Link[]
+  badges: Badge[]
   comments: Comments[]
-  onlineStatus: "offline" | "online"
-  customStatus: string | null
-  previousAliases: string | null
-  pronouns: string
-  nationaility: string
+  onlineStatus: OnlineStatus
+  customStatus: NullableString
+  previousAliases: NullableString
+  pronouns: NullableString
+  nationaility: NullableString
   birthday: Date
 }
 
