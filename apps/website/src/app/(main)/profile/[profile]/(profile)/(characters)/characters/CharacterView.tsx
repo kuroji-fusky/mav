@@ -7,9 +7,7 @@ import { Button } from "@/components/ui/Buttons"
 import { FursonaCard, PinnedCharacter } from "@/components/ui/Cards"
 import { InputField } from "@/components/ui/Forms"
 import SearchBox from "@/components/ui/Forms/SearchBox"
-import { fetchCharacter } from "@/utils/api"
 import cn from "@/utils/cn"
-import { FaPlus } from "react-icons/fa6"
 import {
   LuCheckCircle2 as CheckCircle2Icon,
   LuFilter as FilterIcon,

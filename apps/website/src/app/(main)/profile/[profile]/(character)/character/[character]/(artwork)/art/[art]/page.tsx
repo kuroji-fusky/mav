@@ -1,8 +1,8 @@
 import type { Metadata } from "next"
 import { MFImage, Note, Separator } from "@/components/ui"
-import { Avatar } from "@/components/ui/Buttons"
+import { Avatar, Button } from "@/components/ui/Buttons"
 import Comments from "@/components/ui/Comments"
-import { getArtwork } from "@/utils/api"
+import { fetchUser, fetchUserData, getArtwork } from "@/utils/api"
 import { BRAND } from "@myfursona-internal/config"
 import ArtworkDetails from "./ArtworkDetails"
 
@@ -17,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function ArtPage({ params }) {
   const artwork = await getArtwork(params.art)
-  console.log(artwork)
+  const user = await fetchUserData().catch(() => null)
   return (
     <div className="flex">
       {/* Artwork image, details, and comments */}
@@ -65,6 +65,7 @@ export default async function ArtPage({ params }) {
       {/* More from this artist */}
       <aside className="relative w-96 flex-shrink-0 px-6 py-4 ">
         <div className="bg-200 fixed w-80 p-4">
+          {artwork.owner.id == user.id && <Button className="float-right">Edit</Button>}
           <h3 className="text-xl">Tools</h3>
           <div className="flex flex-col py-3">
             <span className="text-gray-300">Programs Used</span>

@@ -34,7 +34,7 @@ export default function UploadRefsheetModal({
   const defaultValue = {
     refSheetName: "",
     artist: "",
-    colors: [],
+    colors: [""],
     variants: []
   }
 
@@ -65,15 +65,21 @@ export default function UploadRefsheetModal({
     setSaved(false)
   }, [formData])
 
-  // useEffect(() => {
-  //   if (uploadRefsheetModal) {
-  //     setMainRefUrl("")
-  //     setFormData(defaultValue)
-  //   }
-  // })
+  const addColor = () => {
+    setFormData((prev) => ({
+      ...prev,
+      colors: [...prev.colors, ""]
+    }))
+  }
 
-  const handleChange = (key, value) => {
-    setFormData((prev) => ({ ...prev, [key]: value }))
+  const handleChange = (key, value, index = -1) => {
+    if (index >= 0) {
+      const updatedArray = [...formData[key]]
+      updatedArray[index] = value
+      setFormData((prev) => ({ ...prev, [key]: updatedArray }))
+    } else {
+      setFormData((prev) => ({ ...prev, [key]: value }))
+    }
   }
 
   const addVariant = async (e) => {
@@ -167,6 +173,19 @@ export default function UploadRefsheetModal({
           <span className="text-600 mb-2 mt-4 flex gap-x-0.5 font-bold uppercase">
             Color Palette (User Selectable)
           </span>
+          <div>
+            {formData.colors.map((color, index) => (
+              <input
+                key={index}
+                type="color"
+                className="border-400 bg-100 m-2 border border-solid"
+                value={color}
+                onChange={(e) => handleChange("colors", e.target.value, index)}
+                onBlur={addColor}
+              />
+            ))}
+          </div>
+
           <div>
             <input
               type="color"
