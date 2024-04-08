@@ -1,7 +1,9 @@
 import React from "react"
 import cn from "@/utils/cn"
 import { LuCheckCircle, LuFolderPlus, LuXCircle } from "react-icons/lu"
-import { Button, InputField, Modal } from "../ui"
+import { Modal } from "../ui"
+import { Button } from "../ui/Buttons"
+import { InputField } from "../ui/Forms"
 
 export default function CreateFolderModal({
   createFolderModal,
