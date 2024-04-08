@@ -1,7 +1,8 @@
 import type { Metadata } from "next"
 import dynamic from "next/dynamic"
+import { redirect } from "next/navigation"
 import { SidebarSkeleton } from "@/components/dashboard"
-import { fetchSelfCharacters } from "@/utils/api"
+import { fetchSelfCharacters, fetchUserData } from "@/utils/api"
 
 // import { redirect } from "next/navigation"
 // import { fetchUserData } from "@/utils/api"
@@ -25,18 +26,19 @@ export default async function DashboardLayout({
 }: Readonly<{
   children?: React.ReactNode
 }>) {
-  // const userData = await fetchUserData().catch(() => {
-  //   return redirect("/login")
-  // })
+  const userData = await fetchUserData().catch(() => {
+    return redirect("/login")
+  })
+
   const characters = await fetchSelfCharacters()
 
   return (
     <>
       <header className="sticky top-0 z-20">
-        <Navbar />
+        <Navbar user={userData} />
       </header>
       <div className="flex">
-        <Sidebar characters={characters} />
+        <Sidebar characters={characters} user={userData} />
         <main className="w-full">{children}</main>
       </div>
     </>

@@ -1,17 +1,32 @@
+import cn from "@/utils/cn"
+
 export default function ColorPalette({
-  palette,
-  width = "100%",
-  height = "0.66rem"
+  palette
 }: {
   palette: string[]
   width?: number | string
   height?: number | string
 }) {
   return (
-    <ul className="grid grid-flow-col" style={{ width, height }}>
-      {palette.map((color, index) => {
-        return <li key={index} aria-label={name} style={{ backgroundColor: color }}></li>
-      })}
-    </ul>
+    <div
+      className={"border-400 flex h-full w-full flex-row rounded border-2 border-solid"}
+    >
+      {palette
+        .filter((e) => e.startsWith("#"))
+        .map(
+          (color, i) =>
+            color && (
+              <div
+                style={{ backgroundColor: color }}
+                className={cn(
+                  "h-full w-full",
+                  i === 0 && "rounded-l",
+                  i === palette.length - 1 && "rounded-r"
+                )}
+                key={i}
+              />
+            )
+        )}
+    </div>
   )
 }

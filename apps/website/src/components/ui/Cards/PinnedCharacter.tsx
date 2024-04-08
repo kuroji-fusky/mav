@@ -1,3 +1,4 @@
+import { displaySpecies } from "@/utils/displayer"
 import { LuCat as CatIcon, LuPin, LuPalette as Palette } from "react-icons/lu"
 import type { ColorPalette as Colors } from "@/types/characters"
 import { Button } from "../Buttons"
@@ -15,7 +16,7 @@ export default function PinnedCharacter({
   avatar: string
   name: string
   species: string
-  colors: Colors[]
+  colors: string[]
   artist: string
   refSheetImg: string
 }) {
@@ -27,11 +28,11 @@ export default function PinnedCharacter({
           Pinned Character
         </span>
         <div className="flex flex-col justify-between">
-          <div className="flex flex-row ">
+          <div className="flex w-full flex-row">
             <MFImage width={118} height={118} src={avatar} alt={`${name}'s avatar`} />
-            <div className="m-4 flex flex-col">
+            <div className="m-4 flex w-full flex-col">
               <h2 className="text-3xl">{name}</h2>
-              <span className="text-lg">{species}</span>
+              <span className="text-lg">{displaySpecies(species)}</span>
               <ColorPalette palette={colors} />
             </div>
           </div>

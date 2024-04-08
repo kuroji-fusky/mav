@@ -37,7 +37,6 @@ export function CharacterTable({ children }: { children?: React.ReactNode }) {
 
 export function CharacterItem({ character }: { character: Character }) {
   const charLink = `/dashboard/characters/edit/${character.name}`
-
   return (
     <Table.Row>
       <Table.Cell>
@@ -72,7 +71,12 @@ export function CharacterItem({ character }: { character: Character }) {
           {VisibilityIcons[character.visibility]} {character.visibility.toUpperCase()}
         </span>
       </Table.Cell>
-      <Table.Cell>Date field</Table.Cell>
+      <Table.Cell>
+        <div className="flex flex-col">
+          <span className="text-subtext text-xs uppercase">Created On</span>
+          <span>{new Date(character.createdAt).toDateString()}</span>
+        </div>
+      </Table.Cell>
       <Table.Cell>
         <span>Full</span>
       </Table.Cell>

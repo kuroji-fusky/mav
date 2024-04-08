@@ -17,7 +17,9 @@ const CharacterTableItem = dynamic(
 
 export default function CharacterView({ characters = [] }: { characters: Character[] }) {
   const queryParams = useSearchParams()
-  const [createCharacterModal, setCreateCharacterModal] = useState(false)
+  const [createCharacterModal, setCreateCharacterModal] = useState(
+    queryParams.has("createModal") || false
+  )
 
   const toggleCreateCharacterModal = () => {
     setCreateCharacterModal(!createCharacterModal)

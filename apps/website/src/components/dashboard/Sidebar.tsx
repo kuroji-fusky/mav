@@ -22,16 +22,19 @@ import {
   LuSparkles
 } from "react-icons/lu"
 import type { Character } from "@/types/characters"
+import type { UserType } from "@/types/users"
 import { Button } from "../ui/Buttons"
 import type { ItemIteratorType } from "../ui/Layouts/ItemIterator"
 import SidebarProfile from "./SidebarProfile"
 
 export default function DashboardSidebar({
   characters,
-  toggleModal
+  toggleModal,
+  user
 }: {
   characters: Character[]
-  toggleModal: () => void
+  toggleModal?: () => void
+  user: UserType
 }) {
   // TODO check for localStorage to persist state of collapse/expand sidebar
   const toggleState = useAtomValue(sidebarToggleDashboard)
@@ -88,7 +91,7 @@ export default function DashboardSidebar({
             className="relative flex h-full flex-col justify-between px-3.5 py-3.5"
           >
             <div>
-              <SidebarProfile />
+              <SidebarProfile user={user} />
               <ItemIterator as={Fragment} baseUrl="/dashboard/" items={menuItems.top} />
             </div>
             <ItemIterator items={menuItems.bottom} />

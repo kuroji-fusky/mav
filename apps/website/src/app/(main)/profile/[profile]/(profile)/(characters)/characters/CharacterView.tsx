@@ -13,9 +13,10 @@ import {
   LuFilter as FilterIcon,
   LuFolderPlus as FolderPlus,
   LuCog,
+  LuPlus,
   LuX as XIcon
 } from "react-icons/lu"
-import type { CharacterResponse } from "@/types/characters"
+import type { CharacterResponse, ColorPalette } from "@/types/characters"
 
 export default function CharacterView({
   handle,
@@ -46,10 +47,7 @@ export default function CharacterView({
     "bg-pink-400"
   ]
 
-  const refSheets = characters.mainCharacter
-    ? characters.characters.find((char) => char.name == characters.mainCharacter.name)
-        ?.refSheets?.[0]?.variants?.[0]?.url
-    : null
+  const refSheets = characters.mainCharacter?.refSheets[0].variants[0].url
 
   return (
     <FolderView>
@@ -75,16 +73,17 @@ export default function CharacterView({
           >
             Manage Character
           </Button>
+          <Button
+            onClick={() => router.push("/dashboard/characters?createModal=true")}
+            prefixIcon={<LuPlus size={20} />}
+          >
+            Create Character
+          </Button>
         </div>
         {characters.mainCharacter && (
           <PinnedCharacter
-            artist="Ratking"
-            colors={[
-              { color: "cyan", name: "cyan" },
-              { color: "yellow", name: "yellow" },
-              { color: "purple", name: "purple" },
-              { color: "white", name: "white" }
-            ]}
+            artist={"Unknown artist"}
+            colors={characters.mainCharacter.refSheets[0].colors}
             avatar={characters.mainCharacter.avatarUrl || "/UserProfile.png"}
             name={characters.mainCharacter.name}
             species={characters.mainCharacter.species}

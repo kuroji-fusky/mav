@@ -14,10 +14,11 @@ import {
   LuPlus,
   LuShare
 } from "react-icons/lu"
+import type { UserType } from "@/types/users"
 import NavbarLogo from "./NavbarLogo"
 import NavbarSearch from "./NavbarSearch"
 
-export default function DashboardNavbar() {
+export default function DashboardNavbar({ user }: { user: UserType }) {
   const [isToggled, setIsToggled] = useAtom(sidebarToggleDashboard)
 
   const createNewItems = [
@@ -51,7 +52,7 @@ export default function DashboardNavbar() {
           Create
         </Button>
         <span className="ml-3">
-          <Avatar src={"/UserProfile.png"} size={32} />
+          <Avatar src={user.avatarUrl || "UserProfile.png"} size={32} />
         </span>
       </div>
     </nav>
