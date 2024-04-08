@@ -9,9 +9,8 @@ import type {
 } from "@/types/characters"
 import type { MapElement } from "@/types/utils"
 import MFImage from "../MFImage"
+import ColorPalette from "./ColorPalette"
 import Status from "./Status"
-
-type CharacterCardPalette = [Palette] | [Palette, Palette] | [Palette, Palette, Palette]
 
 export default function FursonaCard({
   name,
@@ -44,26 +43,26 @@ export default function FursonaCard({
       )}
       {...attributes}
     >
-      <div className="overflow-hidden rounded-md">
+      <div className="h-full overflow-hidden rounded-md">
         <MFImage
           src={img}
           objectFit="cover"
           aspectRatio="1/1"
           width="100%"
+          height="100%"
           alt={`Avatar of ${name}`}
-          sizes="(max-width: 1280px) 400px"
+          sizes="(max-width: 1280px) 400px, 640px"
           strategy="neutral"
         />
       </div>
-      <div className="grid">
-        <Status status={status} />
-        <h3 className="not-prose font-inter text-2xl font-bold">{name}</h3>
-        <span>{displaySpecies(species)}</span>
-        <span className="text-md my-2 flex flex-row font-semibold">
-          <Heart className="mr-1" size={18} />
-          {likes}
-        </span>
-      </div>
+      <ColorPalette palette={palette} height={"50px"} />
+      <Status status={status} />
+      <h3 className="not-prose font-inter text-2xl font-bold">{name}</h3>
+      <span>{displaySpecies(species)}</span>
+      <span className="text-md my-2 flex flex-row font-semibold">
+        <Heart className="mr-1" size={18} />
+        {likes}
+      </span>
     </DynamicElement>
   )
 }

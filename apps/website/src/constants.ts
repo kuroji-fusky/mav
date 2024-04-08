@@ -67,3 +67,15 @@ export const genderOptions = [
   { label: "Prefer Not to Say", value: "prefernot" },
   { label: "Other", value: "other" }
 ]
+
+export const folderColors = [
+  "bg-gray-400",
+  "bg-red-400",
+  "bg-orange-400",
+  "bg-yellow-400",
+  "bg-green-400",
+  "bg-blue-400",
+  "bg-violet-400",
+  "bg-purple-400",
+  "bg-pink-400"
+]

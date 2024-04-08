@@ -2,21 +2,14 @@
 
 import { useRouter } from "next/navigation"
 import { useState } from "react"
-import { FolderView, GridResponsive, Modal } from "@/components/ui"
+import CreateFolderModal from "@/components/modals/CreateFolder"
+import { FolderView, GridResponsive } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
 import { FursonaCard, PinnedCharacter } from "@/components/ui/Cards"
-import { InputField } from "@/components/ui/Forms"
 import SearchBox from "@/components/ui/Forms/SearchBox"
-import cn from "@/utils/cn"
-import {
-  LuCheckCircle2 as CheckCircle2Icon,
-  LuFilter as FilterIcon,
-  LuFolderPlus as FolderPlus,
-  LuCog,
-  LuPlus,
-  LuX as XIcon
-} from "react-icons/lu"
-import type { CharacterResponse, ColorPalette } from "@/types/characters"
+import { folderColors } from "@/constants"
+import { LuFilter as FilterIcon, LuCog, LuPlus } from "react-icons/lu"
+import type { CharacterResponse } from "@/types/characters"
 
 export default function CharacterView({
   handle,
@@ -28,25 +21,8 @@ export default function CharacterView({
   const router = useRouter()
   const [createFolderModal, setFolderModalState] = useState(false)
 
-  const toggleCreateFolderModal = () => {
-    setFolderModalState(!createFolderModal)
-    return
-  }
-
+  const toggleCreateFolderModal = () => setFolderModalState(!createFolderModal)
   const [selectedIndex, setSelectedIndex] = useState(0)
-
-  const colors = [
-    "bg-gray-400",
-    "bg-red-400",
-    "bg-orange-400",
-    "bg-yellow-400",
-    "bg-green-400",
-    "bg-blue-400",
-    "bg-violet-400",
-    "bg-purple-400",
-    "bg-pink-400"
-  ]
-
   const refSheets = characters.mainCharacter?.refSheets[0].variants[0].url
 
   return (
@@ -67,6 +43,7 @@ export default function CharacterView({
         <div className="mb-4 flex w-full gap-x-2.5">
           <SearchBox placeholder="Search for characters" />
           <Button prefixIcon={<FilterIcon size={20} />}>Filter</Button>
+          {/* TODO: Display if logged in */}
           <Button
             onClick={() => router.push("/dashboard/characters")}
             prefixIcon={<LuCog size={20} />}
@@ -98,54 +75,20 @@ export default function CharacterView({
               img={character.avatarUrl || "/UserProfile.png"}
               name={character.name}
               species={character.species}
+              palette={characters.mainCharacter.refSheets[0].colors}
               status="owned"
               href={`/profile/${handle}/character/${character.name}`}
             />
           ))}
         </GridResponsive>
       </FolderView.Contents>
-      <Modal
-        state={createFolderModal}
-        toggler={toggleCreateFolderModal}
-        className="w-full md:w-[600px]"
-      >
-        <Modal.Title>
-          <div className="flex w-full items-center justify-between">
-            <span className="font-inter flex items-center gap-x-2 text-xl font-bold">
-              <FolderPlus />
-              Add new folder
-            </span>
-            <Button
-              size="small"
-              variant="tritery"
-              icon={<XIcon size={18} />}
-              onClick={toggleCreateFolderModal}
-            />
-          </div>
-        </Modal.Title>
-        <div className="flex flex-col gap-y-1 px-4 pb-3">
-          <InputField inputName="Folder name" />
-          <div className="flex flex-col gap-y-1">
-            {/* TODO export as a <SelectField /> component */}
-            <span className="text-600 font-bold uppercase">Color</span>
-            <div className="flex flex-wrap gap-2">
-              {colors.map((color, i) => (
-                <Button
-                  key={i}
-                  className={cn("grid h-10 w-10 place-items-center rounded-full", color)}
-                  onClick={() => setSelectedIndex(i)}
-                >
-                  {selectedIndex == i ? <CheckCircle2Icon className="text-100" /> : null}
-                </Button>
-              ))}
-            </div>
-          </div>
-        </div>
-        <div className="flex justify-end gap-x-2 px-4 pb-3">
-          <Button variant="secondary">Cancel</Button>
-          <Button>Create</Button>
-        </div>
-      </Modal>
+      <CreateFolderModal
+        createFolderModal={createFolderModal}
+        toggleCreateFolderModal={toggleCreateFolderModal}
+        colors={folderColors}
+        selectedIndex={selectedIndex}
+        setSelectedIndex={setSelectedIndex}
+      />
     </FolderView>
   )
 }

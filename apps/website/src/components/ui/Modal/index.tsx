@@ -1,6 +1,8 @@
 import Modal from "./Modal"
+import ModalBody from "./ModalBody"
 import ModalTitle from "./ModalTitle"
 
 export default Object.assign(Modal, {
-  Title: ModalTitle
+  Title: ModalTitle,
+  Body: ModalBody
 })

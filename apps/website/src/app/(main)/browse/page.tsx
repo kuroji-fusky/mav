@@ -12,6 +12,7 @@ import ShelfSection from "./ShelfSection"
 export default async function Browse() {
   const featuredCharacters = await getFeatured()
   const newCharacters = await getNewCharacters()
+
   return (
     <MarginClamp>
       <div className="mx-auto my-20 flex  flex-col justify-between gap-y-2 md:mt-8 md:flex-col">
@@ -25,7 +26,7 @@ export default async function Browse() {
                 character.refSheets.length > 0 ? character.refSheets[0].colors : []
               }
               href={`/@${character.owner.handle}/character/${character.name}`}
-              // likes={character.likes}
+              likes={character.favoritedBy.length}
               key={index}
             />
           ))}
@@ -40,7 +41,7 @@ export default async function Browse() {
                 character.refSheets.length > 0 ? character.refSheets[0].colors : []
               }
               href={`/@${character.owner.handle}/character/${character.name}`}
-              // likes={character.likes}
+              likes={character.favoritedBy.length}
               key={index}
             />
           ))}

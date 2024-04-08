@@ -35,6 +35,8 @@ export interface Character {
   owner: UserType
   mainCharacter: boolean
   fullName: string
+  createdAt: Date
+  updatedAt: Date
   species: string
   isHybrid: boolean
   comments: Comments[]
