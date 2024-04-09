@@ -12,12 +12,18 @@ export default async function Character({
   const { character, profile } = params
   const data = await fetchCharacter(profile, character)
   const user = await fetchUserData().catch(() => null)
+
   return (
     <MarginClamp>
       <div className="flex w-full flex-row justify-between">
         <section className="w-1/2">
           {data.refSheets.length > 0 && (
-            <ReferenceSheet referenceSheet={data.refSheets[0].variants[0].url} />
+            <ReferenceSheet
+              referenceSheet={
+                data.refSheets.find((r) => r.active).variants.find((v) => v.main).url
+              }
+              colors={data.refSheets.find((r) => r.active).colors}
+            />
           )}
         </section>
         <section className="w-1/2">

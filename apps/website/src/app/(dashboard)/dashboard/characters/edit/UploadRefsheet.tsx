@@ -28,10 +28,12 @@ export default function UploadRefsheetModal({
   refSheetData: ReferenceSheet[]
   editingRefSheet?: ReferenceSheet | undefined
   characterID: string
+  refId: string
 }) {
   const [mainRefUrl, setMainRefUrl] = useState("")
   const [saved, setSaved] = useState(true)
   const defaultValue = {
+    id: null,
     refSheetName: "",
     artist: "",
     colors: [""],
@@ -51,13 +53,15 @@ export default function UploadRefsheetModal({
 
   useEffect(() => {
     if (mainRefUrl) {
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        variants: [
-          { name: "Main", url: mainRefUrl, nsfw: false, active: true },
-          ...prevFormData.variants.filter((v) => !v.active)
-        ]
-      }))
+      const updatedVariants = formData.variants.filter((v) => !v.main)
+      updatedVariants.unshift({
+        name: "Main Variant",
+        url: mainRefUrl,
+        nsfw: false,
+        active: true,
+        main: true
+      })
+      setFormData((prev) => ({ ...prev, variants: updatedVariants }))
     }
   }, [mainRefUrl])
 
@@ -103,7 +107,7 @@ export default function UploadRefsheetModal({
         ...prev,
         variants: [
           ...prev.variants,
-          { name: "New Variant", url, nsfw: false, active: false }
+          { name: "New Variant", url, nsfw: false, main: false }
         ]
       }))
     } catch (error) {
@@ -112,7 +116,18 @@ export default function UploadRefsheetModal({
   }
 
   const save = () => {
-    setNewRefSheetData([...refSheetData, formData])
+    setNewRefSheetData((prev) => {
+      const updated = [...prev]
+      const index = updated.findIndex((r) => r.id === formData.id)
+      if (index >= 0) {
+        updated[index] = formData
+      } else {
+        updated.push(formData)
+      }
+
+      return updated
+    })
+
     fetch(`${BACKEND_URL}/v1/character/upload-ref`, {
       method: "POST",
       headers: {
@@ -122,6 +137,16 @@ export default function UploadRefsheetModal({
       body: JSON.stringify({ refSheet: formData, characterId: characterID })
     })
     setSaved(true)
+  }
+
+  const deleteRefSheet = () => {
+    fetch(`${BACKEND_URL}/v1/character/delete-ref/${formData.id}`, {
+      method: "DELETE",
+      credentials: "include"
+    })
+
+    setNewRefSheetData((prev) => prev.filter((r) => r.id !== formData.id))
+    toggleUploadRefSheetModal()
   }
 
   const close = () => {
@@ -155,12 +180,12 @@ export default function UploadRefsheetModal({
         </div>
       </Modal.Title>
       <section className="flex flex-row justify-around p-4">
-        <div className="w-2/5">
-          <span className="my-4 text-2xl">Primary Ref Sheet</span>
+        <div className="h-full w-2/5">
+          <span className="text-2xl">Main Variant</span>
           <DropZone
             aspectRatio="16/9"
             setData={setMainRefUrl}
-            className="w-full"
+            className="my-4 w-full"
             value={formData.variants.length > 0 ? formData.variants[0].url : undefined}
           />
         </div>
@@ -168,6 +193,7 @@ export default function UploadRefsheetModal({
           <InputField
             inputName="Name"
             required
+            value={formData.refSheetName}
             onChange={(e) => handleChange("refSheetName", e.currentTarget.value)}
           />
           <span className="text-600 mb-2 mt-4 flex gap-x-0.5 font-bold uppercase">
@@ -178,45 +204,19 @@ export default function UploadRefsheetModal({
               <input
                 key={index}
                 type="color"
-                className="border-400 bg-100 m-2 border border-solid"
+                className="border-400 bg-100 mr-2 border border-solid"
                 value={color}
                 onChange={(e) => handleChange("colors", e.target.value, index)}
                 onBlur={addColor}
+                // Right click to remove color
+                onContextMenu={(e) => {
+                  e.preventDefault()
+                  const updatedColors = [...formData.colors]
+                  updatedColors.splice(index, 1)
+                  setFormData((prev) => ({ ...prev, colors: updatedColors }))
+                }}
               />
             ))}
-          </div>
-
-          <div>
-            <input
-              type="color"
-              className="border-400 bg-100 border border-solid"
-              name="color1"
-              id="color1"
-            />
-            <input
-              type="color"
-              className="border-400 bg-100 border border-solid"
-              name="color2"
-              id="color2"
-            />
-            <input
-              type="color"
-              className="border-400 bg-100 border border-solid"
-              name="color3"
-              id="color3"
-            />
-            <input
-              type="color"
-              className="border-400 bg-100 border border-solid"
-              name="color4"
-              id="color4"
-            />
-            <input
-              type="color"
-              className="border-400 bg-100 border border-solid"
-              name="color5"
-              id="color5"
-            />
           </div>
           <div className="w-full py-5">
             <span className="text-600 mb-2 mt-4 flex gap-x-0.5 font-bold uppercase">
@@ -240,14 +240,42 @@ export default function UploadRefsheetModal({
                 </div>
               </div>
             </div>
-            {formData.variants.map((variant, index) => (
-              <ModalRefVariant {...variant} key={index} />
-            ))}
+            {formData.variants
+              .filter((v) => !v.main)
+              .map((variant, index) => (
+                <ModalRefVariant
+                  name={formData.variants[index].name}
+                  nsfw={formData.variants[index].nsfw}
+                  url={variant.url}
+                  key={index}
+                  onChangeCheck={(e) => {
+                    const updatedVariants = [...formData.variants]
+                    updatedVariants[index].nsfw = e.target.checked
+                    setFormData((prev) => ({ ...prev, variants: updatedVariants }))
+                  }}
+                  onChangeName={(e) => {
+                    const updatedVariants = [...formData.variants]
+                    updatedVariants[index].name = e.target.value
+                    setFormData((prev) => ({ ...prev, variants: updatedVariants }))
+                  }}
+                  deleteVarient={(e) => {
+                    e.preventDefault()
+                    if (e.shiftKey) {
+                      const updatedVariants = [...formData.variants]
+                      updatedVariants.splice(index, 1)
+                      setFormData((prev) => ({ ...prev, variants: updatedVariants }))
+                    }
+                  }}
+                />
+              ))}
           </div>
         </div>
       </section>
       <div className="flex flex-row items-center justify-end p-4">
         {saved ? null : "You have unsaved changes*"}
+        <Button variant="error" className="float-right ml-4" onClick={deleteRefSheet}>
+          Delete
+        </Button>
         <Button className="float-right mx-4" onClick={save}>
           Save
         </Button>

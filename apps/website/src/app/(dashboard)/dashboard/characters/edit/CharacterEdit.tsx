@@ -227,6 +227,7 @@ export default function EditCharacterView({ character }: { character: Character 
               editingRefSheet={editingData}
               setNewRefSheetData={setRefSheetsData}
               characterID={character.id}
+              refId={editingData?.id}
             />
             <Button className="mt-4" onClick={() => setRefSheetUploadModal(true)}>
               New Reference Sheet

@@ -172,3 +172,7 @@ export const getArtwork = async (artworkId) => {
   const artwork = await apiWithoutAuth<Artwork>("GET", `/v1/art/${artworkId}`)
   return artwork
 }
+
+export const setRefAsMain = async (refId: string) => {
+  await apiWithAuth("PUT", `/v1/character/assign-ref/${refId}`)
+}

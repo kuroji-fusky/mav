@@ -16,7 +16,10 @@ export default function NavbarUserActions({
   user?: UserType
 }) {
   const createNewItems = generateCreateItems()
-  const siteSettingsItems = generateSiteSettingItems(isRegistered, user.handle)
+  const siteSettingsItems = generateSiteSettingItems(
+    isRegistered,
+    user ? user.handle : null
+  )
 
   if (!isRegistered) {
     return (

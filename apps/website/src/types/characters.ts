@@ -88,11 +88,16 @@ export interface Variant {
   name: string
   url: string
   nsfw: boolean
-  active: boolean
+  main?: boolean
+  onChangeCheck?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onChangeName?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  deleteVarient?: (e: React.MouseEvent<HTMLDivElement>) => void
 }
 
 export interface ReferenceSheet {
+  id: string
   refSheetName: string
+  active: boolean
   artist: string
   colors: string[]
   variants: Variant[]
