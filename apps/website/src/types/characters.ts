@@ -21,8 +21,8 @@ export interface CharacterAttributes {
   pronouns: string
   gender: string
   preferences: {
-    likes: string[]
-    dislikes: string[]
+    likes: string
+    dislikes: string
   }
   custom_fields: CustomAttributes[]
 }

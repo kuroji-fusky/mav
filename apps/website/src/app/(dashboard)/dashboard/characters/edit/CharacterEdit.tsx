@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { Container } from "@/components/dashboard"
+import UploadRefsheetModal from "@/components/modals/UploadRefsheet"
 import { Button } from "@/components/ui/Buttons"
 import { ReferenceCard } from "@/components/ui/Cards"
 import {
@@ -15,7 +16,6 @@ import DropZone from "@/components/ui/Forms/DropZone"
 import { furrySpeciesOptions, genderOptions, pronounOptions } from "@/constants"
 import { BACKEND_URL } from "@/utils/env"
 import type { Character, ReferenceSheet } from "@/types/characters"
-import UploadRefsheetModal from "./UploadRefsheet"
 
 export default function EditCharacterView({ character }: { character: Character }) {
   const [formData, setFormData] = useState<Character | null>(null)

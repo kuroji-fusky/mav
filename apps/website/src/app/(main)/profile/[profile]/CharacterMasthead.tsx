@@ -2,6 +2,8 @@
 
 import { useRouter } from "next/navigation"
 import { useState } from "react"
+import DeleteConfirmModal from "@/components/modals/ConfirmModal"
+import UploadArtModal from "@/components/modals/UploadArt"
 import { Avatar, Button } from "@/components/ui/Buttons"
 import { Masthead } from "@/components/ui/Masthead"
 import { displayPronouns, displaySpecies } from "@/utils/displayer"
@@ -19,8 +21,6 @@ import {
 } from "react-icons/lu"
 import type { Character } from "@/types/characters"
 import type { UserType } from "@/types/users"
-import DeleteConfirmModal from "./ConfirmModal"
-import UploadArtModal from "./UploadArt"
 
 export default function CharacterMasthead({
   data,

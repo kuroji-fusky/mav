@@ -5,19 +5,16 @@ import { Button } from "@/components/ui/Buttons"
 import { InputField } from "@/components/ui/Forms"
 import DropZone from "@/components/ui/Forms/DropZone"
 import Modal from "@/components/ui/Modal"
+import { uploadImage } from "@/utils/apiNoCookies"
 import { BACKEND_URL } from "@/utils/env"
 import { FaFolderPlus } from "react-icons/fa6"
 import { LuXCircle } from "react-icons/lu"
 import type { ReferenceSheet } from "@/types/characters"
 
-// TODO: Add Delete
-// TODO: Fix Clear Form
-
 export default function UploadRefsheetModal({
   toggleUploadRefSheetModal,
   uploadRefsheetModal,
   setNewRefSheetData,
-  refSheetData,
   editingRefSheet,
   characterID
 }: {
@@ -46,7 +43,7 @@ export default function UploadRefsheetModal({
     if (editingRefSheet) {
       setFormData(editingRefSheet)
       if (editingRefSheet.variants && editingRefSheet.variants.length > 0) {
-        setMainRefUrl(editingRefSheet.variants.find((v) => v.active)?.url || "")
+        setMainRefUrl(editingRefSheet.variants.find((v) => v.main)?.url || "")
       }
     }
   }, [editingRefSheet])
@@ -94,14 +91,8 @@ export default function UploadRefsheetModal({
     formData.append("file", uploadedFile)
 
     try {
-      const response = await fetch(`${BACKEND_URL}/v1/profile/upload`, {
-        method: "POST",
-        body: formData,
-        credentials: "include"
-      })
-
+      const response = await uploadImage(formData)
       if (!response.ok) throw new Error("Failed to upload image")
-
       const { url } = await response.json()
       setFormData((prev) => ({
         ...prev,
