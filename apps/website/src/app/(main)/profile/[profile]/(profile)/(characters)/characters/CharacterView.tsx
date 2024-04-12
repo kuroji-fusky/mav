@@ -23,7 +23,9 @@ export default function CharacterView({
 
   const toggleCreateFolderModal = () => setFolderModalState(!createFolderModal)
   const [selectedIndex, setSelectedIndex] = useState(0)
-  const refSheets = characters.mainCharacter?.refSheets[0].variants[0].url
+  const refSheets = characters.mainCharacter?.refSheets
+    .find((r) => r.active)
+    .variants.find((v) => v.main).url
 
   return (
     <FolderView>

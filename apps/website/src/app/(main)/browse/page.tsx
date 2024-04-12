@@ -47,24 +47,8 @@ export default async function Browse() {
           ))}
         </ShelfSection>
         {/* TODO create profile card and collections card */}
-        <div>
-          <div className="my-3 flex flex-row">
-            <span className="flex flex-row items-center justify-center text-2xl font-bold">
-              <Brush width={26} height={26} className="mr-2" />
-              Artists Open for Comissions
-            </span>
-            <hr />
-            <div />
-          </div>
-        </div>
-        <div className="my-3 flex flex-row">
-          <span className="flex flex-row items-center justify-center text-2xl font-bold">
-            <Layers width={26} height={26} className="mr-2" />
-            Curated Collections
-          </span>
-          <hr />
-          <div />
-        </div>
+        <ShelfSection icon={Brush} title={"Artists Open for Comissions (Coming Soon)"} />
+        <ShelfSection icon={Layers} title={"Curated Collections (Coming Soon)"} />
       </div>
     </MarginClamp>
   )
