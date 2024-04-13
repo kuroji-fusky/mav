@@ -1,3 +1,4 @@
+import type { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies"
 import { cookies } from "next/headers"
 import type { Artwork, Character, CharacterResponse } from "@/types/characters"
 import type { UserType } from "@/types/users"
@@ -7,15 +8,19 @@ type APIMethods = "GET" | "POST" | "DELETE" | "PUT"
 
 const endpoint = BACKEND_URL
 
+export const getCookies = async () => {
+  const cookiesHeaders = cookies()
+  return new Promise((resolve) => {
+    resolve(cookiesHeaders)
+  })
+}
+
 export const apiWithAuth = async <Data>(
   method: APIMethods,
   route: string
 ): Promise<Data> => {
   const makeRequest = async () => {
-    const cookiesHeaders = cookies()
-    if (!cookiesHeaders.has("accessToken") || !cookiesHeaders.has("refreshToken")) {
-      throw new Error("Unauthorized")
-    }
+    const cookiesHeaders = (await getCookies()) as ReadonlyRequestCookies
 
     const accessToken = cookiesHeaders.get("accessToken").value
     const refreshToken = cookiesHeaders.get("refreshToken").value
@@ -73,8 +78,8 @@ export const apiWithoutAuth = async <Data>(
     })
 }
 
-export const refreshToken = () => {
-  const cookiesHeaders = cookies()
+export const refreshToken = async () => {
+  const cookiesHeaders = (await getCookies()) as ReadonlyRequestCookies
   if (!cookiesHeaders.has("refreshToken")) {
     return Promise.resolve(false)
   }
