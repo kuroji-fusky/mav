@@ -18,7 +18,6 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function ArtPage({ params }) {
   const artwork = await getArtwork(params.art)
-  console.log(artwork)
   const user = (await fetchUserData().catch(() => null)) as UserType | null
   return (
     <div className="flex">
@@ -53,6 +52,7 @@ export default async function ArtPage({ params }) {
             artTitle={artwork.title ? artwork.title : "No Title"}
             artist={artwork.artist ? artwork.artist.handle : artwork.artistUrl}
             artistImg={artwork.artist && artwork.artist.avatarUrl}
+            description={artwork.description ? artwork.description : "No Description"}
             handle={artwork.artist ? artwork.artist.handle : null}
           />
           {user && (

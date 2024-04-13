@@ -1,7 +1,9 @@
+import { MarginClamp } from "@/components/ui"
+
 const data = {
   character: ""
 }
 
 export default function Character() {
-  return <div>page contents</div>
+  return <MarginClamp>page contents</MarginClamp>
 }

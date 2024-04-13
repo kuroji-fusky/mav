@@ -6,13 +6,15 @@ import { LuMoreVertical, LuShare, LuStar } from "react-icons/lu"
 export default function ArtworkDetails({
   artTitle,
   artist,
-  artistImg
+  artistImg,
+  description
 }: Partial<
   Readonly<{
     artTitle: string
     artist: string
     artistImg: string
     handle: string
+    description: string
   }>
 >) {
   return (
@@ -47,8 +49,8 @@ export default function ArtworkDetails({
         </div>
       </div>
       {/* Art description */}
-      <div className="border-300 mt-5 rounded-md border-[2px] px-5 py-3.5 transition-colors duration-150">
-        description
+      <div className="border-300 my-5 rounded-md border-[2px] px-5 py-3.5 transition-colors duration-150">
+        {description}
       </div>
     </>
   )
