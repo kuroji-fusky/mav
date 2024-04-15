@@ -6,47 +6,135 @@ import { Fragment, useCallback, useEffect } from "react"
 import { sidebarToggle } from "@/atoms"
 import { motion } from "framer-motion"
 import { useAtom } from "jotai"
+import { FaPallet } from "react-icons/fa6"
 import {
   LuAlertTriangle as AlertTriangleIcon,
   LuBox as BoxIcon,
   LuBrush as BrushIcon,
   LuHelpCircle as HelpCircleIcon,
   LuHome as HomeIcon,
+  LuCat,
+  LuHistory,
+  LuPalette,
   LuMessageSquarePlus as MessageSquarePlusIcon,
   LuSettings as SettingsIcon,
   LuSparkles as SparklesIcon,
   LuX as XIcon
 } from "react-icons/lu"
+import { SiCanva } from "react-icons/si"
+import type { UserType } from "@/types/users"
 import { MyFursonaIcon } from "../icons"
-import { Button } from "../ui/Buttons"
+import { Avatar, Button } from "../ui/Buttons"
 import Menu from "../ui/Menu"
 import Overlay from "../ui/Modal/Overlay"
 import Separator from "../ui/Separator"
 
-export default function Sidebar() {
-  const SIDEBAR_ITEMS = [
+export default function Sidebar({ user }: { user: UserType }) {
+  const SIDEBAR_ITEMS_SIGNED_OUT = [
     {
       heading: "",
-      items: [{ name: "Home", icon: HomeIcon }]
+      items: [{ name: "Home", icon: <HomeIcon size={20} />, href: "/" }]
     },
     {
       heading: "Explore",
       items: [
-        { name: "Available Adoptables", icon: SparklesIcon },
-        { name: "Open for Commissions", icon: BrushIcon },
-        { name: "3D Models", icon: BoxIcon }
+        {
+          name: "Available Adoptables",
+          icon: <SparklesIcon size={20} />,
+          href: "/adoptables"
+        },
+        {
+          name: "Open for Commissions",
+          icon: <BrushIcon size={20} />,
+          href: "/commissions"
+        }
+        // TODO: 3D Models Coming Soon
+        // { name: "3D Models", icon: BoxIcon, href: "/3d-models" }
       ]
     },
     {
       heading: "",
       items: [
-        { name: "Settings", icon: SettingsIcon },
-        { name: "Help", icon: HelpCircleIcon },
-        { name: "Send feedback", icon: MessageSquarePlusIcon },
-        { name: "Report Issue", icon: AlertTriangleIcon }
+        // { name: "Settings",   icon: <SettingsIcon size={20} />, href: "/settings" },
+        { name: "Help", icon: <HelpCircleIcon size={20} />, href: "/help" },
+        {
+          name: "Send feedback",
+          icon: <MessageSquarePlusIcon size={20} />,
+          href: "/feedback"
+        },
+        { name: "Report Issue", icon: <AlertTriangleIcon size={20} />, href: "/report" }
       ]
     }
   ]
+
+  const SIDEBAR_ITEMS_SIGNED_IN = [
+    {
+      heading: "",
+      items: [{ name: "Home", icon: <HomeIcon size={20} />, href: "/" }]
+    },
+    {
+      heading: "Activity",
+      items: [
+        { name: "History", icon: <LuHistory size={20} />, href: "/history" },
+        {
+          name: "Your Comissions",
+          icon: <LuPalette size={20} />,
+          href: `/activity/commissions`
+        },
+        {
+          name: "Your Adopts",
+          icon: <SparklesIcon size={20} />,
+          href: `/activity/adoptables`
+        }
+      ]
+    },
+    {
+      heading: "Your Characters",
+      items: user
+        ? user.characters.map((character) => ({
+            name: character.name,
+            icon: character.avatarUrl ? (
+              <Avatar src={character.avatarUrl} />
+            ) : (
+              <LuCat size={20} />
+            ),
+            href: `/@${user.handle}/character/${character.name}`
+          }))
+        : []
+    },
+    {
+      heading: "Explore",
+      items: [
+        {
+          name: "Available Adoptables",
+          icon: <SparklesIcon size={20} />,
+          href: "/adoptables"
+        },
+        {
+          name: "Open for Commissions",
+          icon: <BrushIcon size={20} />,
+          href: "/commissions"
+        }
+        // TODO: 3D Models Coming Soon
+        // { name: "3D Models", icon: BoxIcon, href: "/3d-models" }
+      ]
+    },
+    {
+      heading: "",
+      items: [
+        { name: "Settings", icon: <SettingsIcon size={20} />, href: "/settings" },
+        { name: "Help", icon: <HelpCircleIcon size={20} />, href: "/help" },
+        {
+          name: "Send feedback",
+          icon: <MessageSquarePlusIcon size={20} />,
+          href: "/feedback"
+        },
+        { name: "Report Issue", icon: <AlertTriangleIcon size={20} />, href: "/report" }
+      ]
+    }
+  ]
+
+  const SIDEBAR_ITEMS = user ? SIDEBAR_ITEMS_SIGNED_IN : SIDEBAR_ITEMS_SIGNED_OUT
 
   const [isSidebarOpen, setSidebarState] = useAtom(sidebarToggle)
 
@@ -102,8 +190,8 @@ export default function Sidebar() {
                   <Menu.Item
                     key={index}
                     name={item.name}
-                    prefixIcon={<item.icon size={20} />}
-                    href="/"
+                    prefixIcon={item.icon}
+                    href={item.href}
                   />
                 ))}
               </Menu>

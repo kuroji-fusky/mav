@@ -11,18 +11,14 @@ export default async function MainLayout({
 }>) {
   let userData: UserType | null = null
 
-  try {
-    userData = await fetchUserData()
-  } catch (error) {
-    throw new Error(error)
-  }
+  userData = await fetchUserData().catch(() => null)
 
   return (
     <>
       <div>
         <header className="sticky top-0 z-20">
           <Navbar userData={userData} />
-          <Sidebar />
+          <Sidebar user={userData} />
         </header>
         <div id="skip-nav" className="min-h-[calc(100dvh-3.75rem)]">
           {children}
