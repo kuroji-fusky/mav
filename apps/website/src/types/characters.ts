@@ -11,8 +11,8 @@ export interface ColorPalette {
 // type PronounOriginal = "He/Him" | "She/Her" | "They/Them"
 // type Pronouns = (PronounOriginal | Lowercase<PronounOriginal>)[] | string[]
 
-interface CustomAttributes {
-  property: string
+export interface CustomAttributes {
+  heading: string
   value: string
 }
 

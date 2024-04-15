@@ -15,18 +15,12 @@ import {
 import DropZone from "@/components/ui/Forms/DropZone"
 import { furrySpeciesOptions, genderOptions, pronounOptions } from "@/constants"
 import { BACKEND_URL } from "@/utils/env"
-import type { Character, ReferenceSheet } from "@/types/characters"
+import type { Character, CustomAttributes, ReferenceSheet } from "@/types/characters"
 
 export default function EditCharacterView({ character }: { character: Character }) {
   const [formData, setFormData] = useState<Character | null>(null)
   const [characterAvatar, setCharacterAvatar] = useState(null)
-  const [attributes, setAttributes] = useState<
-    {
-      heading: string
-      value: string
-    }[]
-  >([])
-
+  const [attributes, setAttributes] = useState<CustomAttributes[]>([])
   const [refSheetUploadModal, setRefSheetUploadModal] = useState(false)
   const [refSheetsData, setRefSheetsData] = useState<ReferenceSheet[]>([])
   const [editingData, setEditingData] = useState<ReferenceSheet | null>(null)
