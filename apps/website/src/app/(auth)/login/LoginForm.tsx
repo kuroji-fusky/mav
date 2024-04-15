@@ -110,7 +110,9 @@ export default function LoginForm() {
               break
           }
         })
-        .catch((e) => console.error(e))
+        .catch((e) => {
+          throw new Error(e)
+        })
     })
   }
 

@@ -14,7 +14,7 @@ export default async function MainLayout({
   try {
     userData = await fetchUserData()
   } catch (error) {
-    console.error("Failed to fetch user data:", error)
+    throw new Error(error)
   }
 
   return (

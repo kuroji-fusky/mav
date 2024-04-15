@@ -119,7 +119,7 @@ export default function EditCharacterView({ character }: { character: Character 
         }
       })
       .catch((err) => {
-        console.error(err)
+        throw new Error(err)
       })
   }
 

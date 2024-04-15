@@ -102,7 +102,7 @@ export default function UploadRefsheetModal({
         ]
       }))
     } catch (error) {
-      console.error("Error uploading file:", error.message)
+      throw new Error(error)
     }
   }
 
