@@ -8,6 +8,7 @@ import { Separator } from "../ui"
 import { Button, SearchButton } from "../ui/Buttons"
 import NavbarLogo from "./NavbarLogo"
 import NavbarUserActions from "./NavbarUserActions"
+import Notifications from "./Notifications"
 import ProfileBreadcrumb from "./ProfileBreadcrumb"
 
 export default function Navbar({ userData }: { userData: UserType }) {
@@ -34,6 +35,7 @@ export default function Navbar({ userData }: { userData: UserType }) {
         <div className="desktop-only-md">
           <SearchButton />
         </div>
+        {userData && <Notifications notifications={userData.notifications || []} />}
         <Separator dir="vertical" size="2.125rem" />
         <NavbarUserActions user={userData} isRegistered={userData ? true : false} />
       </div>

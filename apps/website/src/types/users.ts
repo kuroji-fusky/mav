@@ -37,7 +37,19 @@ export interface UserType {
   previousAliases: NullableString
   pronouns: NullableString
   nationaility: NullableString
+  notifications: Notification[]
   birthday: Date
+}
+
+export interface Notification {
+  id: string
+  content: string
+  read: boolean
+  user: UserType
+  sender: UserType | null
+  artwork: Artwork | null
+  comment: Comments | null
+  createdAt: Date
 }
 
 export interface Comments {
