@@ -26,7 +26,6 @@ export default function EditCharacterView({ character }: { character: Character 
   const [editingData, setEditingData] = useState<ReferenceSheet | null>(null)
   const [saved, setSaved] = useState(true)
 
-  // Merge character data with form data
   useEffect(() => {
     if (character) {
       setFormData(character)
@@ -58,7 +57,13 @@ export default function EditCharacterView({ character }: { character: Character 
   const updateAttributes = ({ key, value }: { key: string; value: string }) => {
     setFormData((prev) => {
       if (prev) {
-        return { ...prev, attributes: { ...prev.attributes, [key]: value } }
+        return {
+          ...prev,
+          attributes: {
+            ...prev.attributes,
+            [key]: value
+          }
+        }
       }
 
       return null
@@ -66,7 +71,6 @@ export default function EditCharacterView({ character }: { character: Character 
   }
 
   const updatePreference = ({ key, value }: { key: string; value: string }) => {
-    // Likes/Dislikes Split by new line
     setFormData((prev) => {
       if (prev) {
         return {

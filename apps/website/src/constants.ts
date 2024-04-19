@@ -47,7 +47,7 @@ export const pronounOptions = [
   { label: "He/Him", value: "hehim" },
   { label: "She/Her", value: "sheher" },
   { label: "They/Them", value: "theythem" },
-  { label: "Ze/Hir", value: "zezir" },
+  { label: "Ze/Hir", value: "zehir" },
   { label: "Ze/Zir", value: "zezir" },
   { label: "Xe/Xem", value: "xexem" },
   { label: "Ey/Em", value: "eyem" },

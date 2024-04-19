@@ -1,3 +1,5 @@
+"use client"
+
 import Modal from "./Modal"
 import ModalBody from "./ModalBody"
 import ModalTitle from "./ModalTitle"
