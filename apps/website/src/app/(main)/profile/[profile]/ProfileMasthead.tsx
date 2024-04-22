@@ -17,13 +17,13 @@ import type { UserRoles, UserType } from "@/types/users"
 // TODO: Remove all props to be retrieved directly from Jotai or react-query
 export default function ProfileMasthead({
   profileData,
-  hasEditAccess
+  self
 }: {
   username?: string
   profileData: UserType
   badges?: UserRoles
   /** Only for logged in users that should be set to `true` */
-  hasEditAccess?: boolean
+  self?: UserType
   /** If the user has explicitly set profile to "NSFW" */
   isNsfw?: boolean
   followsYou?: boolean
@@ -59,7 +59,7 @@ export default function ProfileMasthead({
   ]
 
   return (
-    <Masthead hasEditAccess={hasEditAccess}>
+    <Masthead hasEditAccess={true}>
       <Masthead.Banner src={profileData.bannerUrl || null} />
       <Masthead.Wrapper>
         <Masthead.Avatar profileOnly src={profileData.avatarUrl || null} />

@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { fetchCharacter, fetchUser } from "@/utils/api"
+import { fetchCharacter, fetchUser, fetchUserData } from "@/utils/api"
 import { BRAND } from "@myfursona-internal/config"
 import type { SlugRouteProps } from "@/types/utils"
 import DynamicLayout from "../../../DynamicLayout"
@@ -24,6 +24,7 @@ export default async function Layout({
 } & SlugRouteProps<{ profile: string; character: string }>) {
   const { character, profile } = params
 
+  const currentUser = await fetchUserData()
   const userData = await fetchUser(profile)
   const characterData = await fetchCharacter(profile, character)
   if (character && !characterData) return null
@@ -31,7 +32,7 @@ export default async function Layout({
   return (
     <>
       {/* TODO: Remove all props to be retrieved directly from Jotai or react-query */}
-      <DynamicLayout profile={userData} character={characterData} />
+      <DynamicLayout profile={userData} character={characterData} self={currentUser} />
       <div>{children}</div>
     </>
   )

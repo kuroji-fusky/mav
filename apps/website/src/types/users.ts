@@ -17,7 +17,7 @@ type Badge = {
 }
 
 export interface UserType {
-  id: number
+  id: string
   handle: string
   displayName: NullableString
   bio: NullableString

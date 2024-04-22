@@ -8,10 +8,12 @@ import ProfileMasthead from "./ProfileMasthead"
 
 export default function DynamicMasthead({
   profile,
-  character
+  character,
+  self
 }: {
   profile?: UserType
   character?: Partial<Character>
+  self?: UserType
 }) {
   const path = usePathname()
   const isRouteCharacter = path.includes("character/")
@@ -19,8 +21,8 @@ export default function DynamicMasthead({
   if (containsArtUrl) return null
 
   return !isRouteCharacter ? (
-    <ProfileMasthead profileData={profile} />
+    <ProfileMasthead profileData={profile} self={self} />
   ) : (
-    <CharacterMasthead owner={profile} data={character} />
+    <CharacterMasthead owner={profile} data={character} self={self} />
   )
 }

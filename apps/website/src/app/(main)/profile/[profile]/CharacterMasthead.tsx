@@ -24,15 +24,13 @@ import type { UserType } from "@/types/users"
 
 export default function CharacterMasthead({
   data,
-  owner
+  owner,
+  self
 }: {
   owner: UserType
   data: Partial<Character>
+  self: UserType
 }) {
-  const [favorited, setFavorited] = useState(
-    data.favoritedBy.find((user) => user.id === owner.id) ? true : false
-  )
-
   const [favCount, setFavCount] = useState(data.favoritedBy.length)
   const [artUploadModal, setArtUploadModal] = useState(false)
   const toggleUploadArtModal = () => setArtUploadModal(!artUploadModal)
@@ -40,6 +38,10 @@ export default function CharacterMasthead({
   const toggleDeleteConfirmModal = () => setDeleteConfirmModal(!deleteConfirmModal)
 
   const router = useRouter()
+
+  const [favorited, setFavorited] = useState(
+    data.favoritedBy.find((user) => user.id === self.id) !== undefined
+  )
 
   const favoriteSona = async (id: string) => {
     const data = await fetch(`${BACKEND_URL}/v1/character/favorite/${id}`, {
@@ -54,7 +56,7 @@ export default function CharacterMasthead({
   }
 
   return (
-    <Masthead>
+    <Masthead hasEditAccess={self.id === owner.id}>
       <UploadArtModal
         toggleUploadArtModal={toggleUploadArtModal}
         uploadArtModal={artUploadModal}
@@ -85,37 +87,42 @@ export default function CharacterMasthead({
               <span aria-hidden></span>
             </h2>
             <div className="relative z-[6] flex items-start gap-x-2.5">
-              <Button
-                prefixIcon={<EditIcon size={20} />}
-                aria-label="Edit Character"
-                onClick={() => router.push(`/dashboard/characters/edit/${data.name}`)}
-              >
-                Edit Character
-              </Button>
-              <Button
-                prefixIcon={<LuUpload size={20} />}
-                aria-label="Upload Artwork"
-                onClick={toggleUploadArtModal}
-              >
-                Upload Artwork
-              </Button>
-              <Button
-                prefixIcon={<HeartIcon size={20} />}
-                aria-label="Favorite"
-                variant={favorited ? "secondary" : "primary"}
-                count={favCount}
-                onClick={() => favoriteSona(data.id)}
-              >
-                Favorite
-              </Button>
-              <Button
-                prefixIcon={<FaTrash size={20} />}
-                aria-label="Delete"
-                variant={"error"}
-                onClick={toggleDeleteConfirmModal}
-              >
-                Delete
-              </Button>
+              {self.id === owner.id ? (
+                <>
+                  <Button
+                    prefixIcon={<EditIcon size={20} />}
+                    aria-label="Edit Character"
+                    onClick={() => router.push(`/dashboard/characters/edit/${data.name}`)}
+                  >
+                    Edit Character
+                  </Button>
+                  <Button
+                    prefixIcon={<LuUpload size={20} />}
+                    aria-label="Upload Artwork"
+                    onClick={toggleUploadArtModal}
+                  >
+                    Upload Artwork
+                  </Button>
+                  <Button
+                    prefixIcon={<FaTrash size={20} />}
+                    aria-label="Delete"
+                    variant={"error"}
+                    onClick={toggleDeleteConfirmModal}
+                  >
+                    Delete
+                  </Button>
+                </>
+              ) : (
+                <Button
+                  prefixIcon={<HeartIcon size={20} />}
+                  aria-label="Favorite"
+                  variant={favorited ? "secondary" : "primary"}
+                  count={favCount}
+                  onClick={() => favoriteSona(data.id)}
+                >
+                  Favorite
+                </Button>
+              )}
             </div>
           </Masthead.Layer>
           <Masthead.Layer>
