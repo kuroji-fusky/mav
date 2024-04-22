@@ -12,23 +12,25 @@ export default function Artwork({
   image: Artwork
   characterName: string
 }) {
-  const { artworkUrl, title } = image
   const router = useRouter()
   return (
-    <div className="relative w-1/4">
+    <div className="relative h-fit w-full cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105">
       <Image
         onClick={() =>
           router.push(
             `/@${image.owner.handle}/character/${characterName}/art/${image.id}`
           )
         }
-        src={artworkUrl}
-        alt={title}
+        src={image.artworkUrl}
+        alt={image.title || "Artwork"}
         layout="responsive"
         width={100}
         height={100}
         className="rounded-lg"
       />
+      <div className="absolute bottom-0 left-0 right-0 truncate bg-black bg-opacity-50 p-2 text-center text-white">
+        {image.title}
+      </div>
     </div>
   )
 }
