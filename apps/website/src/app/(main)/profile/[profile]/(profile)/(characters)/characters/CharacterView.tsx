@@ -23,9 +23,9 @@ export default function CharacterView({
 
   const toggleCreateFolderModal = () => setFolderModalState(!createFolderModal)
   const [selectedIndex, setSelectedIndex] = useState(0)
-  const refSheets = characters.mainCharacter?.refSheets
+  const activeRefSheets = characters.mainCharacter?.refSheets
     .find((r) => r.active)
-    .variants.find((v) => v.main).url
+    .variants.find((v) => v.main)
 
   return (
     <FolderView>
@@ -66,7 +66,9 @@ export default function CharacterView({
             avatar={characters.mainCharacter.avatarUrl || "/UserProfile.png"}
             name={characters.mainCharacter.name}
             species={characters.mainCharacter.species}
-            refSheetImg={refSheets || "/GenericBG.png"}
+            refSheetImg={
+              activeRefSheets ? activeRefSheets.url : "/DefaultRefrenceSheet.png"
+            }
           />
         )}
 

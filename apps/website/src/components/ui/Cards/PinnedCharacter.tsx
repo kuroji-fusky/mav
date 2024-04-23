@@ -30,7 +30,7 @@ export default function PinnedCharacter({
         </span>
         <div className="flex flex-col justify-between">
           <div className="flex w-full flex-row">
-            <Image width={118} height={118} src={avatar} alt={`${name}'s avatar`} />
+            <Image width={250} height={250} src={avatar} alt={`${name}'s avatar`} />
             <div className="m-4 flex w-full flex-col">
               <h2 className="text-3xl">{name}</h2>
               <span className="text-lg">{displaySpecies(species)}</span>

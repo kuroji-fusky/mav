@@ -12,6 +12,8 @@ export default async function Character({
   const { character, profile } = params
   const data = await fetchCharacter(profile, character)
   const user = await fetchUserData().catch(() => null)
+  const activeRefSheet = data.refSheets.find((r) => r.active)
+  const activeRefSheetVariant = activeRefSheet.variants.find((v) => v.main)
 
   return (
     <MarginClamp>
@@ -20,9 +22,11 @@ export default async function Character({
           {data.refSheets.length > 0 && (
             <ReferenceSheet
               referenceSheet={
-                data.refSheets.find((r) => r.active).variants.find((v) => v.main).url
+                activeRefSheetVariant
+                  ? activeRefSheetVariant.url
+                  : "/DefaultRefrenceSheet.png"
               }
-              colors={data.refSheets.find((r) => r.active).colors}
+              colors={activeRefSheet.colors ? activeRefSheet.colors : []}
             />
           )}
         </section>

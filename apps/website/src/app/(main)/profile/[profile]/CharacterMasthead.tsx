@@ -136,14 +136,19 @@ export default function CharacterMasthead({
             </div>
           </Masthead.Layer>
           <Masthead.Layer>
-            <div className="flex flex-row space-x-2">
+            <div className="flex flex-row">
               <span className="text-700 flex flex-row items-center text-lg">
                 Created by
               </span>
-              <Avatar src={owner.avatarUrl} />
-              <span className="text-700 flex flex-row items-center text-lg">
-                @{owner.handle}
-              </span>
+              <div
+                className="hover:bg-300 mx-2 flex cursor-pointer flex-row space-x-2 px-2 py-1 transition-all ease-in-out"
+                onClick={() => router.push(`/@${owner.handle}`)}
+              >
+                <Avatar src={owner.avatarUrl} />
+                <span className="text-700 flex flex-row items-center text-lg">
+                  @{owner.handle}
+                </span>
+              </div>
             </div>
           </Masthead.Layer>
         </Masthead.Details>
