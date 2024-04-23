@@ -77,7 +77,11 @@ export default function CharacterView({
               img={character.avatarUrl || "/UserProfile.png"}
               name={character.name}
               species={character.species}
-              palette={characters.mainCharacter.refSheets[0].colors}
+              palette={
+                characters.mainCharacter.refSheets[index]
+                  ? characters.mainCharacter.refSheets[index].colors
+                  : []
+              }
               status="owned"
               href={`/profile/${handle}/character/${character.name}`}
             />

@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { displaySpecies } from "@/utils/displayer"
 import { LuCat as CatIcon, LuPin, LuPalette as Palette } from "react-icons/lu"
 import type { ColorPalette as Colors } from "@/types/characters"
@@ -29,7 +30,7 @@ export default function PinnedCharacter({
         </span>
         <div className="flex flex-col justify-between">
           <div className="flex w-full flex-row">
-            <MFImage width={118} height={118} src={avatar} alt={`${name}'s avatar`} />
+            <Image width={118} height={118} src={avatar} alt={`${name}'s avatar`} />
             <div className="m-4 flex w-full flex-col">
               <h2 className="text-3xl">{name}</h2>
               <span className="text-lg">{displaySpecies(species)}</span>
@@ -51,13 +52,7 @@ export default function PinnedCharacter({
         </div>
       </div>
       <div className=" w-full">
-        <MFImage
-          rounded={12}
-          width={640}
-          height={360}
-          src={refSheetImg}
-          alt={`${name}'s ref sheet`}
-        />
+        <Image width={640} height={360} src={refSheetImg} alt={`${name}'s ref sheet`} />
       </div>
     </section>
   )
