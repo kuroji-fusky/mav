@@ -51,7 +51,12 @@ export default function UploadArtModal({
       })
     })
 
-    return await data.json()
+    if (!data.ok) {
+      console.error("Failed to upload artwork")
+      return
+    }
+
+    window.location.reload()
   }
 
   return (

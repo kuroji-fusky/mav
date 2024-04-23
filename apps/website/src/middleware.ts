@@ -46,7 +46,6 @@ export function middleware(request: NextRequest) {
 
   res.headers.set("Content-Security-Policy", cspRules)
   res.headers.append("Access-Control-Allow-Credentials", "true")
-  res.headers.set("x-hello-from-middleware1", "hello")
 
   res.headers.append("Access-Control-Allow-Origin", "*")
   res.headers.append("Access-Control-Allow-Methods", "GET,DELETE,PATCH,POST,PUT")
