@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { Button } from "@/components/ui/Buttons"
 import { InputField, RichTextField } from "@/components/ui/Forms"
 import cn from "@/utils/cn"
 import type { Artwork } from "@/types/characters"
@@ -57,6 +58,11 @@ export default function ArtEditForm({ artwork }: { artwork: Artwork }) {
 
       {/* Featured Characters tagging */}
       <CharactersFeatured artwork={artwork} />
+      {/* TODO: Add Functions to save and delete artowrk */}
+      <div className="flex flex-row justify-end space-x-4">
+        <Button variant="error">Delete</Button>
+        <Button>Save</Button>
+      </div>
     </div>
   )
 }
