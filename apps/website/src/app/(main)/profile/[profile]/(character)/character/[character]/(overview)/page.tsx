@@ -13,7 +13,9 @@ export default async function Character({
   const data = await fetchCharacter(profile, character)
   const user = await fetchUserData().catch(() => null)
   const activeRefSheet = data.refSheets.find((r) => r.active)
-  const activeRefSheetVariant = activeRefSheet.variants.find((v) => v.main)
+  const activeRefSheetVariant = activeRefSheet
+    ? activeRefSheet.variants.find((v) => v.main)
+    : null
 
   return (
     <MarginClamp>
