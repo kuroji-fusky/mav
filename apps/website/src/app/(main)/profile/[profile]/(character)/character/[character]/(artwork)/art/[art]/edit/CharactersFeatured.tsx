@@ -1,36 +1,26 @@
 "use client"
 
 import Image from "next/image"
-import { redirect, usePathname, useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { useState } from "react"
-import { MFImage } from "@/components/ui"
-import { Button } from "@/components/ui/Buttons"
 import { InputField } from "@/components/ui/Forms"
+import cn from "@/utils/cn"
 import { BACKEND_URL } from "@/utils/env"
-import type { Artwork, Character } from "@/types/characters"
+import type { Artwork } from "@/types/characters"
 import CharacterTag from "../CharacterTag"
 
 export default function CharactersFeatured({ artwork }: { artwork: Artwork }) {
   const [charactersFeatured, setCharactersFeatured] = useState(artwork.charactersFeatured)
   const [error, setError] = useState("")
-  const [results, setResults] = useState([])
   const [searchQuery, setSearchQuery] = useState("")
-  const path = usePathname()
+  const [results, setResults] = useState([])
   const router = useRouter()
+  const path = usePathname()
 
-  const handleChange = async (e) => {
-    setSearchQuery(e.currentTarget.value)
-    if (e.currentTarget.value.length < 3) return
-    // Fetch characters from backend
-    const characters = await fetch(
-      `${BACKEND_URL}/v1/character/search?query=${e.currentTarget.value}`
-    )
-      .then((res) => res.json())
-      .catch((err) => console.error(err))
-    if (!characters) return setError("Characters not found")
-    setResults(characters)
-    return characters
-  }
+  // const addCharacter = (e) => {
+  //     // Fetch character from backend
+  //     const char = fetch(`${BACKEND_URL}/v1/character/${e.currentTarget.value}`).then((res) => res.json()).catch((err) => console.error(err))
+  //     if (!char) return setError('Character not found')
 
   const addCharacter = async (id: string) => {
     // Fetch character from backend
@@ -81,22 +71,6 @@ export default function CharactersFeatured({ artwork }: { artwork: Artwork }) {
     return updatedArtwork
   }
 
-  const saveArtwork = async () => {
-    // Save artwork to backend
-    const updatedArtwork = await fetch(`${BACKEND_URL}/v1/art/${artwork.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      credentials: "include",
-      body: JSON.stringify({ charactersFeatured })
-    })
-      .then((res) => res.json())
-      .catch((err) => console.error(err))
-    if (!updatedArtwork) return setError("Failed to update artwork")
-    router.back()
-  }
-
   const deleteArtwork = async () => {
     // Delete artwork from backend
     const deletedArtwork = await fetch(`${BACKEND_URL}/v1/art/${artwork.id}`, {
@@ -112,50 +86,61 @@ export default function CharactersFeatured({ artwork }: { artwork: Artwork }) {
     return router.push(path.replace(`/art/${artwork.id}/edit`, `/gallery`))
   }
 
+  const searchCharacters = async (e) => {
+    setSearchQuery(e.currentTarget.value)
+    if (e.currentTarget.value.length < 3) return
+    // Fetch characters from backend
+    const characters = await fetch(
+      `${BACKEND_URL}/v1/character/search?query=${e.currentTarget.value}`
+    )
+      .then((res) => res.json())
+      .catch((err) => console.error(err))
+    if (!characters) return setError("Characters not found")
+    setResults(characters)
+    return characters
+  }
+
   return (
     <div>
       <InputField
         inputName="Featured Characters"
         value={searchQuery}
-        onChange={handleChange}
-        error={error}
+        onChange={searchCharacters}
       />
       {results.length > 0 && (
-        <div className="bg-400 flex w-full flex-col rounded-lg">
-          {results.map((character) => (
+        <div className="space-y-4">
+          {results.map((character, index) => (
             <div
-              key={character.id}
-              className="border-300 hover:bg-300 flex flex-row items-center border px-3 py-2 transition-all ease-in-out"
+              key={index}
+              className={cn(
+                `bg-400 hover:bg-300 flex flex-row items-center space-x-4 px-2 py-1`,
+                charactersFeatured.find((char) => char.id === character.id) && "hidden"
+              )}
               onClick={() => addCharacter(character.id)}
             >
-              <MFImage
+              <Image
                 src={character.avatarUrl}
                 alt={character.name}
                 width={50}
                 height={50}
-                rounded={100}
+                className="rounded-full"
               />
-              <span className="mx-4 text-xl">{character.name}</span>
+              <span>{character.name}</span>
             </div>
           ))}
         </div>
       )}
-      <div className="my-4 flex flex-row gap-x-4">
-        {charactersFeatured.map((character) => (
+      <div className="my-4 flex flex-col ">
+        <span>Featured Characters</span>
+        {charactersFeatured.map((character, index) => (
           <CharacterTag
-            key={character.id}
+            key={index}
             characterName={character.name}
-            characterId={character.id}
             characterAvatarUrl={character.avatarUrl}
+            characterId={character.id}
             onClick={removeCharacter}
           />
         ))}
-      </div>
-      <div className="flex flex-row justify-end space-x-4">
-        <Button variant="error" onClick={deleteArtwork}>
-          Delete
-        </Button>
-        <Button onClick={saveArtwork}>Save</Button>
       </div>
     </div>
   )
