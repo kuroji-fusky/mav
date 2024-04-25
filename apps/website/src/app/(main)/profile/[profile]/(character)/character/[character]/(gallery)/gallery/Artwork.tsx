@@ -18,7 +18,7 @@ export default function Artwork({
       <Image
         onClick={() =>
           router.push(
-            `/@${image.owner.handle}/character/${image.publishedCharacter.name}/art/${image.id}`
+            `/@${image.owner.handle}/character/${image.publishedCharacter ? image.publishedCharacter.name : image.charactersFeatured[0].name}/art/${image.id}`
           )
         }
         src={image.artworkUrl}

@@ -2,8 +2,8 @@ import type { Artwork, Character } from "./characters"
 import type { LinkedString } from "./utils"
 
 type NullableString = string | null
-type UserRole = "artist" | "admin" | "contributor" | "early-tester"
-type UserRoles = UserRole[]
+type UserRole = "developer" | "admin" | "moderator" | "user"
+type UserRoles = UserRole
 type OnlineStatus = "offline" | "online"
 
 type Link = {
@@ -27,7 +27,8 @@ export interface UserType {
   characters: Character[]
   dateRegistered: Date
   dateUpdated: Date
-  roles: UserRoles
+  role: UserRole
+  hasAristAccess: boolean
   hasBetaAccess: boolean
   links: Link[]
   badges: Badge[]

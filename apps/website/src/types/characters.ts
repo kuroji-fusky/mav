@@ -100,6 +100,7 @@ export interface ReferenceSheet {
   refSheetName: string
   active: boolean
   artist: string
+  character?: Character
   colors: string[]
   variants: Variant[]
 }

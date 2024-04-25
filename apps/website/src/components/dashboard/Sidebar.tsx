@@ -50,12 +50,7 @@ export default function DashboardSidebar({
         text: "Characters",
         matchStartingRoute: true
       },
-      { icon: LuImage, text: "Gallery" },
-      { icon: LuBrush, text: "Listings" },
-      { icon: LuMessagesSquare, text: "Messages" },
-      { icon: LuKanbanSquare, text: "Queue board" },
-      { icon: LuLineChart, text: "Analytics" },
-      { icon: LuShield, text: "Artist Requests", link: "/admin/artist-requests" }
+      { icon: LuImage, text: "Gallery" }
     ],
     bottom: [
       { icon: LuSparkles, text: "Upgrade", link: "/plus" },
@@ -66,6 +61,28 @@ export default function DashboardSidebar({
       },
       { icon: LuHelpCircle, text: "Help", link: "/support" }
     ]
+  }
+
+  // Non-Artist Items
+  if (!user.hasAristAccess) {
+    menuItems.top.push({ icon: LuBrush, text: "Request Artist Features" })
+  } else {
+    menuItems.top.push({ icon: LuBrush, text: "Listings" }),
+      menuItems.top.push({ icon: LuMessagesSquare, text: "Messages" }),
+      menuItems.top.push({ icon: LuKanbanSquare, text: "Queue board" }),
+      menuItems.top.push({ icon: LuLineChart, text: "Analytics" })
+  }
+
+  // Staff Items
+  if (user.role == "admin" || user.role == "moderator") {
+    menuItems.top.push({
+      icon: LuShield,
+      text: "Artist Requests",
+      link: "/admin/artist-requests"
+    })
+
+    menuItems.bottom.push({ icon: LuShield, text: "Moderation" })
+    menuItems.bottom.push({ icon: LuShield, text: "Admin" })
   }
 
   const editCharacterRoute = usePathStartsWith("/dashboard/characters/edit")

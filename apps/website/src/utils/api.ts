@@ -1,6 +1,11 @@
 import type { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies"
 import { cookies } from "next/headers"
-import type { Artwork, Character, CharacterResponse } from "@/types/characters"
+import type {
+  Artwork,
+  Character,
+  CharacterResponse,
+  ReferenceSheet
+} from "@/types/characters"
 import type { UserType } from "@/types/users"
 import { BACKEND_URL } from "./env"
 
@@ -180,4 +185,14 @@ export const getArtwork = async (artworkId) => {
 
 export const setRefAsMain = async (refId: string) => {
   await apiWithAuth("PUT", `/v1/character/assign-ref/${refId}`)
+  return
+}
+
+export const getRefSheets = async (handle: string) => {
+  const refSheets = await apiWithoutAuth<ReferenceSheet[]>(
+    "GET",
+    `/v1/character/${handle}/refSheets`
+  )
+
+  return refSheets
 }
