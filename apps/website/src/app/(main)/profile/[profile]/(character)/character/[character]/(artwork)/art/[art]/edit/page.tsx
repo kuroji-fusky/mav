@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { redirect } from "next/navigation"
+import { MFImage } from "@/components/ui"
 import { fetchUserData, getArtwork } from "@/utils/api"
 import ArtEditForm from "./EditForm"
 
@@ -14,13 +15,14 @@ export default async function ArtPage({ params }) {
   return (
     // Create edit page for artwork
     <div className="flex w-full flex-row justify-between space-x-5 px-12 py-5">
-      <Image
+      <MFImage
         src={artwork.artworkUrl}
         alt={artwork.altText}
-        // Half image
-        width={1000}
-        height={1000}
-        className="mx-auto"
+        width="80%"
+        objectFit="contain"
+        strategy="important"
+        sizes="2400px (max-width: 1400px)"
+        quality={80}
       />
       <ArtEditForm artwork={artwork} />
     </div>

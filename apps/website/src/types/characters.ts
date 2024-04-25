@@ -73,6 +73,7 @@ export interface Artwork {
   artworkUrl?: string
   watermarkUrl?: string
   charactersFeatured?: Character[]
+  publishedCharacter?: Character
   artist?: UserType | null
   artistUrl?: string
   comments: Comments[]
