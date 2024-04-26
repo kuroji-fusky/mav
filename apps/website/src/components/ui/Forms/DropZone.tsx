@@ -1,6 +1,7 @@
 "use client"
 
 /* eslint-disable react/forbid-elements */
+import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
 import cn from "@/utils/cn"
 import { BACKEND_URL } from "@/utils/env"
@@ -170,10 +171,11 @@ export default function DropZone({
           />
 
           {value ? (
-            <MFImage
-              aspectRatio={aspectRatio}
-              width={"100%"}
-              height={"100%"}
+            <Image
+              // aspectRatio={aspectRatio}
+              // layout="responsive"
+              width={200}
+              height={200}
               alt=""
               src={value}
             />

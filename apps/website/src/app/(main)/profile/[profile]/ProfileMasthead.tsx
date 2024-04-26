@@ -3,16 +3,33 @@
 import { Button } from "@/components/ui/Buttons"
 import { Dropdown, DropdownItem } from "@/components/ui/Dropdown"
 import { Masthead } from "@/components/ui/Masthead"
+import { BACKEND_URL } from "@/utils/env"
 import type { IconType } from "react-icons"
 import {
   LuBrush as BrushIcon,
   LuCat as CatIcon,
   LuHeart as HeartIcon,
   LuHome as HomeIcon,
+  LuShieldCheck,
   LuMoreVertical as MoreVerticalIcon,
   LuUserPlus as UserPlusIcon
 } from "react-icons/lu"
 import type { UserRoles, UserType } from "@/types/users"
+
+const followUser = (userId: string) => {
+  fetch(`${BACKEND_URL}/v1/relationship/follow/${userId}`, {
+    method: "POST",
+    credentials: "include",
+    body: JSON.stringify({}),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then((res) => {
+    if (res.ok) {
+      console.log("Followed user")
+    }
+  })
+}
 
 // TODO: Remove all props to be retrieved directly from Jotai or react-query
 export default function ProfileMasthead({
@@ -66,12 +83,30 @@ export default function ProfileMasthead({
         <Masthead.Details>
           <Masthead.Layer spaceBetween>
             <div
-              className="not-prose font-inter mt-4 flex items-center gap-x-1.5 text-3xl font-bold"
+              className="not-prose font-inter items-left mt-4 flex flex-col gap-x-1.5 text-3xl font-bold"
               translate="no"
             >
-              <div>{name}</div>
-              <span aria-hidden>{/* badges */}</span>
+              <div className="flex flex-row">
+                <span>{name}</span>
+                {profileData.role != "admin" && profileData.role != "moderator" && (
+                  <div
+                    aria-hidden
+                    className={
+                      "border-500 text-500 ml-3 flex flex-row items-center space-x-1 rounded-full border px-4 text-sm"
+                    }
+                  >
+                    <LuShieldCheck size={16} />
+                    <span className="text-sm font-semibold">Staff</span>
+                  </div>
+                )}
+              </div>
+              <div className="text-700 mt-1.5 flex flex-row space-x-4 font-medium">
+                <span className="text-sm">@{profileData.handle}</span>
+                <span className="text-sm">{profileData.followers.length} Followers</span>
+                <span className="text-sm">{profileData.following.length} Following</span>
+              </div>
             </div>
+            {/* {self.id == profileData.id && ( */}
             <div className="relative z-[6] mt-4 flex items-start gap-x-2.5">
               <Button
                 prefixIcon={<BrushIcon size={20} />}
@@ -80,9 +115,11 @@ export default function ProfileMasthead({
               >
                 View Commission ToS
               </Button>
+
               <Button
                 prefixIcon={<UserPlusIcon size={20} />}
                 aria-label={`Follow ${name}`}
+                onClick={() => followUser(profileData.id)}
               >
                 Follow
               </Button>
@@ -105,10 +142,6 @@ export default function ProfileMasthead({
               />
             </div>
           </Masthead.Layer>
-          {/* TODO: Figure out mutuals through backend */}
-          {/* <Masthead.Layer>following</Masthead.Layer> */}
-          {/* TODO: Figure out links through backend */}
-          {/* <Masthead.Layer>{profileData.links}</Masthead.Layer> */}
         </Masthead.Details>
       </Masthead.Wrapper>
       <Masthead.Tabs baseURL={`/@${profileData.handle}`} items={profileTabs} />

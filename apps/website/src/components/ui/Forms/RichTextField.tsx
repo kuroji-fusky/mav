@@ -1,11 +1,15 @@
+import cn from "@/utils/cn"
+
 export default function RichTextField({
   inputName,
   onChange,
-  value
+  value,
+  code
 }: {
   inputName: string
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
   value?: string
+  code?: boolean
 }) {
   return (
     <div className="h-32 w-full space-y-2">
@@ -14,7 +18,10 @@ export default function RichTextField({
         onChange={onChange}
         id={inputName.toLowerCase()}
         value={value}
-        className="text-700 border-400 bg-100 h-32 w-full rounded-md border px-4 py-2"
+        className={cn(
+          "text-700 border-400 bg-100 h-32 w-full rounded-md border px-4 py-2",
+          code ? "whitespace-pre font-mono text-sm" : "text-base"
+        )}
       />
     </div>
   )

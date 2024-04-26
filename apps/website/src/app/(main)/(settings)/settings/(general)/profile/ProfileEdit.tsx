@@ -1,24 +1,39 @@
 "use client"
 
-import React, { useState } from "react"
+import { useState } from "react"
 import { Separator } from "@/components/ui"
 import { Button } from "@/components/ui/Buttons"
 import { InputField, SelectField } from "@/components/ui/Forms"
 import DropZone from "@/components/ui/Forms/DropZone"
 import { pronounOptions } from "@/constants"
 import { BACKEND_URL } from "@/utils/env"
-import { d } from "@tanstack/react-query-devtools/build/legacy/devtools-9h89nHJX"
 import type { UserType } from "@/types/users"
+import CustomizeHTML from "./(sections)/CustomizeHTML"
+import CustomizeLinks from "./(sections)/CustomizeLinks"
 
 export default function ProfileEdit({ user }: { user: UserType }) {
   const [avatarUrl, setAvatarUrl] = useState(user.avatarUrl)
   const [name, setName] = useState(user.displayName)
   const [handle, setHandle] = useState(user.handle)
+  const [tempSocialError, setTempSocialError] = useState("")
+  const [tempSocialLinks, setTempSocialLinks] = useState("")
   const [pronouns, setPronouns] = useState(user.pronouns)
-  const links = user.links || Array(10).fill({ label: "", url: "" })
+  const [socialLinks, setSocialLinks] = useState(user.links || [])
 
-  const getSocialLink = (label: string) => {
-    return links.find((l) => l.label == label)?.url || ""
+  const addSocialLink = (url) => {
+    const urlRegex = new RegExp(
+      /(http(s)?:\/\/)?(www\.)?([a-zA-Z0-9-]+)\.([a-zA-Z0-9-]+)(\/[a-zA-Z0-9-]+)?/g
+    )
+
+    if (!urlRegex.test(url)) {
+      setTempSocialError("Invalid URL")
+      return
+    }
+
+    setTempSocialError("")
+    const label = url.split(".")[0]
+    setSocialLinks([...socialLinks, { url, label }])
+    setTempSocialLinks("")
   }
 
   const updateProfile = () => {
@@ -50,8 +65,8 @@ export default function ProfileEdit({ user }: { user: UserType }) {
     <div className="flex flex-col">
       <h1 className="my-4 text-2xl">Public Profile</h1>
       <Separator dir="horizontal" />
-      <div className="mt-4 flex h-48 flex-row items-center justify-between space-x-6">
-        <div className=" w-2/3 space-y-5">
+      <div className="mt-4 flex flex-row items-end justify-between">
+        <div className=" flex w-2/3 flex-col items-end space-y-5">
           <InputField
             inputName="Name"
             value={name}
@@ -66,83 +81,28 @@ export default function ProfileEdit({ user }: { user: UserType }) {
           <Button onClick={updateProfile}>Update profile</Button>
         </div>
         <div className="h-48">
-          <DropZone setData={setAvatarUrl} aspectRatio="1" value={avatarUrl} />
+          <DropZone
+            setData={setAvatarUrl}
+            aspectRatio="1"
+            value={avatarUrl}
+            className="mx-auto h-fit w-3/4"
+          />
         </div>
       </div>
-      <h1 className="mb-4 mt-32 text-2xl">Connections</h1>
-      <Separator dir="horizontal" />
-      <div className="mt-4 flex flex-row items-center justify-between space-x-6">
-        <div className="h-48 w-2/3 space-y-5 pb-5">
-          <InputField
-            inputName="X/Twitter Handle"
-            value={getSocialLink("x")}
-            onChange={(e) => (user.links[0].url = `https://x.com/${e.target.value}`)}
-          />
-          <InputField
-            inputName="Instagram Handle"
-            value={getSocialLink("instagram")}
-            onChange={(e) =>
-              (user.links[1].url = "https://instagram.com/" + e.target.value)
-            }
-          />
-          <InputField
-            inputName="Twitch Handle"
-            value={getSocialLink("twitch")}
-            onChange={(e) => (user.links[2].url = "https://twitch.com/" + e.target.value)}
-          />
-          <InputField
-            inputName="Steam ID"
-            value={getSocialLink("steam")}
-            onChange={(e) =>
-              (user.links[2].url = "https://steamcommunity.com/id/" + e.target.value)
-            }
-          />
-          <InputField
-            inputName="YouTube Handle"
-            value={getSocialLink("youtube")}
-            onChange={(e) =>
-              (user.links[3].url = "https://youtube.com/" + e.target.value)
-            }
-          />
-          <InputField
-            inputName="TikTok Handle"
-            value={getSocialLink("tiktok")}
-            onChange={(e) => (user.links[4].url = "https://tiktok.com/" + e.target.value)}
-          />
-          <InputField
-            inputName="GitHub Username"
-            value={getSocialLink("tiktok")}
-            onChange={(e) => (user.links[5].url = "https://github.com/" + e.target.value)}
-          />
-          <InputField
-            inputName="Facebook Handle"
-            value={getSocialLink("facebook")}
-            onChange={(e) =>
-              (user.links[6].url = "https://facebook.com/" + e.target.value)
-            }
-          />
-          <InputField
-            inputName="Reddit Handle"
-            value={getSocialLink("reddit")}
-            onChange={(e) => (user.links[7].url = "https://reddit.com/" + e.target.value)}
-          />
-          <InputField
-            inputName="Snapchat Handle"
-            value={getSocialLink("snapchat")}
-            onChange={(e) =>
-              (user.links[8].url = "https://snapchat.com/" + e.target.value)
-            }
-          />
-          <InputField
-            inputName="Discord User ID"
-            value={getSocialLink("discord")}
-            onChange={(e) =>
-              (user.links[9].url = "https://discord.com/" + e.target.value)
-            }
-          />
-          <Button>Update connections</Button>
-        </div>
+      <h1 className="mb-4 mt-3 text-2xl">Profile Layout</h1>
+      <div className="mb-8 flex flex-row items-center justify-between space-x-6">
+        {/* Show/Hide Cards Toggle */}
+        <span>Coming Soon</span>
       </div>
+      <CustomizeLinks
+        tempSocialLinks={tempSocialLinks}
+        socialLinks={socialLinks}
+        addSocialLink={addSocialLink}
+        getSocialLink={(index) => socialLinks[index].url}
+        tempSocialError={tempSocialError}
+        setTempSocialLinks={setTempSocialLinks}
+      />
+      <CustomizeHTML />
     </div>
   )
 }

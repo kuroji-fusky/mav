@@ -21,8 +21,11 @@ export interface UserType {
   handle: string
   displayName: NullableString
   bio: NullableString
+  customHTMLCard: NullableString
   avatarUrl: LinkedString
   bannerUrl: LinkedString
+  following: UserType[]
+  followers: UserType[]
   favoriteCharacters: Character[]
   characters: Character[]
   dateRegistered: Date
