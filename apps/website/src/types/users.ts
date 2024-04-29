@@ -42,6 +42,13 @@ export interface UserType {
   pronouns: NullableString
   nationaility: NullableString
   notifications: Notification[]
+  artistApplication: {
+    bio: string
+    name: string
+    email: string
+    portfolio: string
+    images: string[]
+  }
   birthday: Date
 }
 

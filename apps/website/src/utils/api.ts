@@ -150,6 +150,11 @@ export const fetchCharacter = async (handle: string, characterName: string) => {
   return character
 }
 
+export const fetchArtistRequests = async () => {
+  const requests = await apiWithAuth<UserType[]>("GET", "/v1/staff/artist-requests")
+  return requests
+}
+
 export const getArtworks = async (profile: string, character: string) => {
   const artworks = await apiWithoutAuth<Artwork[]>(
     "GET",
