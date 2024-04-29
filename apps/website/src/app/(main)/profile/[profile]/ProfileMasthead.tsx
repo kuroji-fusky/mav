@@ -88,17 +88,18 @@ export default function ProfileMasthead({
             >
               <div className="flex flex-row">
                 <span>{name}</span>
-                {profileData.role != "admin" && profileData.role != "moderator" && (
-                  <div
-                    aria-hidden
-                    className={
-                      "border-500 text-500 ml-3 flex flex-row items-center space-x-1 rounded-full border px-4 text-sm"
-                    }
-                  >
-                    <LuShieldCheck size={16} />
-                    <span className="text-sm font-semibold">Staff</span>
-                  </div>
-                )}
+                {profileData.role == "admin" ||
+                  (profileData.role == "moderator" && (
+                    <div
+                      aria-hidden
+                      className={
+                        "border-500 text-500 ml-3 flex flex-row items-center space-x-1 rounded-full border-2 px-5 py-0.5 text-sm"
+                      }
+                    >
+                      <LuShieldCheck size={20} />
+                      <span className="text-[14px] font-bold">STAFF</span>
+                    </div>
+                  ))}
               </div>
               <div className="text-700 mt-1.5 flex flex-row space-x-4 font-medium">
                 <span className="text-sm">@{profileData.handle}</span>

@@ -64,7 +64,7 @@ export default function DashboardSidebar({
   }
 
   // Non-Artist Items
-  if (!user.hasAristAccess) {
+  if (!user.hasArtistAccess) {
     menuItems.top.push({ icon: LuBrush, text: "Request Artist Features" })
   } else {
     menuItems.top.push({ icon: LuBrush, text: "Listings" }),

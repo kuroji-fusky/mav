@@ -31,7 +31,7 @@ export interface UserType {
   dateRegistered: Date
   dateUpdated: Date
   role: UserRole
-  hasAristAccess: boolean
+  hasArtistAccess: boolean
   hasBetaAccess: boolean
   links: Link[]
   badges: Badge[]

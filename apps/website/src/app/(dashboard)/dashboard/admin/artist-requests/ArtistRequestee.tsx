@@ -5,6 +5,8 @@ import React from "react"
 import { Separator } from "@/components/ui"
 import { Avatar, Button } from "@/components/ui/Buttons"
 import { Checkbox } from "@/components/ui/Forms"
+import cn from "@/utils/cn"
+import { BACKEND_URL } from "@/utils/env"
 
 export default function ArtistRequestee({
   id,
@@ -27,9 +29,24 @@ export default function ArtistRequestee({
 }) {
   const [viewDetails, setViewDetails] = React.useState(false)
   const [checked, setChecked] = React.useState(false)
+  const [promoted, setPromoted] = React.useState(false)
+  const promoteArtist = () => {
+    fetch(`${BACKEND_URL}/v1/staff/promote/${id}/artist`, {
+      method: "PUT",
+      credentials: "include"
+    })
+      .then((res) => {
+        if (res.ok) {
+          setPromoted(true)
+        }
+      })
+      .catch(() => {
+        console.log("Failed to promote artist")
+      })
+  }
 
   return (
-    <div>
+    <div className={cn(promoted ? "hidden" : "block")}>
       <div className="flex flex-row justify-between py-4">
         <div className="flex w-full flex-row justify-between space-x-4">
           <Checkbox
@@ -48,7 +65,7 @@ export default function ArtistRequestee({
             </div>
             <div className="flex flex-row space-x-4">
               <Button onClick={() => setViewDetails(!viewDetails)}>View</Button>
-              <Button onClick={() => setViewDetails(!viewDetails)}>Approve</Button>
+              <Button onClick={() => promoteArtist()}>Approve</Button>
             </div>
           </div>
         </div>
