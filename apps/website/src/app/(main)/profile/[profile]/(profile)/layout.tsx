@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { redirect } from "next/navigation"
-import { fetchUser } from "@/utils/api"
+import { fetchUser, fetchUserData } from "@/utils/api"
 import { BRAND } from "@myfursona-internal/config"
 import type { SlugRouteProps } from "@/types/utils"
 import DynamicLayout from "../DynamicLayout"
@@ -26,6 +26,7 @@ export default async function Layout({
   const { profile } = params
 
   // Fetch user data from the API
+  const self = await fetchUserData()
   const userData = await fetchUser(profile).then((data) => {
     if (!data) return null
     if (!data.displayName) return redirect("/onboarding/new-user")
@@ -38,7 +39,7 @@ export default async function Layout({
   return (
     <>
       {/* TODO: Remove all props to be retrieved directly from Jotai or react-query */}
-      <DynamicLayout profile={userData} character={null} />
+      <DynamicLayout profile={userData} character={null} self={self} />
       <div>{children}</div>
     </>
   )

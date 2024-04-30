@@ -5,12 +5,15 @@ import { Dropdown, DropdownItem } from "@/components/ui/Dropdown"
 import { Masthead } from "@/components/ui/Masthead"
 import { BACKEND_URL } from "@/utils/env"
 import type { IconType } from "react-icons"
+import { FaShop } from "react-icons/fa6"
 import {
   LuBrush as BrushIcon,
   LuCat as CatIcon,
   LuHeart as HeartIcon,
   LuHome as HomeIcon,
   LuShieldCheck,
+  LuStore,
+  LuUserMinus,
   LuMoreVertical as MoreVerticalIcon,
   LuUserPlus as UserPlusIcon
 } from "react-icons/lu"
@@ -27,6 +30,21 @@ const followUser = (userId: string) => {
   }).then((res) => {
     if (res.ok) {
       console.log("Followed user")
+    }
+  })
+}
+
+const unfollowUser = (userId: string) => {
+  fetch(`${BACKEND_URL}/v1/relationship/unfollow/${userId}`, {
+    method: "POST",
+    credentials: "include",
+    body: JSON.stringify({}),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then((res) => {
+    if (res.ok) {
+      console.log("Unfollowed user")
     }
   })
 }
@@ -52,7 +70,6 @@ export default function ProfileMasthead({
   }[]
 }) {
   const name = profileData.displayName ? profileData.displayName : profileData.handle
-
   const profileTabs = [
     {
       icon: HomeIcon,
@@ -74,6 +91,19 @@ export default function ProfileMasthead({
         : 0
     }
   ]
+
+  if (profileData.hasArtistAccess) {
+    profileTabs.splice(1, 0, {
+      icon: BrushIcon,
+      text: "Listings",
+      link: "/listings"
+    })
+    profileTabs.splice(3, 0, {
+      icon: LuStore,
+      text: "Store",
+      link: "/store"
+    })
+  }
 
   return (
     <Masthead hasEditAccess={true}>
@@ -107,41 +137,53 @@ export default function ProfileMasthead({
                 <span className="text-sm">{profileData.following.length} Following</span>
               </div>
             </div>
-            {/* {self.id == profileData.id && ( */}
-            <div className="relative z-[6] mt-4 flex items-start gap-x-2.5">
-              <Button
-                prefixIcon={<BrushIcon size={20} />}
-                aria-label={`View ${name}'s Commissions`}
-                variant="secondary"
-              >
-                View Commission ToS
-              </Button>
+            {self.id != profileData.id && (
+              <div className="relative z-[6] mt-4 flex items-start gap-x-2.5">
+                <Button
+                  prefixIcon={<BrushIcon size={20} />}
+                  aria-label={`View ${name}'s Commissions`}
+                  variant="secondary"
+                >
+                  View Commission ToS
+                </Button>
+                {self.following.find((user) => user.id === profileData.id) ? (
+                  <Button
+                    prefixIcon={<LuUserMinus size={20} />}
+                    aria-label={`Unfollow ${name}`}
+                    variant="error"
+                    onClick={() => unfollowUser(profileData.id)}
+                  >
+                    Unfollow
+                  </Button>
+                ) : (
+                  <Button
+                    prefixIcon={<UserPlusIcon size={20} />}
+                    aria-label={`Follow ${name}`}
+                    onClick={() => followUser(profileData.id)}
+                  >
+                    Follow
+                  </Button>
+                )}
 
-              <Button
-                prefixIcon={<UserPlusIcon size={20} />}
-                aria-label={`Follow ${name}`}
-                onClick={() => followUser(profileData.id)}
-              >
-                Follow
-              </Button>
-              <Dropdown
-                button={
-                  <Button icon={<MoreVerticalIcon size={20} />} aria-label="More" />
-                }
-                items={
-                  <>
-                    <DropdownItem link="/">Share</DropdownItem>
-                    <DropdownItem link="/">Manage trades</DropdownItem>
-                    <DropdownItem link="/">
-                      Report <span translate="no">{name}</span>
-                    </DropdownItem>
-                    <DropdownItem link="/">
-                      Block <span translate="no">{name}</span>
-                    </DropdownItem>
-                  </>
-                }
-              />
-            </div>
+                <Dropdown
+                  button={
+                    <Button icon={<MoreVerticalIcon size={20} />} aria-label="More" />
+                  }
+                  items={
+                    <>
+                      <DropdownItem link="/">Share</DropdownItem>
+                      <DropdownItem link="/">Manage trades</DropdownItem>
+                      <DropdownItem link="/">
+                        Report <span translate="no">{name}</span>
+                      </DropdownItem>
+                      <DropdownItem link="/">
+                        Block <span translate="no">{name}</span>
+                      </DropdownItem>
+                    </>
+                  }
+                />
+              </div>
+            )}
           </Masthead.Layer>
         </Masthead.Details>
       </Masthead.Wrapper>
