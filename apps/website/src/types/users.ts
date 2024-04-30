@@ -41,6 +41,9 @@ export interface UserType {
   previousAliases: NullableString
   pronouns: NullableString
   nationaility: NullableString
+  commissionStatus: "open" | "closed" | "limited"
+  requestStatus: "open" | "closed" | "limited"
+  artTradeStatus: "open" | "closed" | "limited"
   notifications: Notification[]
   artistApplication: {
     bio: string
