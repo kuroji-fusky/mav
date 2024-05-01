@@ -20,7 +20,7 @@ export default function ShelfSection({
         </span>
       }
     >
-      <GridResponsive className="mt-3 gap-1" breakpoint={210} role="listbox">
+      <GridResponsive className="mt-3 gap-1" breakpoint={250} role="listbox">
         {children}
       </GridResponsive>
     </Carousel>

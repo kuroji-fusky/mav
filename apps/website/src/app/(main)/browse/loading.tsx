@@ -7,6 +7,7 @@ import {
   LuLayers as Layers,
   LuSparkles as Sparkles
 } from "react-icons/lu"
+import ArtistCard from "./ArrtistCard"
 import ShelfSection from "./ShelfSection"
 
 export default async function loading() {
@@ -24,7 +25,11 @@ export default async function loading() {
           ))}
         </ShelfSection>
         {/* TODO create profile card and collections card */}
-        <ShelfSection icon={Brush} title={"Artists Open for Comissions (Coming Soon)"} />
+        <ShelfSection icon={Brush} title={"Artists Open for Comissions (Coming Soon)"}>
+          {Array.from({ length: 6 }).map((_, index) => (
+            <ArtistCard loading key={index} />
+          ))}
+        </ShelfSection>
         <ShelfSection icon={Layers} title={"Curated Collections (Coming Soon)"} />
       </div>
     </MarginClamp>

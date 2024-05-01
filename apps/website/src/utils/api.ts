@@ -117,6 +117,11 @@ export const fetchUserData = async () => {
   return data
 }
 
+export const getArtistOpenComissions = async () => {
+  const comissions = await apiWithoutAuth<UserType[]>("GET", "/v1/profile/artists/open")
+  return comissions
+}
+
 export const fetchUser = async (handle: string) => {
   const data = await apiWithoutAuth<UserType>("GET", `/v1/profile/${handle}`)
   return data
