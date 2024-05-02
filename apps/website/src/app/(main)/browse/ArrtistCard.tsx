@@ -9,7 +9,7 @@ export default function ArtistCard({
   artistHandle,
   followers,
   badges,
-  loading
+  loading = false
 }) {
   return (
     <Link href={`/@${artistHandle}`}>
