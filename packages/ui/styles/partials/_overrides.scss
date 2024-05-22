@@ -1,29 +1,29 @@
 @use "mixins" as *;
 
-// --bui-context-menu
+// --mav-context-menu
 @include map-theme-variables(
   "light",
   (
-    "context-menu": var(--bui-100)
+    "context-menu": var(--mav-100)
   )
 );
 @include map-theme-variables(
   "dark",
   (
-    "context-menu": var(--bui-200)
+    "context-menu": var(--mav-200)
   )
 );
 
-// --bui-active
+// --mav-active
 @include map-theme-variables(
   "light",
   (
-    "active": var(--bui-100)
+    "active": var(--mav-100)
   )
 );
 @include map-theme-variables(
   "dark",
   (
-    "active": var(--bui-700)
+    "active": var(--mav-700)
   )
 );

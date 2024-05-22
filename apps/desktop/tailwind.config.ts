@@ -1,3 +1,19 @@
-import twConfig from "@myfursona-internal/config/tailwind-client-only"
+import type { Config } from "tailwindcss"
+import twShared from "@myartverse/config/tailwind.config"
+import defaultTheme from "tailwindcss/defaultTheme"
 
-export default twConfig
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "../../packages/ui/src/**/*.{ts,tsx}"
+  ],
+  theme: {
+    extend: {
+      fontFamily: {
+        inter: ["Inter", ...defaultTheme.fontFamily.sans]
+      }
+    }
+  },
+  presets: [twShared]
+} satisfies Config

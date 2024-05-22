@@ -3,7 +3,7 @@ import type { Config } from "tailwindcss"
 import forms from "@tailwindcss/forms"
 import typography from "@tailwindcss/typography"
 
-const PREFIX = "bui"
+const PREFIX = "mav"
 
 const iterateColorVars = (
   baseVariable: string,
