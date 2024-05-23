@@ -4,6 +4,18 @@ module.exports = {
     es2021: true,
     browser: true
   },
+  ignorePatterns: [
+    "node_modules/",
+    "dist/",
+    ".next/",
+    "apps/web/public/*.js",
+    "apps/desktop/src-tauri/target/release/build",
+    ".tsbuildinfo",
+    "NOTICE",
+    "AUTHORS.md",
+    "README.md",
+    "TODO.md"
+  ],
   extends: ["next", "eslint:recommended", "plugin:@typescript-eslint/recommended"],
   plugins: ["import", "unused-imports", "@stylistic"],
   rules: {
@@ -36,7 +48,6 @@ module.exports = {
         ]
       }
     ],
-    "react/no-unescaped-entities": "off",
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/no-unused-vars": "warn",
     "@typescript-eslint/consistent-type-imports": [
@@ -106,11 +117,16 @@ module.exports = {
   parser: "@typescript-eslint/parser",
   overrides: [
     {
-      files: ["apps/website/src/**", "apps/widget/src/**", "apps/desktop/src/**"],
+      files: [
+        "apps/website/src/**/*.{ts,tsx}",
+        "apps/desktop/src/**/*.{ts,tsx}",
+        "packages/**/*.{ts,tsx}"
+      ],
       rules: {
         "react/iframe-missing-sandbox": "warn",
         "react/no-deprecated": "warn",
-        "react/jsx-no-script-url": "error"
+        "react/jsx-no-script-url": "error",
+        "react/no-unescaped-entities": "off"
       }
     },
     {

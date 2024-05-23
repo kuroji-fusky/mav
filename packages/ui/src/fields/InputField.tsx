@@ -1,7 +1,7 @@
 "use client"
 
 import {
-  ElementRef,
+  type ElementRef,
   forwardRef,
   useEffect,
   useImperativeHandle,

@@ -4,4 +4,4 @@ export type Variants = "primary" | "secondary" | "tritery" | "success" | "warnin
 
 type IntrinsicElements = React.JSX.IntrinsicElements
 
-export type ReactHTMLElement<T extends keyof IntrinsicElements> = IntrinsicElements[T] extends React.DetailedHTMLProps<infer P, any> ? P : IntrinsicElements[T]
+export type ReactHTMLElement<T extends keyof IntrinsicElements> = IntrinsicElements[T] extends React.DetailedHTMLProps<infer P, unknown> ? P : IntrinsicElements[T]

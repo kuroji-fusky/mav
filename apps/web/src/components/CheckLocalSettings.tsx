@@ -1,5 +1,6 @@
 "use client"
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect } from "react"
 
 const checkLocalStorage = (key: string, value: unknown): string | void => {
