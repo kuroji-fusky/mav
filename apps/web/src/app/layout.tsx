@@ -49,13 +49,15 @@ export default function RootLayout({ children }: PropsWithChildren) {
       <head>
         <link rel="mask-icon" href="./safari-pinned-tab.svg" color="9e00ff" />
       </head>
-      <body className="bg-100 text-700 bg-background prose-headings:font-bold prose-headings:font-inter font-open-sans !overflow-x-hidden text-sm font-medium">
+      <body className="bg-100 text-700 bg-background prose-headings:font-bold font-inter !overflow-x-hidden text-sm font-medium">
+        <Analytics />
         <PreconnectResources />
         <CheckLocalSettings />
-        <SkipNav />
-        <NoJSMessage />
-        <div id="__myartverse">{children}</div>
-        <Analytics />
+        <div id="myartverse">
+          <SkipNav />
+          <NoJSMessage />
+          {children}
+        </div>
       </body>
     </html>
   )
