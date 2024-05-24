@@ -1,5 +1,5 @@
 {
-  "name": "@myartverse/shared",
+  "name": "@mav/shared",
   "description": "The shared code from both the web client and desktop",
   "version": "0.0.0",
   "license": "Apache-2.0",

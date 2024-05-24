@@ -1,5 +1,5 @@
 import type { Config } from "tailwindcss"
-import twShared from "@myartverse/config/tailwind.config"
+import twShared from "@mav/config/tailwind.config"
 import defaultTheme from "tailwindcss/defaultTheme"
 
 export default {

@@ -3,8 +3,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link"
 import { forwardRef } from "react"
-import type { ReactHTMLElement } from "@myartverse/shared/types"
-import { cn } from "@myartverse/shared/utils"
+import type { ReactHTMLElement } from "@mav/shared/types"
+import { cn } from "@mav/shared/utils"
 import { cva } from "class-variance-authority"
 import type { ButtonProps } from "./Button.types"
 

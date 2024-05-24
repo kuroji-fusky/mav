@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link"
-import { MyArtverseIcon } from "@myartverse/ui"
+import { MyArtverseIcon } from "@mav/ui/icons"
 
 const commitHashEnv = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA || ""
 const commitHash = commitHashEnv.slice(0, 7)

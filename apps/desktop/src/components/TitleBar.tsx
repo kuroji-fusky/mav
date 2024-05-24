@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import { MyArtverseIcon } from "@myartverse/ui"
+import { MyArtverseIcon } from "@mav/ui"
 import { appWindow } from "@tauri-apps/api/window"
 import {
   VscChromeMaximize,

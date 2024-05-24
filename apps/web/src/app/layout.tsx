@@ -1,11 +1,11 @@
-import "@myartverse/ui/styles/index.scss"
+import "@mav/shared/styles/index.scss"
 import type { Metadata, Viewport } from "next"
 import dynamic from "next/dynamic"
 import { Inter } from "next/font/google"
 import type { PropsWithChildren } from "react"
 import { Analytics, NoJSMessage, SkipNav } from "@/components"
-import { BRAND } from "@myartverse/shared"
-import { cn } from "@myartverse/shared/utils"
+import { BRAND } from "@mav/shared"
+import { cn } from "@mav/shared/utils"
 import PreconnectResources from "./preconnect-resources"
 
 const CheckLocalSettings = dynamic(

@@ -8,8 +8,8 @@ import {
   useRef,
   useState
 } from "react"
-import type { ReactHTMLElement } from "@myartverse/shared/types"
-import { cn } from "@myartverse/shared/utils"
+import type { ReactHTMLElement } from "@mav/shared/types"
+import { cn } from "@mav/shared/utils"
 import FieldLabel from "./FieldLabel"
 import { DIV_TAG, LABEL_TAG } from "./fields.constants"
 import type { MAVFields } from "./fields.types"
@@ -38,7 +38,7 @@ interface _InnerFieldLabelProps {
   label: string
 }
 
-const InnerFieldLabel = (props: _InnerFieldLabelProps) => {
+const PrefilledLabel = (props: _InnerFieldLabelProps) => {
   return <div className="bg-300 flex select-none items-center px-3">{props.label}</div>
 }
 
@@ -93,13 +93,12 @@ const InputField = forwardRef<HTMLInputElement, Partial<InputFieldProps>>(
         >
           {!noLabel && <FieldLabel label={inputName} isRequired={required} />}
           <div
-            style={{ borderWidth: 1 }}
             className={cn(
-              "flex overflow-hidden rounded-md transition-colors",
+              "flex overflow-hidden rounded-md !border transition-colors",
               !isFocused ? "border-400" : "border-500 bg-200"
             )}
           >
-            {prefix && <InnerFieldLabel label={prefix} />}
+            {prefix && <PrefilledLabel label={prefix} />}
             <input
               ref={internalRef}
               aria-labelledby={inputName ? a11yMemo.ariaLabelledBy : undefined}
@@ -119,7 +118,7 @@ const InputField = forwardRef<HTMLInputElement, Partial<InputFieldProps>>(
               title=""
               {...eventHandlers}
             />
-            {suffix && <InnerFieldLabel label={suffix} />}
+            {suffix && <PrefilledLabel label={suffix} />}
           </div>
         </DynamicElement>
         {/* Error messages */}

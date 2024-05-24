@@ -1,4 +1,4 @@
-import { BRAND } from "@myartverse/shared"
+import { BRAND } from "@mav/shared"
 import { LuAlertTriangle } from "react-icons/lu"
 
 export function NoJSMessage() {

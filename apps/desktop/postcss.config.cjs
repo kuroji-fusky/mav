@@ -1,2 +1,2 @@
 /** @type {import('postcss-load-config').Config} */
-module.exports = require("@myartverse/config/postcss.config.cjs")
+module.exports = require("@mav/config/postcss.config.cjs")

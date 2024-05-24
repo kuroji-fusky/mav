@@ -1,5 +1,5 @@
 {
-  "name": "@myartverse/desktop",
+  "name": "@mav/desktop",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -18,9 +18,9 @@
     "react-icons": "^5.2.1"
   },
   "devDependencies": {
-    "@myartverse/config": "*",
-    "@myartverse/shared": "*",
-    "@myartverse/ui": "*",
+    "@mav/config": "*",
+    "@mav/shared": "*",
+    "@mav/ui": "*",
     "@tauri-apps/cli": "^1",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",

@@ -43,7 +43,7 @@ module.exports = {
           "mdx/*",
           "next/**",
           "react-*/**",
-          "@myartverse/**",
+          "@mav/**",
           "**/assets/*"
         ]
       }
@@ -127,6 +127,12 @@ module.exports = {
         "react/no-deprecated": "warn",
         "react/jsx-no-script-url": "error",
         "react/no-unescaped-entities": "off"
+      }
+    },
+    {
+      files: ["packages/ui/*.tsx"],
+      rules: {
+        "import/no-internal-modules": "off"
       }
     },
     {

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next"
-import { BRAND } from "@myartverse/shared"
+import { BRAND } from "@mav/shared"
 
 export default function manifest(): MetadataRoute.Manifest {
   return {

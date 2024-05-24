@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { MyArtverseIcon } from "@myartverse/ui"
+import { MyArtverseIcon } from "@mav/ui/icons"
 
 export function Navbar() {
   return (

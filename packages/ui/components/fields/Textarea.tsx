@@ -1,9 +1,8 @@
 "use client"
 
 import { forwardRef } from "react"
-import type { ReactHTMLElement } from "@myartverse/shared/types"
-import { cn, generateRandomString } from "@myartverse/shared/utils"
-import { kebabCase } from "lodash"
+import type { ReactHTMLElement } from "@mav/shared/types"
+import { cn, generateRandomString } from "@mav/shared/utils"
 import FieldLabel from "./FieldLabel"
 import { DIV_TAG, LABEL_TAG } from "./fields.constants"
 import type { MAVFields } from "./fields.types"

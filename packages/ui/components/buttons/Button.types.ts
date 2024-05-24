@@ -1,5 +1,5 @@
 import type { ReactElement } from "react"
-import type { ReactHTMLElement, Variants } from "@myartverse/shared/types"
+import type { ReactHTMLElement, Variants } from "@mav/shared/types"
 import type { UrlObject } from "url"
 
 type ButtonVariants = Exclude<Variants, "success" | "info"> | "error-secondary"

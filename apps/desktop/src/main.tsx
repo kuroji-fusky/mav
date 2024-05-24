@@ -1,5 +1,5 @@
 import "@fontsource/inter/700.css"
-import "@myartverse/ui/styles/index.scss"
+import "@mav/shared/styles/index.scss"
 import React from "react"
 import ReactDOM from "react-dom/client"
 import "@fontsource/inter"

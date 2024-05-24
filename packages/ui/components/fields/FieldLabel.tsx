@@ -1,4 +1,4 @@
-import { cn } from "@myartverse/shared/utils"
+import { cn } from "@mav/shared/utils"
 
 interface FieldLabelProps {
   label: string

@@ -1,5 +1,5 @@
 import { useMemo } from "react"
-import { generateRandomString } from "@myartverse/shared/utils"
+import { generateRandomString } from "@mav/shared/utils"
 import { kebabCase } from "lodash"
 
 /**

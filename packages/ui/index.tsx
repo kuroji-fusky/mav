@@ -1,1 +1,1 @@
-export * from "./src/icons/MyArtverse"
+export * from "./ColorPalette"

@@ -1,5 +1,5 @@
-import { Button } from "@myartverse/ui/src/buttons"
-import { InputField, Textarea } from "@myartverse/ui/src/fields"
+import { Button } from "@mav/ui/components/buttons"
+import { Form, InputField, Textarea } from "@mav/ui/components/fields"
 
 export default function Home() {
   return (
@@ -7,13 +7,12 @@ export default function Home() {
       <Button prefix={<div>Prefix</div>} suffix={<div>Suffix</div>}>
         Button
       </Button>
-      <form action="POST">
+      <Form>
         <InputField />
         <InputField inputName="Name" placeholder="@kim_seokjin" required />
-        <InputField inputName="Reason for unban?" required />
-        <InputField inputName="Your character url" prefix="character/" />
+        <InputField prefix="character/" />
         <InputField inputName="Prefix/suffix example" prefix="prefix" suffix="suffix" />
-      </form>
+      </Form>
       <Textarea inputName="Your feedback" />
     </main>
   )
