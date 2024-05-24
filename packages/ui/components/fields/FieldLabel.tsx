@@ -11,7 +11,7 @@ interface FieldLabelProps {
 export default function FieldLabel(props: Partial<FieldLabelProps>) {
   return (
     <span
-      aria-hidden={true}
+      aria-hidden
       className={cn(
         "text-700 flex gap-x-0.5 text-base font-bold empty:hidden",
         props.isRequired &&
