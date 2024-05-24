@@ -15,7 +15,7 @@ export default function FieldLabel(props: Partial<FieldLabelProps>) {
       className={cn(
         "text-700 flex gap-x-0.5 text-base font-bold empty:hidden",
         props.isRequired &&
-          "after:text-error after:ml-1 after:font-bold after:content-['*']"
+          "after:text-alert after:ml-1 after:font-bold after:content-['*']"
       )}
     >
       {props.label}

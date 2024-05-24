@@ -2,7 +2,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link"
-import { forwardRef } from "react"
+import { type PropsWithChildren, forwardRef } from "react"
 import type { ReactHTMLElement } from "@mav/shared/types"
 import { cn } from "@mav/shared/utils"
 import { cva } from "class-variance-authority"
@@ -10,24 +10,53 @@ import type { ButtonProps } from "./Button.types"
 
 const Button = forwardRef<
   HTMLButtonElement,
-  Partial<ButtonProps & Omit<ReactHTMLElement<"button">, "prefix">>
+  Partial<
+    PropsWithChildren<
+      ButtonProps & Pick<ReactHTMLElement<"button">, "className" | "onClick">
+    >
+  >
 >((props, ref) => {
+  const {
+    disabled,
+    icon,
+    position,
+    variant,
+    size,
+    href,
+    type,
+    className,
+    prefix,
+    suffix,
+    children,
+    ...eventHandlers
+  } = props
+
   const buttonVars = cva(
-    ["flex items-center gap-x-1.5 rounded-md transition-[border,background-color]"],
+    [
+      "flex items-center gap-x-1.5 rounded-md transition-all",
+      disabled && "cursor-not-allowed",
+      className
+    ],
     {
       variants: {
         intent: {
-          primary: "border-transparent bg-300 hover:bg-400",
-          secondary: "!border-[2px] bg-100 border-300 hover:bg-400 hover:border-400",
-          tritery: "border-transparent bg-transparent hover:bg-400",
-          warning: "bg-transparent",
-          error: "bg-error text-active hover:bg-opacity-70 border-transparent",
-          "error-secondary": "border-error hover:border-opacity-50"
+          primary: !disabled ? "border-transparent bg-300 hover:bg-400" : "bg-mute",
+          secondary: !disabled
+            ? "!border-[2px] bg-100 border-300 hover:bg-400 hover:border-400"
+            : "!border-[2px] border-mute",
+          tritery: !disabled
+            ? "border-transparent bg-transparent hover:bg-400"
+            : "opacity-60",
+          warning: "bg-warning text-100 hover:bg-opacity-75",
+          "warning-secondary": "border border-warning hover:bg-warning hover:text-100",
+          alert:
+            "bg-alert text-active hover:bg-opacity-70 bg-opacity-100 border-transparent",
+          "alert-secondary": "border border-alert hover:bg-alert"
         },
         size: {
-          small: !props.icon ? "px-2.5 py-1.5" : "p-2",
-          medium: !props.icon ? "px-3.5 py-2" : "p-2",
-          big: !props.icon ? "px-5 py-2.5" : "p-3"
+          small: !icon ? "px-2.5 py-1" : "p-2",
+          medium: !icon ? "px-3.5 py-2" : "p-2",
+          big: !icon ? "px-5 py-2.5" : "p-3"
         },
         positions: {
           left: "text-left justify-start",
@@ -48,28 +77,25 @@ const Button = forwardRef<
   return (
     <DynamicElement
       ref={ref as any}
-      href={props.href ?? null}
-      type={!props.href ? props.type ?? "button" : null}
-      aria-disabled={props.disabled ?? null}
-      className={cn(
-        buttonVars({
-          positions: props.position,
-          intent: props.variant,
-          size: props.size
-        }),
-        props.className
-      )}
-      {...props}
+      href={href ?? null}
+      type={!href ? type ?? null : null}
+      aria-disabled={disabled ?? null}
+      className={buttonVars({
+        positions: position,
+        intent: variant,
+        size: size
+      })}
+      {...eventHandlers}
       // This is to prevent conflicts from custom "prefix" and "suffix" props
       prefix={null}
       suffix={null}
     >
-      {props.prefix}
+      {prefix}
       <div className="contents">
-        {props.icon}
-        {props.children}
+        {icon}
+        {children}
       </div>
-      {props.suffix}
+      {suffix}
     </DynamicElement>
   )
 })

@@ -83,7 +83,7 @@ const InputField = forwardRef<HTMLInputElement, Partial<InputFieldProps>>(
 
     return (
       <div data-mav-input-field="" className="w-full">
-        <span className="sr-only" id={a11yMemo.ariaLabelledBy}>
+        <span className="sr-only empty:hidden" id={a11yMemo.ariaLabelledBy}>
           {inputName}
         </span>
         <DynamicElement
@@ -103,8 +103,8 @@ const InputField = forwardRef<HTMLInputElement, Partial<InputFieldProps>>(
               ref={internalRef}
               aria-labelledby={inputName ? a11yMemo.ariaLabelledBy : undefined}
               className={cn(
-                "text-700 w-full border-0 bg-transparent px-3.5 py-2 focus:ring-0",
-                error ? "border-error" : null
+                "text-700 w-full border-0 bg-transparent px-3.5 py-2 text-sm focus:ring-0",
+                error ? "border-alert" : null
               )}
               id={a11yMemo.kebabedPropName}
               name={a11yMemo.kebabedPropName ?? undefined}
@@ -123,8 +123,8 @@ const InputField = forwardRef<HTMLInputElement, Partial<InputFieldProps>>(
         </DynamicElement>
         {/* Error messages */}
         <div
-          id="field-error-boundary"
-          className={cn("text-error mt-2", !error ? "hidden" : "")}
+          id="field-alert-boundary"
+          className={cn("text-alert mt-2", !error ? "hidden" : "")}
         >
           {/* <Note inline type="error">
             {error}

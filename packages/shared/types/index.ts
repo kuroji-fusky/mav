@@ -1,6 +1,6 @@
 import type React from "react"
 
-export type Variants = "primary" | "secondary" | "tritery" | "success" | "warning" | "error" | "info"
+export type Variants = "primary" | "secondary" | "tritery" | "success" | "warning" | "alert" | "info"
 
 type IntrinsicElements = React.JSX.IntrinsicElements
 
