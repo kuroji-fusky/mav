@@ -2,16 +2,17 @@ import { type KnipConfig } from "knip"
 
 export default {
   eslint: {
-    config: [".eslintrc.json"]
+    config: [".eslintrc.cjs"]
   },
   entry: ["apps/**/src/**/*.{ts,tsx}!", "packages/**/*.{js,ts,tsx}!"],
   project: ["**/*.{ts,tsx}!"],
   rules: {
-    files: "warn",
-    dependencies: "warn",
+    files: "error",
     exports: "warn",
     types: "warn",
-    nsExports: "warn",
-    nsTypes: "error"
+    dependencies: "off",
+    unlisted: "off",
+    devDependencies: "off",
+    binaries: "off"
   }
 } satisfies KnipConfig

@@ -9,10 +9,11 @@ import {
   useState
 } from "react"
 import type { ReactHTMLElement } from "@myartverse/shared/types"
-import { cn, generateRandomString } from "@myartverse/shared/utils"
-import { kebabCase } from "lodash"
+import { cn } from "@myartverse/shared/utils"
 import FieldLabel from "./FieldLabel"
 import { DIV_TAG, LABEL_TAG } from "./fields.constants"
+import type { MAVFields } from "./fields.types"
+import { useMemoizeA11yLabel } from "./fields.utils"
 
 type PickedInputProps = Pick<
   ReactHTMLElement<"input">,
@@ -22,24 +23,42 @@ type PickedInputProps = Pick<
   | "onChange"
   | "value"
   | "readOnly"
-  | "className"
   | "onKeyDown"
   | "onClick"
   | "onBlur"
 >
 
-interface InputFieldProps extends PickedInputProps {
-  inputName: string
-  noLabel: boolean
-  error: string
+interface InputFieldProps extends PickedInputProps, MAVFields {
   prefix: string
   suffix: string
+  regex: RegExp
 }
 
-const rndString = generateRandomString()
+interface _InnerFieldLabelProps {
+  label: string
+}
+
+const InnerFieldLabel = (props: _InnerFieldLabelProps) => {
+  return <div className="bg-300 flex select-none items-center px-3">{props.label}</div>
+}
 
 const InputField = forwardRef<HTMLInputElement, Partial<InputFieldProps>>(
   (props, ref) => {
+    const {
+      inputName,
+      error,
+      noLabel,
+      placeholder,
+      prefix,
+      required,
+      suffix,
+      type,
+      readOnly,
+      ...eventHandlers
+    } = props
+
+    const a11yMemo = useMemoizeA11yLabel(inputName)
+
     const [isFocused, setIsFocused] = useState(false)
     const internalRef = useRef<ElementRef<"input">>(null)
 
@@ -60,67 +79,53 @@ const InputField = forwardRef<HTMLInputElement, Partial<InputFieldProps>>(
       }
     }, [internalRef])
 
-    const kebabedInputName = kebabCase(props.inputName)
-
-    const DynamicElement = !props.noLabel ? LABEL_TAG : DIV_TAG
-    const a11yLabelledBy = `${kebabedInputName}-${rndString}`
+    const DynamicElement = !noLabel ? LABEL_TAG : DIV_TAG
 
     return (
       <div data-mav-input-field="" className="w-full">
-        <span className="sr-only" id={a11yLabelledBy}>
-          {props.inputName}
+        <span className="sr-only" id={a11yMemo.ariaLabelledBy}>
+          {inputName}
         </span>
         <DynamicElement
           className="flex flex-col gap-y-1.5"
-          htmlFor={!props.noLabel ? kebabedInputName : undefined}
-          aria-labelledby={props.inputName ? a11yLabelledBy : undefined}
+          htmlFor={!noLabel ? a11yMemo.kebabedPropName : undefined}
+          aria-labelledby={inputName ? a11yMemo.ariaLabelledBy : undefined}
         >
-          {!props.noLabel && (
-            <FieldLabel label={props.inputName} isRequired={props.required} />
-          )}
+          {!noLabel && <FieldLabel label={inputName} isRequired={required} />}
           <div
             style={{ borderWidth: 1 }}
             className={cn(
               "flex overflow-hidden rounded-md transition-colors",
-              !isFocused ? "border-400" : "border-500"
+              !isFocused ? "border-400" : "border-500 bg-200"
             )}
           >
-            {props.prefix && (
-              <div className="bg-300 flex select-none items-center px-3">
-                {props.prefix}
-              </div>
-            )}
+            {prefix && <InnerFieldLabel label={prefix} />}
             <input
               ref={internalRef}
-              aria-labelledby={props.inputName ? a11yLabelledBy : undefined}
+              aria-labelledby={inputName ? a11yMemo.ariaLabelledBy : undefined}
               className={cn(
-                "text-700 bg-100 w-full border-0 px-3.5 py-2",
-                props.error ? "border-error" : null,
-                props.className
+                "text-700 w-full border-0 bg-transparent px-3.5 py-2 focus:ring-0",
+                error ? "border-error" : null
               )}
-              id={kebabedInputName}
-              name={kebabedInputName}
-              type={props.type}
-              placeholder={props.placeholder}
-              required={props.required}
+              id={a11yMemo.kebabedPropName}
+              name={a11yMemo.kebabedPropName ?? undefined}
+              type={type}
+              readOnly={readOnly}
+              placeholder={placeholder}
+              required={required}
               autoCapitalize="none"
               autoComplete="off"
               spellCheck={false}
-              {...props}
-              // @ts-ignore
-              inputName={null}
+              title=""
+              {...eventHandlers}
             />
-            {props.suffix && (
-              <div className="bg-300 flex select-none items-center px-3">
-                {props.suffix}
-              </div>
-            )}
+            {suffix && <InnerFieldLabel label={suffix} />}
           </div>
         </DynamicElement>
         {/* Error messages */}
         <div
           id="field-error-boundary"
-          className={cn("text-error mt-2", !props.error ? "hidden" : "")}
+          className={cn("text-error mt-2", !error ? "hidden" : "")}
         >
           {/* <Note inline type="error">
             {error}

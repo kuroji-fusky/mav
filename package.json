@@ -11,7 +11,7 @@
   "lint-staged": {
     "**/*.{ts,tsx,mjs,mdx,md}": [
       "prettier --write .",
-      "eslint --quiet ."
+      "eslint --quiet --fix ."
     ]
   },
   "scripts": {

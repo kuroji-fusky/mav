@@ -65,8 +65,10 @@ const Button = forwardRef<
       suffix={null}
     >
       {props.prefix}
-      {props.icon}
-      {props.children}
+      <div className="contents">
+        {props.icon}
+        {props.children}
+      </div>
       {props.suffix}
     </DynamicElement>
   )
