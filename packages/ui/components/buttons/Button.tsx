@@ -47,7 +47,7 @@ const Button = forwardRef<
           tritery: !disabled
             ? "border-transparent bg-transparent hover:bg-400"
             : "opacity-60",
-          warning: "bg-warning text-100 hover:bg-opacity-75",
+          warning: "bg-warning text-active-invert hover:bg-opacity-75",
           "warning-secondary": "border border-warning hover:bg-warning hover:text-100",
           alert:
             "bg-alert text-active hover:bg-opacity-70 bg-opacity-100 border-transparent",

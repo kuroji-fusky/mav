@@ -26,7 +26,7 @@ const COLORS = {
     ["info-hl", "info-highlight"],
     ["success-hl", "success-highlight"]
   ],
-  OVERRIDE: ["context-menu", "active"]
+  OVERRIDE: ["context-menu", "active", "active-invert"]
 }
 
 const iterateColorVars = (

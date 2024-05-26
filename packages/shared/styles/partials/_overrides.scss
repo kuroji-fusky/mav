@@ -18,12 +18,14 @@
 @include map-theme-variables(
   "light",
   (
-    "active": var(--mav-100)
+    "active": var(--mav-100),
+    "active-invert": var(--mav-700)
   )
 );
 @include map-theme-variables(
   "dark",
   (
-    "active": var(--mav-700)
+    "active": var(--mav-700),
+    "active-invert": var(--mav-100)
   )
 );

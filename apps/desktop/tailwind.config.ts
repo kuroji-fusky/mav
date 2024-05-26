@@ -6,7 +6,7 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
-    "../../packages/ui/src/**/*.{ts,tsx}"
+    "../../packages/ui/**/*.{ts,tsx}"
   ],
   theme: {
     extend: {

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 module.exports = {
   root: true,
   env: {
@@ -16,7 +17,8 @@ module.exports = {
     "README.md",
     "TODO.md"
   ],
-  extends: ["next", "eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  parser: "@typescript-eslint/parser",
   plugins: ["import", "unused-imports", "@stylistic"],
   rules: {
     "no-var": "error",
@@ -29,6 +31,8 @@ module.exports = {
     ],
     "no-duplicate-imports": "error",
     "max-depth": ["error", 3],
+
+    // Import rules
     "unused-imports/no-unused-imports": "warn",
     "import/no-deprecated": "warn",
     "import/no-duplicates": "error",
@@ -114,25 +118,23 @@ module.exports = {
       }
     ]
   },
-  parser: "@typescript-eslint/parser",
+  settings: {
+    next: {
+      rootDir: ["apps/web/"]
+    }
+  },
   overrides: [
     {
-      files: [
-        "apps/website/src/**/*.{ts,tsx}",
-        "apps/desktop/src/**/*.{ts,tsx}",
-        "packages/**/*.{ts,tsx}"
-      ],
+      files: ["apps/web/**"],
+      extends: ["next/core-web-vitals"]
+    },
+    {
+      files: ["apps/**/*.tsx", "packages/**/*.tsx"],
       rules: {
         "react/iframe-missing-sandbox": "warn",
         "react/no-deprecated": "warn",
         "react/jsx-no-script-url": "error",
         "react/no-unescaped-entities": "off"
-      }
-    },
-    {
-      files: ["packages/ui/*.tsx"],
-      rules: {
-        "import/no-internal-modules": "off"
       }
     },
     {
@@ -151,11 +153,12 @@ module.exports = {
         //   },
         // ],
       }
+    },
+    {
+      files: ["packages/ui/*.tsx"],
+      rules: {
+        "import/no-internal-modules": "off"
+      }
     }
-  ],
-  settings: {
-    next: {
-      rootDir: ["apps/web/"]
-    }
-  }
+  ]
 }

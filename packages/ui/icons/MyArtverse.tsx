@@ -18,11 +18,11 @@ export function MyArtverseIcon({
       viewBox={`0 0 ${!logoOnly ? 237 : 55} 55`}
       width={!logoOnly ? WIDTH : HEIGHT}
       height={HEIGHT}
-      aria-label="MyFursona logo"
+      aria-label="MyArtverse logo"
       fill="none"
       focusable={false}
     >
-      <g className="pointer-events-none">
+      <g style={{ pointerEvents: "none" }}>
         {!wordmarkOnly && (
           <>
             <path

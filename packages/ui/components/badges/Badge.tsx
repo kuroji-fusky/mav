@@ -7,10 +7,10 @@ const badgeVariants = cva(["rounded-full"], {
     variant: {
       primary: "bg-300",
       secondary: "border-2 border-300",
-      warning: "bg-warning text-100",
-      alert: "bg-alert",
-      info: "bg-info",
-      success: "bg-success text-100"
+      warning: "bg-warning text-active-invert",
+      alert: "bg-alert text-active",
+      info: "bg-info text-active",
+      success: "bg-success text-active-invert"
     },
     size: {
       small: "px-2.5 py-0.5",
