@@ -5,6 +5,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@mav/shared/utils"
 import type { IconType } from "react-icons"
+import { Badge } from "./badges"
 
 interface TabProps {
   baseURL?: string
@@ -42,14 +43,7 @@ export function Tabs(props: TabProps) {
           >
             {Icon && <Icon size={20} aria-hidden />}
             <span className="contents">{text}</span>
-            {countIndicator && (
-              <span
-                aria-hidden
-                className="bg-300 rounded-2xl px-2 py-0.5 text-xs group-hover:bg-opacity-100"
-              >
-                {countIndicator}
-              </span>
-            )}
+            {countIndicator && <Badge size="small">{countIndicator}</Badge>}
           </Link>
         )
       })}

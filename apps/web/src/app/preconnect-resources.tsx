@@ -1,18 +1,11 @@
 "use client"
 
-import { usePathname } from "next/navigation"
 import ReactDOM from "react-dom"
 
 const isDevelopment = process.env.NODE_ENV === "development"
 
 export default function PreconnectResources() {
-  const path = usePathname()
-
   ReactDOM.prefetchDNS("https://eu.umami.is/")
-
-  if (path.startsWith("/blog") || path.startsWith("/dashboard/overview")) {
-    ReactDOM.preconnect("https://images.ctfassets.net/")
-  }
 
   // Preconnect resources from localhost during development
   const LOCALHOST_URL = "http://localhost" as const

@@ -1,3 +1,5 @@
+"use client"
+
 import { Tabs } from "../../Tabs"
 
 /** A wrapper for the `<Tabs />` component to be used for Masthead */

@@ -33,7 +33,6 @@ export const metadata: Metadata = {
     type: "website",
     siteName: BRAND
   },
-  robots: "/robots.txt",
   other: {
     "apple-mobile-web-app-status-bar": "#9e00ff"
   }
