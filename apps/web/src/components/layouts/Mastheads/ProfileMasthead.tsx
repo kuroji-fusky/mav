@@ -1,10 +1,10 @@
 "use client"
 
-import { Masthead } from "@mav/ui/components/layouts"
+import { Masthead, type MastheadTabItems } from "@mav/ui/components/layouts"
 import { LuCat, LuHeart, LuHome } from "react-icons/lu"
 
 export function ProfileMasthead() {
-  const profileTabs = [
+  const profileTabs: MastheadTabItems = [
     {
       icon: LuHome,
       text: "Overview",

@@ -7,16 +7,18 @@ import { cn } from "@mav/shared/utils"
 import type { IconType } from "react-icons"
 import { Badge } from "./badges"
 
+interface TabItem {
+  text: string
+  link: string
+  active: boolean
+  icon: IconType
+  countIndicator: number
+  isNew: boolean
+}
+
 interface TabProps {
   baseURL?: string
-  items: Partial<{
-    text: string
-    link: string
-    active: boolean
-    icon: IconType
-    countIndicator: number
-    isNew: boolean
-  }>[]
+  items: Partial<TabItem>[]
 }
 
 export function Tabs(props: TabProps) {
@@ -25,7 +27,7 @@ export function Tabs(props: TabProps) {
   const pathname = usePathname()
 
   return (
-    <div className="flex items-center gap-x-1 py-1">
+    <div data-mav-tabs="" className="flex items-center gap-x-1 py-1">
       {tabItems.map(({ text, link, icon: Icon, countIndicator }, index) => {
         const hasPathMatches = pathname === `${baseURL}${link}`
 
@@ -43,7 +45,7 @@ export function Tabs(props: TabProps) {
           >
             {Icon && <Icon size={20} aria-hidden />}
             <span className="contents">{text}</span>
-            {countIndicator && <Badge size="small">{countIndicator}</Badge>}
+            {countIndicator?.toString() && <Badge size="small">{countIndicator}</Badge>}
           </Link>
         )
       })}

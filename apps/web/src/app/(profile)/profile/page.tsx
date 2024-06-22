@@ -1,4 +1,4 @@
-import { ProfileMasthead } from "@/components/layouts/Mastheads/ProfileMasthead"
+import { ProfileMasthead } from "@/components/layouts/Mastheads"
 
 export default function ProfilePage() {
   return (
