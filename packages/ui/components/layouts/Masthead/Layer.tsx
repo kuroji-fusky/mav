@@ -14,12 +14,7 @@ interface MastheadLayerProps extends PickedDivProps {
  */
 export function MastheadLayer(props: Partial<PropsWithChildren<MastheadLayerProps>>) {
   return (
-    <div
-      className={cn(
-        "flex flex-wrap items-center",
-        props.spaceBetween && "justify-between"
-      )}
-    >
+    <div data-mh-layer="" className={cn(props.spaceBetween && "justify-between")}>
       {props.children}
     </div>
   )

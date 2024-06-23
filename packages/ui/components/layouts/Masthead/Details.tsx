@@ -22,7 +22,11 @@ export function MastheadDetails(props: PropsWithChildren<MastheadDetailsProps>) 
     io.observe(profileDetails)
   }, [])
   return (
-    <section ref={detailWrapperRef} className="flex w-full flex-col gap-y-2">
+    <section
+      ref={detailWrapperRef}
+      className="flex w-full flex-col gap-y-2.5
+                 [&_[data-mh-layer]]:flex [&_[data-mh-layer]]:flex-wrap [&_[data-mh-layer]]:items-center"
+    >
       {props.children}
     </section>
   )

@@ -33,7 +33,7 @@ module.exports = {
     "max-depth": ["error", 3],
 
     // Import rules
-    "unused-imports/no-unused-imports": "warn",
+    "unused-imports/no-unused-imports": "off",
     "import/no-deprecated": "warn",
     "import/no-duplicates": "error",
     "import/no-relative-packages": "error",

@@ -3,7 +3,12 @@
 import { Masthead, type MastheadTabItems } from "@mav/ui/components/layouts"
 import { LuCat, LuHeart, LuHome } from "react-icons/lu"
 
-export function ProfileMasthead() {
+interface ProfileMastheadProps {
+  bannerUrl: string
+  avatarUrl: string
+}
+
+export function ProfileMasthead(props: Partial<ProfileMastheadProps>) {
   const profileTabs: MastheadTabItems = [
     {
       icon: LuHome,
@@ -28,7 +33,12 @@ export function ProfileMasthead() {
       <Masthead.Banner></Masthead.Banner>
       <Masthead.Wrapper>
         <Masthead.Details>
-          <Masthead.Layer spaceBetween></Masthead.Layer>
+          <Masthead.Layer spaceBetween>
+            <div>username and badges</div>
+            <div>buttons</div>
+          </Masthead.Layer>
+          <Masthead.Layer>following and others</Masthead.Layer>
+          <Masthead.Layer>social links</Masthead.Layer>
         </Masthead.Details>
       </Masthead.Wrapper>
       <Masthead.Tabs items={profileTabs} />

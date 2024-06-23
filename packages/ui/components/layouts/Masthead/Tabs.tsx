@@ -1,10 +1,9 @@
 "use client"
 
 import { Tabs } from "../../Tabs"
-import type { _MastheadTabs } from "./Masthead.types"
+import type { MastheadTabs } from "./Masthead.types"
 
-/** A wrapper for the `<Tabs />` component to be used for Masthead */
-export function MastheadTabs(props: _MastheadTabs) {
+export function MastheadTabs(props: MastheadTabs) {
   return (
     <div className="bg-100 sticky top-[3.75rem] z-[3] overflow-x-auto">
       <div className="mx-auto max-w-screen-2xl px-9">

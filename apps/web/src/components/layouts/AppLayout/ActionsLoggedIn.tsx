@@ -1,1 +1,3 @@
-export function ActionsLoggedIn() {}
+export function ActionsLoggedIn() {
+  return <>logged in</>
+}
