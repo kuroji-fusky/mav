@@ -13,7 +13,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: yarn install --no-lockfile
+
+      - name: Install deps without lockfile
+        run: yarn install --no-lockfile
 
       - name: "Formatting: ESLint"
         run: yarn eslint .
