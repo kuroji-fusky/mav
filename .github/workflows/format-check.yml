@@ -1,0 +1,25 @@
+name: Formatting Check
+on:
+  push:
+  workflow_dispatch:
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  check-format-and-deps:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: yarn install --no-lockfile
+
+      - name: "Formatting: ESLint"
+        run: yarn eslint .
+
+      - name: "Formatting: Prettier"
+        run: yarn prettier --check .
+
+      - name: "Dependencies: Knip"
+        run: yarn knip
