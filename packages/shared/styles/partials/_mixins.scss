@@ -8,9 +8,7 @@ $_PREFIX: mav;
 
 @mixin map-root($map) {
   :root {
-    @each $k, $v in $map {
-      --#{$_PREFIX}-#{$k}: #{$v};
-    }
+    @include map-variables($map);
   }
 }
 

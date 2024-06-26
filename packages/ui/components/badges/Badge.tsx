@@ -40,9 +40,9 @@ export function Badge(props: Partial<PropsWithChildren<BadgeProps>>) {
   return (
     <span
       data-mav-inline-badge=""
-      className={badgeVariants({ variant: props.variant, size: props.size })}
+      className={(badgeVariants({ variant: props.variant, size: props.size }))}
     >
-      {props.icon && <props.icon size={iconSizes[props.size! || "medium"]} />}
+      {props.icon && <props.icon className="flex-shrink-0" size={iconSizes[props.size! || "medium"]} />}
       {props.children}
     </span>
   )

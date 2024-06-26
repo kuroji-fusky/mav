@@ -19,7 +19,7 @@ export function Navbar() {
         <div className="flex items-center gap-x-2">
           <Button
             prefix={<LuSearch size={18} />}
-            className="hover:bg-100 w-64"
+            className="hover:!bg-100 w-64"
             variant="secondary"
           >
             Search

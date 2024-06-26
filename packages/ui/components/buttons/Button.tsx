@@ -33,7 +33,7 @@ const Button = forwardRef<
 
   const buttonVars = cva(
     [
-      "flex items-center gap-x-1.5 rounded-md transition-all",
+      "flex items-center gap-x-1.5 rounded-md transition-all select-none first:*:flex-shrink-0 last:*:flex-shrink-0",
       disabled && "cursor-not-allowed",
       className
     ],
@@ -76,15 +76,20 @@ const Button = forwardRef<
 
   return (
     <DynamicElement
+      data-mav-dynamic-button=""
       ref={ref as any}
       href={href ?? null}
       type={!href ? type ?? null : null}
+      // The use of "aria-disabled" here to let the screen reader know it's a disabled button,
+      // so it's not completely hidden
       aria-disabled={disabled ?? null}
-      className={buttonVars({
-        positions: position,
-        intent: variant,
-        size: size
-      })}
+      className={cn(
+        buttonVars({
+          positions: position,
+          intent: variant,
+          size: size
+        })
+      )}
       {...eventHandlers}
       // This is to prevent conflicts from custom "prefix" and "suffix" props
       prefix={null}
