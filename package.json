@@ -8,12 +8,6 @@
     "apps/*",
     "packages/*"
   ],
-  "lint-staged": {
-    "**/*.{ts,tsx,mjs,mdx,md}": [
-      "prettier --write .",
-      "eslint --quiet --fix ."
-    ]
-  },
   "scripts": {
     "dev": "dotenv -- turbo dev --filter=web-client --no-daemon",
     "dev:desktop": "cd ./apps/desktop && tauri dev",
@@ -21,6 +15,8 @@
     "build:all": "turbo build --concurrency 2",
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",
+    "lint": "eslint --quiet .",
+    "lint:format": "eslint --fix --quiet . && prettier --write .",
     "knip": "knip"
   },
   "devDependencies": {
