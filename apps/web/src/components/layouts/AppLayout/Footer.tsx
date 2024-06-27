@@ -1,11 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link"
+import { COPYRIGHT_ALL_RIGHTS_RESERVED } from "@mav/shared"
 import { MyArtverseIcon } from "@mav/ui/icons"
 
 const commitHashEnv = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA || ""
 const commitHash = commitHashEnv.slice(0, 7)
-
-const copyrightOwner = "MyArtverse"
 
 const footerLinks = [
   { text: "Pricing", link: "/plus" },
@@ -15,7 +13,7 @@ const footerLinks = [
   { text: "Blog", link: "/blog" },
   { text: "Privacy", link: "/legal/privacy-policy" },
   { text: "Terms", link: "/legal/tos" },
-  { text: "Status", link: "https://stats.uptimerobot.com/rlVXRfwrKz" }
+  { text: "Status", link: "/" }
 ]
 
 export function Footer() {
@@ -28,14 +26,14 @@ export function Footer() {
           </Link>
           <div className="flex flex-1 items-center justify-evenly">
             {footerLinks.map((item, index) => (
-              <Link key={index} href={item.link as any} className="hover:opacity-60">
+              <Link key={index} href={item.link as string} className="hover:opacity-60">
                 {item.text}
               </Link>
             ))}
           </div>
         </div>
         <div className="text-subtext flex gap-x-4 opacity-75">
-          <div className="w-full">{`© ${new Date().getFullYear()} ${copyrightOwner}`}</div>
+          <div className="w-full">{COPYRIGHT_ALL_RIGHTS_RESERVED}</div>
           {!commitHashEnv ? (
             <span className="cursor-help underline decoration-dashed">Development</span>
           ) : (

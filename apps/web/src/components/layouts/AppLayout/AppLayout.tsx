@@ -6,7 +6,7 @@ export default function AppLayout(props: PropsWithChildren) {
   return (
     <>
       <Navbar />
-      {props.children}
+      <div className="min-h-[calc(100dvh-3.75rem)]">{props.children}</div>
       <Footer />
     </>
   )

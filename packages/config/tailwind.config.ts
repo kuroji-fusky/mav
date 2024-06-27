@@ -56,6 +56,9 @@ const gridResizable = {
 
 export default {
   content: [],
+  experimental: {
+    optimizeUniversalDefaults: true
+  },
   darkMode: "class",
   theme: {
     extend: {

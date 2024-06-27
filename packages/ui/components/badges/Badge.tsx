@@ -2,7 +2,7 @@ import type { PropsWithChildren } from "react"
 import { type VariantProps, cva } from "class-variance-authority"
 import type { IconType } from "react-icons"
 
-const badgeVariants = cva(["rounded-full inline-flex items-center"], {
+const badgeVariants = cva(["rounded-full inline-flex items-center cursor-default"], {
   variants: {
     variant: {
       primary: "bg-300",
@@ -13,7 +13,7 @@ const badgeVariants = cva(["rounded-full inline-flex items-center"], {
       success: "bg-success text-active-invert"
     },
     size: {
-      small: "px-2 py-0.5 text-xs gap-x-1",
+      small: "px-2 py-1 text-xs gap-x-1",
       medium: "px-3 py-1 gap-x-1.5",
       big: "px-3.5 py-1.5 !text-base gap-x-2"
     }
@@ -32,9 +32,9 @@ interface BadgeProps extends VariantProps<typeof badgeVariants> {
 
 export function Badge(props: Partial<PropsWithChildren<BadgeProps>>) {
   const iconSizes = {
-    small: 14,
+    small: 13.5,
     medium: 17,
-    big: 21
+    big: 20
   }
 
   return (
