@@ -36,7 +36,7 @@ const settingRoutes: SettingRoutes[] = [
       {
         icon: LuLock,
         label: "Data & privacy",
-        slug: "data-and-privacy"
+        slug: "privacy"
       },
       {
         icon: LuShield,
@@ -45,7 +45,7 @@ const settingRoutes: SettingRoutes[] = [
       {
         icon: LuWallet,
         label: "Billing & subscriptions",
-        slug: "billing-and-subscriptions"
+        slug: "billing"
       },
       {
         icon: LuPersonStanding,

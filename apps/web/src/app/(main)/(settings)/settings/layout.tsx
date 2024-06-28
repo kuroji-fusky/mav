@@ -24,10 +24,10 @@ export default function SettingsLayout(props: Readonly<PropsWithChildren>) {
           </div>
         </div>
       </div>
-      <div className="flex gap-x-3">
+      <div className="flex gap-x-6">
         {/* Setting items */}
         <SidebarSettingsList />
-        <div className="flex-1">{props.children}</div>
+        <div className="flex-1 pt-1 px-0.5">{props.children}</div>
       </div>
     </div>
   )

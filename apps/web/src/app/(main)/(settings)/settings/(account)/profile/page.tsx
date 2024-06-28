@@ -1,7 +1,13 @@
+import { Group } from "@mav/ui/components/layouts"
+
 export const metadata = {
   title: "Profile"
 }
 
 export default function SettingsProfilePage() {
-  return <>profile page</>
+  return (
+    <>
+      <Group title="COMEDI">LINUX</Group>
+    </>
+  )
 }
