@@ -34,10 +34,6 @@ const settingRoutes: SettingRoutes[] = [
         label: "Appearance"
       },
       {
-        icon: LuPersonStanding,
-        label: "Accessibility"
-      },
-      {
         icon: LuLock,
         label: "Data & privacy",
         slug: "data-and-privacy"
@@ -50,6 +46,10 @@ const settingRoutes: SettingRoutes[] = [
         icon: LuWallet,
         label: "Billing & subscriptions",
         slug: "billing-and-subscriptions"
+      },
+      {
+        icon: LuPersonStanding,
+        label: "Accessibility"
       }
     ]
   },
@@ -72,11 +72,13 @@ const settingRoutes: SettingRoutes[] = [
     items: [
       {
         icon: LuCode2,
-        label: "API keys"
+        label: "API keys",
+        slug: "developers/api-keys"
       },
       {
         icon: LuScroll,
-        label: "Activity logs"
+        label: "Activity logs",
+        slug: "developers/activity-logs"
       }
     ]
   }

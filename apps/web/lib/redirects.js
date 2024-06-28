@@ -9,5 +9,5 @@ export default [
     permanent: true
   },
   // TODO: change dest. route to /settings/profile soon
-  { source: "/settings", destination: "/settings/account", permanent: true }
+  { source: "/settings", destination: "/settings/profile", permanent: true }
 ]
