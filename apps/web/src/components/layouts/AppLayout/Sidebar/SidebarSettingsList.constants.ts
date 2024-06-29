@@ -1,13 +1,16 @@
 import type { IconType } from "react-icons"
 import {
+  LuBan,
   LuBell,
   LuCode2,
   LuLock,
+  LuMessageSquare,
   LuPalette,
   LuPersonStanding,
   LuScroll,
   LuShield,
   LuShuffle,
+  LuTrash2,
   LuUser,
   LuWallet
 } from "react-icons/lu"
@@ -60,10 +63,21 @@ const settingRoutes: SettingRoutes[] = [
         icon: LuBell,
         label: "Notifications"
       },
-
+      {
+        icon: LuMessageSquare,
+        label: "Moderation"
+      },
       {
         icon: LuShuffle,
         label: "Trade history"
+      },
+      {
+        icon: LuBan,
+        label: "Blocked users"
+      },
+      {
+        icon: LuTrash2,
+        label: "Deleted items"
       }
     ]
   },

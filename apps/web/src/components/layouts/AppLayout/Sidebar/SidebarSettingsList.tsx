@@ -12,7 +12,7 @@ export function SidebarSettingsList() {
   return (
     <nav
       aria-label="User settings"
-      className="min-h-[calc(100dvh-4.5rem)] w-64 flex-shrink-0"
+      className="min-h-[calc(100dvh-4.5rem)] flex-shrink-0 w-52 xl:w-64"
     >
       <ul className="flex flex-col gap-y-2">
         {settingRoutes.map((section, i) => {
@@ -45,7 +45,7 @@ export function SidebarSettingsList() {
                         aria-current={isCurrentPath ? "page" : undefined}
                         className={cn(
                           "gap-x-2.5 border-none",
-                          isCurrentPath && "!bg-500"
+                          isCurrentPath && "!bg-500 !text-active"
                         )}
                         prefix={<item.icon size={20} />}
                       >

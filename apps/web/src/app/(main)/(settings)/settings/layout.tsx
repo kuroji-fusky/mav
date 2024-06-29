@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function SettingsLayout(props: Readonly<PropsWithChildren>) {
   return (
-    <div className="mx-auto max-w-[1400px] px-4">
+    <div className="mx-auto mb-20 max-w-[1400px] px-4">
       {/* User info */}
       <div className="bg-200 my-3 flex items-center gap-x-3 rounded-md px-3.5 py-3">
         <div className="bg-300 size-11 rounded-full" />
@@ -27,7 +27,7 @@ export default function SettingsLayout(props: Readonly<PropsWithChildren>) {
       <div className="flex gap-x-6">
         {/* Setting items */}
         <SidebarSettingsList />
-        <div className="flex-1 pt-1 px-0.5">{props.children}</div>
+        <div className="flex-1 px-0.5 pt-1">{props.children}</div>
       </div>
     </div>
   )
