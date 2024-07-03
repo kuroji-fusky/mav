@@ -15,6 +15,7 @@ interface GroupProps {
 export function Group(props: PropsWithChildren<GroupProps>) {
   const rndTitle = generateRandomString()
   const rndDesc = generateRandomString()
+
   const kebabTitle = kebabCase(props.title)
 
   const ariaLabelledBy = `gt-${kebabTitle}-${rndTitle}`

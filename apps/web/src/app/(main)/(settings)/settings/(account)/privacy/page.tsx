@@ -1,4 +1,3 @@
-import Link from "next/link"
 import { Button } from "@mav/ui/components/buttons"
 import { InputField } from "@mav/ui/components/fields"
 import { Group, GroupContainer } from "@mav/ui/components/layouts"
@@ -29,7 +28,6 @@ export default function SettingsPrivacyPage() {
         <Button>Link account via Apple ID</Button>
       </Group>
       <Group title="Two-factor authentication">content</Group>
- 
     </GroupContainer>
   )
 }

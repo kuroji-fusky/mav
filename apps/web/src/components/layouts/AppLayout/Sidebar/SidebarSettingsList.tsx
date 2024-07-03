@@ -12,7 +12,7 @@ export function SidebarSettingsList() {
   return (
     <nav
       aria-label="User settings"
-      className="min-h-[calc(100dvh-4.5rem)] flex-shrink-0 w-52 xl:w-64"
+      className="min-h-[calc(100dvh-4.5rem)] w-52 flex-shrink-0 xl:w-64"
     >
       <ul className="flex flex-col gap-y-2">
         {settingRoutes.map((section, i) => {
@@ -24,7 +24,7 @@ export function SidebarSettingsList() {
               <div
                 id={ariaHeading}
                 className={cn(
-                  "mx-3.5 text-xs uppercase opacity-75",
+                  "mx-3.5 text-xs font-semibold uppercase opacity-75",
                   i > 0
                     ? "before:border-separator relative mb-2.5 mt-4 before:absolute before:-inset-x-2 before:-translate-y-3.5 before:border-t-[1px]"
                     : "my-2.5"

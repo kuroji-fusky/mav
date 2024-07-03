@@ -1,5 +1,6 @@
 "use client"
 
+import { mergeNamespaceComponents } from "@mav/shared/utils"
 import { FolderViewContainer } from "./Container"
 import { FolderViewPagination } from "./Pagination"
 import { FolderViewRoot } from "./Root"
@@ -26,7 +27,7 @@ import { FolderViewShelfItem } from "./ShelfItem"
  * </FolderView>
  * ```
  */
-const FolderView = Object.assign(FolderViewRoot, {
+const FolderView = mergeNamespaceComponents(FolderViewRoot, {
   /**
    * This component should be below {@link FolderView.Shelf} as the root element is a flexbox.
    *
