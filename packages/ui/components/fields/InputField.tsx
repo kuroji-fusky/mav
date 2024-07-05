@@ -34,14 +34,15 @@ interface InputFieldProps extends PickedInputProps, MAVFields {
   regex: RegExp
 }
 
-interface _InnerFieldLabelProps {
+interface _InputPrefixLabelProps {
   label: string
 }
 
-const PrefilledLabel = (props: _InnerFieldLabelProps) => {
+const InputPrefixLabel = (props: _InputPrefixLabelProps) => {
   return <div className="bg-300 flex select-none items-center px-3">{props.label}</div>
 }
 
+// TODO add a caps lock warning
 const InputField = forwardRef<HTMLInputElement, Partial<InputFieldProps>>(
   (props, ref) => {
     const {
@@ -81,15 +82,17 @@ const InputField = forwardRef<HTMLInputElement, Partial<InputFieldProps>>(
 
     const DynamicElement = !noLabel ? LABEL_TAG : DIV_TAG
 
+    const ariaA11yLabel = `input-${a11yMemo.ariaLabelledBy}`
+
     return (
       <div data-mav-input-field="" className="w-full">
-        <span className="sr-only empty:hidden" id={a11yMemo.ariaLabelledBy}>
+        <span className="sr-only empty:hidden" id={ariaA11yLabel}>
           {inputName}
         </span>
         <DynamicElement
           className="flex flex-col gap-y-1.5"
           htmlFor={!noLabel ? a11yMemo.kebabedPropName : undefined}
-          aria-labelledby={inputName ? a11yMemo.ariaLabelledBy : undefined}
+          aria-labelledby={inputName ? ariaA11yLabel : undefined}
         >
           {!noLabel && <FieldLabel label={inputName} isRequired={required} />}
           <div
@@ -98,10 +101,10 @@ const InputField = forwardRef<HTMLInputElement, Partial<InputFieldProps>>(
               !isFocused ? "border-400" : "border-500 bg-200"
             )}
           >
-            {prefix && <PrefilledLabel label={prefix} />}
+            {prefix && <InputPrefixLabel label={prefix} />}
             <input
               ref={internalRef}
-              aria-labelledby={inputName ? a11yMemo.ariaLabelledBy : undefined}
+              aria-labelledby={inputName ? ariaA11yLabel : undefined}
               className={cn(
                 "text-700 w-full border-0 bg-transparent px-3.5 py-2 text-sm focus:ring-0",
                 error ? "border-alert" : null
@@ -118,7 +121,7 @@ const InputField = forwardRef<HTMLInputElement, Partial<InputFieldProps>>(
               title=""
               {...eventHandlers}
             />
-            {suffix && <PrefilledLabel label={suffix} />}
+            {suffix && <InputPrefixLabel label={suffix} />}
           </div>
         </DynamicElement>
         {/* Error messages */}

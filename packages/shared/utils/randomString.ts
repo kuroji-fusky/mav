@@ -4,10 +4,14 @@ export function generateRandomString() {
   const alphabetSoup = "abcdefghijklmnopqrstuvwxyz".split("")
 
   const randomNumForAlphabet = _rnd(Math.random() * alphabetSoup.length)
+  const randomNumForSanitization = _rnd(Math.random() * alphabetSoup.length)
+
   const randomLetter = alphabetSoup[randomNumForAlphabet]
 
-  const randomNumForPadding = _rnd(Math.random() * 24 * 2048)
-  const paddedStr = randomNumForPadding.toString(24).padStart(4, randomLetter)
+  const randomNumForPadding = _rnd(Math.random() * 28 * 2048)
+  const paddedStr = randomNumForPadding.toString(28).padStart(5, randomLetter)
 
-  return paddedStr
+  const sanitizedStr = paddedStr.replace(/\s/g, alphabetSoup[randomNumForSanitization])
+
+  return sanitizedStr
 }

@@ -1,6 +1,7 @@
 "use client"
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { mergeNamespaceComponents } from "@mav/shared/utils"
 import { Tabs } from "../../Tabs"
 import { MastheadBanner } from "./Banner"
 import { MastheadDetails } from "./Details"
@@ -29,7 +30,7 @@ import { MastheadWrapper } from "./Wrapper"
  *  </Masthead.Banner>
  *  <Masthead.Wrapper>
  *    <Masthead.Avatar>
- *      <img src="./profile-banner.webp" alt={providedAlt || ""} />
+ *      <img src="./profile-banner.webp" alt={providedAvatarAlt || ""} />
  *    </Masthead.Avatar>
  *    <Masthead.Details>
  *      <Masthead.Layer>{name}</Masthead.Layer>
@@ -41,7 +42,7 @@ import { MastheadWrapper } from "./Wrapper"
  * </Masthead>
  * ```
  */
-const Masthead = Object.assign(MastheadRoot, {
+const Masthead = mergeNamespaceComponents(MastheadRoot, {
   // Avatar: MastheadAvatar,
   Banner: MastheadBanner,
   /**
@@ -84,3 +85,7 @@ const Masthead = Object.assign(MastheadRoot, {
 })
 
 export { Masthead }
+
+function yes() {
+  return <Masthead></Masthead>
+}

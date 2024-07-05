@@ -11,7 +11,7 @@ const __tmpIsUserLoggedIn = false
 
 export function Navbar() {
   return (
-    <div className="sticky top-0">
+    <div className="sticky top-0 z-50">
       <nav className="font-inter bg-100 relative flex select-none items-center justify-between px-5 py-3 text-sm font-medium">
         <Link href="/" aria-label="Home" draggable={false}>
           <MyArtverseIcon size={0.69} />

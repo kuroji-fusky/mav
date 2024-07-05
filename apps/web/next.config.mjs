@@ -1,9 +1,11 @@
 import nextMDX from "@next/mdx"
 import nextPWA from "next-pwa"
+import redirects from "./lib/redirects.js"
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ["lodash-es", "gsap"],
+  transpilePackages: ["gsap", "@mav/config", "@mav/ui", "@mav/shared"],
+  pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   poweredByHeader: false,
   experimental: {
     mdxRs: true
@@ -33,19 +35,7 @@ const nextConfig = {
     ]
   },
   async redirects() {
-    return [
-      { source: "/signup", destination: "/register", permanent: true },
-      { source: "/sign-up", destination: "/register", permanent: true },
-      { source: "/signin", destination: "/login", permanent: true },
-      { source: "/sign-in", destination: "/login", permanent: true },
-      {
-        source: "/dashboard",
-        destination: "/studio/overview",
-        permanent: true
-      },
-      // TODO: change dest. route to /settings/profile soon
-      { source: "/settings", destination: "/settings/account", permanent: true }
-    ]
+    return redirects
   },
   async headers() {
     return [
@@ -81,7 +71,8 @@ const withPWA = nextPWA({
   disable: process.env.NODE_ENV !== "production"
 })
 
-export default withMDX({
-  pageExtensions: ["ts", "tsx", "md", "mdx"],
-  ...withPWA(nextConfig)
-})
+export default () => {
+  const extPlugins = [withMDX, withPWA]
+
+  return extPlugins.reduce((acc, next) => next(acc), nextConfig)
+}

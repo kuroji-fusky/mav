@@ -13,7 +13,7 @@ export default function FieldLabel(props: Partial<FieldLabelProps>) {
     <span
       aria-hidden
       className={cn(
-        "text-700 flex gap-x-0.5 text-base font-bold empty:hidden",
+        "text-700 flex gap-x-0.5 text-base font-semibold empty:hidden",
         props.isRequired &&
           "after:text-alert after:ml-1 after:font-bold after:content-['*']"
       )}

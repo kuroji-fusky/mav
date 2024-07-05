@@ -2,7 +2,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link"
-import { type PropsWithChildren, forwardRef } from "react"
+import React, { type PropsWithChildren, forwardRef } from "react"
 import type { ReactHTMLElement } from "@mav/shared/types"
 import { cn } from "@mav/shared/utils"
 import { cva } from "class-variance-authority"
@@ -12,7 +12,9 @@ const Button = forwardRef<
   HTMLButtonElement,
   Partial<
     PropsWithChildren<
-      ButtonProps & Pick<ReactHTMLElement<"button">, "className" | "onClick">
+      ButtonProps &
+        Pick<ReactHTMLElement<"button">, "className" | "onClick"> &
+        Pick<ReactHTMLElement<"a">, "aria-current">
     >
   >
 >((props, ref) => {

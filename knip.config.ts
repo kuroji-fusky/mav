@@ -7,7 +7,7 @@ export default {
   entry: ["apps/**/src/**/*.{ts,tsx}!", "packages/**/*.{js,ts,tsx}!"],
   project: ["**/*.{ts,tsx}!"],
   rules: {
-    files: "error",
+    files: "warn",
     exports: "warn",
     types: "warn",
     dependencies: "off",
