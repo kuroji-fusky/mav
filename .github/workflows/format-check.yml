@@ -1,4 +1,4 @@
-name: Formatting Check
+name: Format / Lint / Dependency Checks
 on:
   push:
   workflow_dispatch:
@@ -17,11 +17,11 @@ jobs:
       - name: Install deps without lockfile
         run: yarn install --no-lockfile
 
-      - name: "Formatting: ESLint"
-        run: yarn eslint .
+      - name: "Dependencies: Knip"
+        run: yarn knip
 
       - name: "Formatting: Prettier"
         run: yarn prettier --check .
 
-      - name: "Dependencies: Knip"
-        run: yarn knip
+      - name: "Formatting: ESLint"
+        run: yarn eslint .
