@@ -9,6 +9,9 @@ import {
   isValidElement
 } from "react"
 
+// A hacky-fix for the missing `name` property
+type ExtendElementType = ElementType & { name: string }
+
 /**
  * A hook to validate one or more specified React components passed
  * through `children`
@@ -28,12 +31,10 @@ export function useValidateChildrenComponents<
       !allowedComponents.some((allowedType) => child.type === allowedType)
     ) {
       const allowedNames = allowedComponents
-        // @ts-ignore
-        .map((type) => (type as ElementType).name || type.toString())
+        .map((type) => (type as ExtendElementType).name || type.toString())
         .join(", ")
 
-      // @ts-ignore
-      const invalidChildName = isValidChildElement && (child.type as ElementType).name
+      const invalidChildName = isValidChildElement && (child.type as ExtendElementType).name
 
       throw new Error(
         `${invalidChildName} is not a valid component. The allowed components are: ${allowedNames}.`
