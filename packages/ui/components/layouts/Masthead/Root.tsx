@@ -1,7 +1,6 @@
 "use client"
 
 import type { FC, PropsWithChildren } from "react"
-import { Internal_GenericWrapper } from "../../_GenericWrapper"
 import { useValidateChildrenComponents } from "../useValidateChildrenComponents"
 import { MastheadBanner } from "./Banner"
 import { MastheadTabs } from "./Tabs"

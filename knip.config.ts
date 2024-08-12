@@ -1,4 +1,4 @@
-import { type KnipConfig } from "knip"
+import type { KnipConfig } from "knip"
 
 export default {
   eslint: {
@@ -8,11 +8,18 @@ export default {
   project: ["**/*.{ts,tsx}!"],
   rules: {
     files: "warn",
-    exports: "warn",
+    exports: "error",
     types: "warn",
-    dependencies: "off",
+    dependencies: "warn",
     unlisted: "off",
     devDependencies: "off",
-    binaries: "off"
-  }
+    binaries: "off",
+    duplicates: "error"
+  },
+  ignore: [
+    // Symlink file to SidebarGlobal.constants.ts
+    "apps/web/src/app/(main)/(settings)/settings/setting-routes.ts",
+
+    "packages/ui/tailwind.config.ts"
+  ]
 } satisfies KnipConfig
