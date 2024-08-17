@@ -1,5 +1,4 @@
 import type { PropsWithChildren, ReactElement } from "react"
-import { generateRandomString } from "@mav/shared/utils"
 import { kebabCase } from "lodash"
 
 interface GroupProps {
@@ -13,8 +12,8 @@ interface GroupProps {
 }
 
 export function Group(props: PropsWithChildren<GroupProps>) {
-  const rndTitle = generateRandomString()
-  const rndDesc = generateRandomString()
+  const rndTitle = crypto.randomUUID()
+  const rndDesc = crypto.randomUUID()
 
   const kebabTitle = kebabCase(props.title)
 
@@ -38,7 +37,7 @@ export function Group(props: PropsWithChildren<GroupProps>) {
           </span>
         )}
       </div>
-      <div>{props.children}</div>
+      {props.children ? <div>{props.children}</div> : null}
     </section>
   )
 }

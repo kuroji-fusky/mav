@@ -1,7 +1,7 @@
 "use client"
 
 import { usePathname } from "next/navigation"
-import { cn, generateRandomString } from "@mav/shared/utils"
+import { cn } from "@mav/shared/utils"
 import { Button } from "@mav/ui/components/buttons"
 import { kebabCase } from "lodash"
 import settingRoutes from "./SidebarSettingsList.constants"
@@ -16,7 +16,7 @@ export function SidebarSettingsList() {
     >
       <ul className="flex flex-col gap-y-2">
         {settingRoutes.map((section, i) => {
-          const rnd = generateRandomString()
+          const rnd = crypto.randomUUID()
           const ariaHeading = `${section.heading?.toLowerCase()}-${rnd}`
 
           return (

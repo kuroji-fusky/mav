@@ -2,7 +2,7 @@
 
 import { forwardRef } from "react"
 import type { ReactHTMLElement } from "@mav/shared/types"
-import { cn, generateRandomString } from "@mav/shared/utils"
+import { cn } from "@mav/shared/utils"
 import FieldLabel from "./FieldLabel"
 import { DIV_TAG, LABEL_TAG } from "./fields.constants"
 import type { MAVFields } from "./fields.types"
@@ -19,7 +19,7 @@ interface TextAreaProps extends PickedTextareaProps, MAVFields {
   isResizable: boolean
 }
 
-const rndString = generateRandomString()
+const rndString = crypto.randomUUID()
 
 const Textarea = forwardRef<HTMLTextAreaElement, Partial<TextAreaProps>>((props, ref) => {
   const {

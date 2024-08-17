@@ -1,5 +1,4 @@
 import { useMemo } from "react"
-import { generateRandomString } from "@mav/shared/utils"
 import { kebabCase } from "lodash"
 
 /**
@@ -7,7 +6,7 @@ import { kebabCase } from "lodash"
  */
 export const useMemoizeA11yLabel = (propName?: string) => {
   return useMemo(() => {
-    const rndString = generateRandomString()
+    const rndString = crypto.randomUUID()
 
     const kebabedPropName = kebabCase(propName)
     const ariaLabelledBy = `${kebabedPropName}-${rndString}`
