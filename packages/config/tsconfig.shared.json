@@ -18,8 +18,6 @@
     "resolveJsonModule": true,
 
     "useDefineForClassFields": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   }
 }

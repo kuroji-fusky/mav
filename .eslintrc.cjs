@@ -32,6 +32,8 @@ module.exports = {
     "no-duplicate-imports": "error",
     "max-depth": ["error", 3],
 
+    "@typescript-eslint/no-unused-vars": "off",
+
     // Import rules
     "unused-imports/no-unused-imports": "off",
     "import/no-deprecated": "warn",

@@ -42,7 +42,7 @@ import { MastheadWrapper } from "./Wrapper"
  * </Masthead>
  * ```
  */
-const Masthead = mergeNamespaceComponents(MastheadRoot, {
+const Masthead = Object.assign(MastheadRoot, {
   // Avatar: MastheadAvatar,
   Banner: MastheadBanner,
   /**

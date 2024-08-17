@@ -37,7 +37,7 @@ export function useValidateChildrenComponents<
       const invalidChildName = isValidChildElement && (child.type as ExtendElementType).name
 
       throw new Error(
-        `${invalidChildName} is not a valid component. The allowed components are: ${allowedNames}.`
+        `Component '${invalidChildName}' is not allowed. The allowed components are: ${allowedNames}.`
       )
     }
 
