@@ -8,6 +8,7 @@ interface GroupProps {
    * Adds "Learn more" link at the end of the description
    */
   learnMoreLink?: string
+  prefixIcon?: unknown
   potentialActions?: string | NonNullable<ReactElement>
 }
 
@@ -22,20 +23,24 @@ export function Group(props: PropsWithChildren<GroupProps>) {
 
   return (
     <section
+      data-mav-group=""
       id={kebabTitle}
       aria-labelledby={ariaLabelledBy}
       aria-describedby={props.description ? ariaDescribedBy : undefined}
       className="flex flex-col gap-y-1.5"
     >
       <div className={!props.description ? "contents" : "flex flex-col gap-y-0.5"}>
-        <h2 id={ariaLabelledBy} className="text-2xl">
-          {props.title}
-        </h2>
-        {props.description && (
+        <div className="flex items-center justify-between">
+          <h2 id={ariaLabelledBy} className="text-2xl">
+            {props.title}
+          </h2>
+          <div className="empty:hidden">{props.potentialActions}</div>
+        </div>
+        {props.description ? (
           <span id={ariaDescribedBy} className="my-2 opacity-75">
             {props.description}
           </span>
-        )}
+        ) : null}
       </div>
       {props.children ? <div>{props.children}</div> : null}
     </section>
