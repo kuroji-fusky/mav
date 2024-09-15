@@ -10,16 +10,26 @@ interface GroupProps {
   learnMoreLink?: string
   prefixIcon?: unknown
   potentialActions?: string | NonNullable<ReactElement>
+  containerStyle?: "none" | "border" | "border-padding"
 }
 
-export function Group(props: PropsWithChildren<GroupProps>) {
-  const rndTitle = crypto.randomUUID()
-  const rndDesc = crypto.randomUUID()
+const rndTitle = crypto.randomUUID()
+const rndDesc = crypto.randomUUID()
 
+export function Group(props: PropsWithChildren<GroupProps>) {
   const kebabTitle = kebabCase(props.title)
 
   const ariaLabelledBy = `gt-${kebabTitle}-${rndTitle}`
   const ariaDescribedBy = `gd-${kebabTitle}-${rndDesc}`
+
+  const containerStyleClass: Record<
+    NonNullable<GroupProps["containerStyle"]>,
+    string | undefined
+  > = {
+    none: undefined,
+    border: "border border-400 mt-1 rounded-md",
+    "border-padding": "border border-400 mt-1 rounded-md px-3 py-2"
+  }
 
   return (
     <section
@@ -34,15 +44,21 @@ export function Group(props: PropsWithChildren<GroupProps>) {
           <h2 id={ariaLabelledBy} className="text-2xl">
             {props.title}
           </h2>
-          <div className="empty:hidden">{props.potentialActions}</div>
+          <div className="empty:hidden" data-mav-group-potential-actions-slot="">
+            {props.potentialActions}
+          </div>
         </div>
-        {props.description ? (
-          <span id={ariaDescribedBy} className="my-2 opacity-75">
-            {props.description}
-          </span>
-        ) : null}
+        <span
+          id={ariaDescribedBy}
+          data-mav-group-description=""
+          className="my-1 opacity-75 empty:hidden"
+        >
+          {props.description}
+        </span>
       </div>
-      {props.children ? <div>{props.children}</div> : null}
+      <div className={containerStyleClass[props.containerStyle || "none"]}>
+        {props.children}
+      </div>
     </section>
   )
 }

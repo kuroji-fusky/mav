@@ -6,6 +6,7 @@ import type { PropsWithChildren } from "react"
 import { Analytics, NoJSMessage, SkipNav } from "@/components"
 import { BRAND } from "@mav/shared"
 import { cn } from "@mav/shared/utils"
+import { Provider } from "jotai"
 import PreconnectResources from "./preconnect-resources"
 
 const CheckLocalSettings = dynamic(
@@ -52,10 +53,10 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <Analytics />
         <PreconnectResources />
         <CheckLocalSettings />
-        <div id="myartverse">
+        <div data-mav-root-layout-slot="" className="contents">
           <SkipNav />
           <NoJSMessage />
-          {children}
+          <Provider>{children}</Provider>
         </div>
       </body>
     </html>

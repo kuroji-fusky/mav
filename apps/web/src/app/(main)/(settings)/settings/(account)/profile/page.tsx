@@ -9,7 +9,6 @@ export default function SettingsProfilePage() {
   return (
     <GroupContainer>
       <Group title="Public profile">content</Group>
-      <Group title="Banner">content</Group>
       <Group
         title="Danger zone"
         description={

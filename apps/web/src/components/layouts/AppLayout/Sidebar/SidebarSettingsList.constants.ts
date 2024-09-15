@@ -77,7 +77,7 @@ const settingRoutes: SettingRoutes[] = [
       },
       {
         icon: LuTrash2,
-        label: "Deleted items"
+        label: "Deleted content"
       }
     ]
   },

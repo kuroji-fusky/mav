@@ -47,7 +47,7 @@ const Button = forwardRef<
             ? "!border-[2px] bg-100 border-300 hover:bg-400 hover:border-400"
             : "!border-[2px] border-mute",
           tritery: !disabled
-            ? "border-transparent bg-transparent hover:bg-400"
+            ? "border-transparent bg-transparent hover:bg-300"
             : "opacity-60",
           warning: "bg-warning text-active-invert hover:bg-opacity-75",
           "warning-secondary": "border border-warning hover:bg-warning hover:text-100",
@@ -81,7 +81,7 @@ const Button = forwardRef<
       data-mav-dynamic-button=""
       ref={ref as any}
       href={href ?? null}
-      type={!href ? type ?? null : null}
+      type={!href ? (type ?? null) : null}
       // The use of "aria-disabled" here to let the screen reader know it's a disabled button,
       // so it's not completely hidden
       aria-disabled={disabled ?? null}

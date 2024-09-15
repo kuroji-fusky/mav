@@ -43,7 +43,7 @@ export function Badge(props: Partial<PropsWithChildren<BadgeProps>>) {
       className={badgeVariants({ variant: props.variant, size: props.size })}
     >
       {props.icon && (
-        <props.icon className="flex-shrink-0" size={iconSizes[props.size! || "medium"]} />
+        <props.icon className="flex-shrink-0" size={iconSizes[props.size ?? "medium"]} />
       )}
       {props.children}
     </span>
