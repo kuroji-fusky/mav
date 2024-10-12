@@ -1,7 +1,7 @@
 import Image from "next/image"
 import { ProfileMasthead } from "@/components/layouts/Mastheads"
 import { Button } from "@mav/ui/components/buttons"
-import { UserComment } from "@mav/ui/components/comments"
+import { UserComment, UserCommentInput } from "@mav/ui/components/comments"
 import { Group } from "@mav/ui/components/layouts"
 
 export default function ProfilePage() {
@@ -16,7 +16,13 @@ export default function ProfilePage() {
         <aside className="flex flex-col gap-y-3">
           <Group title="About user"></Group>
           <Group title="Comments" potentialActions={<Button>Filter</Button>}>
-            <div className="grid gap-y-1">
+            <div className="mb-5">
+              <UserCommentInput
+                imgTag={Image}
+                avatar="/img/examples/kuro/kuro-example4.png"
+              />
+            </div>
+            <div className="grid gap-y-4">
               <UserComment
                 imgTag={Image}
                 avatar="/img/examples/kuro/kuro-example4.png"

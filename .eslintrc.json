@@ -1,11 +1,10 @@
-/* eslint-disable no-undef */
-module.exports = {
-  root: true,
-  env: {
-    es2021: true,
-    browser: true
+{
+  "root": true,
+  "env": {
+    "es2021": true,
+    "browser": true
   },
-  ignorePatterns: [
+  "ignorePatterns": [
     "node_modules/",
     "dist/",
     ".next/",
@@ -17,16 +16,16 @@ module.exports = {
     "README.md",
     "TODO.md"
   ],
-  extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
-  parser: "@typescript-eslint/parser",
-  plugins: ["import", "unused-imports", "@stylistic"],
-  rules: {
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["import", "unused-imports", "@stylistic"],
+  "rules": {
     "no-var": "error",
     "no-console": "warn",
     "no-else-return": [
       "error",
       {
-        allowElseIf: false
+        "allowElseIf": false
       }
     ],
     "no-duplicate-imports": "error",
@@ -34,7 +33,6 @@ module.exports = {
 
     "@typescript-eslint/no-unused-vars": "off",
 
-    // Import rules
     "unused-imports/no-unused-imports": "off",
     "import/no-deprecated": "warn",
     "import/no-duplicates": "error",
@@ -43,7 +41,7 @@ module.exports = {
     "import/no-internal-modules": [
       "warn",
       {
-        allow: [
+        "allow": [
           "tailwindcss/*",
           "@tailwindcss/**",
           "mdx/*",
@@ -55,11 +53,10 @@ module.exports = {
       }
     ],
     "@typescript-eslint/ban-ts-comment": "off",
-    "@typescript-eslint/no-unused-vars": "warn",
     "@typescript-eslint/consistent-type-imports": [
       "error",
       {
-        prefer: "type-imports"
+        "prefer": "type-imports"
       }
     ],
     "@stylistic/function-call-spacing": ["error", "never"],
@@ -67,19 +64,19 @@ module.exports = {
     "@stylistic/keyword-spacing": [
       "error",
       {
-        before: true
+        "before": true
       }
     ],
     "@stylistic/newline-per-chained-call": [
       "error",
       {
-        ignoreChainWithDepth: 3
+        "ignoreChainWithDepth": 3
       }
     ],
     "@stylistic/no-confusing-arrow": [
       "error",
       {
-        onlyOneSimpleParam: true
+        "onlyOneSimpleParam": true
       }
     ],
     "@stylistic/no-floating-decimal": "error",
@@ -92,47 +89,47 @@ module.exports = {
     "@stylistic/object-curly-newline": [
       "error",
       {
-        minProperties: 6,
-        consistent: true
+        "minProperties": 6,
+        "consistent": true
       }
     ],
     "@stylistic/padding-line-between-statements": [
       "error",
       {
-        blankLine: "always",
-        prev: "directive",
-        next: "*"
+        "blankLine": "always",
+        "prev": "directive",
+        "next": "*"
       },
       {
-        blankLine: "always",
-        prev: ["multiline-const", "function"],
-        next: ["const", "let", "block-like", "export", "return", "try"]
+        "blankLine": "always",
+        "prev": ["multiline-const", "function"],
+        "next": ["const", "let", "block-like", "export", "return", "try"]
       },
       {
-        blankLine: "always",
-        prev: "block-like",
-        next: "*"
+        "blankLine": "always",
+        "prev": "block-like",
+        "next": "*"
       },
       {
-        blankLine: "always",
-        prev: "*",
-        next: "try"
+        "blankLine": "always",
+        "prev": "*",
+        "next": "try"
       }
     ]
   },
-  settings: {
-    next: {
-      rootDir: ["apps/web/"]
+  "settings": {
+    "next": {
+      "rootDir": ["apps/web/"]
     }
   },
-  overrides: [
+  "overrides": [
     {
-      files: ["apps/web/**"],
-      extends: ["next/core-web-vitals"]
+      "files": ["apps/web/**"],
+      "extends": ["next/core-web-vitals"]
     },
     {
-      files: ["apps/**/*.tsx", "packages/**/*.tsx"],
-      rules: {
+      "files": ["apps/**/*.tsx", "packages/**/*.tsx"],
+      "rules": {
         "react/iframe-missing-sandbox": "warn",
         "react/no-deprecated": "warn",
         "react/jsx-no-script-url": "error",
@@ -140,25 +137,14 @@ module.exports = {
       }
     },
     {
-      files: ["apps/web/src/app/**", "apps/web/src/components/**"],
-      rules: {
+      "files": ["apps/web/**.tsx"],
+      "rules": {
         "@next/next/no-img-element": "off"
-        // "react/forbid-elements": [
-        //   "error",
-        //   {
-        //     forbid: [
-        //       {
-        //         element: "img",
-        //         message: "use <MFImage> as a better alternative",
-        //       },
-        //     ],
-        //   },
-        // ],
       }
     },
     {
-      files: ["packages/ui/*.tsx"],
-      rules: {
+      "files": ["packages/ui/*.tsx"],
+      "rules": {
         "import/no-internal-modules": "off"
       }
     }

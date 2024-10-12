@@ -4,7 +4,10 @@ import { LuMessageCircle } from "react-icons/lu"
 
 export default function StudioOverviewPage() {
   return (
-    <MarginGutter screenSize="xl" className="px-6 py-5 *:mt-6 *:gap-6 first:*:mt-0">
+    <MarginGutter
+      screenSize="xl"
+      className="px-6 py-5 *:mt-6 *:gap-6 first:*:mt-0"
+    >
       <div className="grid">
         <Group
           title="Recent messages"
@@ -20,7 +23,7 @@ export default function StudioOverviewPage() {
         <Group
           title="Quick access"
           description="Lorem ipsum stuff"
-          potentialActions={<MoreButton />}
+          potentialActions={<MoreButton size="small" />}
         >
           slot placeholder
         </Group>

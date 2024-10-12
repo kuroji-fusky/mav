@@ -37,12 +37,14 @@ const Button = forwardRef<
     [
       "flex items-center gap-x-1.5 rounded-md transition-all select-none first:*:flex-shrink-0 last:*:flex-shrink-0",
       disabled && "cursor-not-allowed",
-      className
+      className,
     ],
     {
       variants: {
         intent: {
-          primary: !disabled ? "border-transparent bg-300 hover:bg-400" : "bg-mute",
+          primary: !disabled
+            ? "border-transparent bg-300 hover:bg-400"
+            : "bg-mute",
           secondary: !disabled
             ? "!border-[2px] bg-100 border-300 hover:bg-400 hover:border-400"
             : "!border-[2px] border-mute",
@@ -50,28 +52,29 @@ const Button = forwardRef<
             ? "border-transparent bg-transparent hover:bg-300"
             : "opacity-60",
           warning: "bg-warning text-active-invert hover:bg-opacity-75",
-          "warning-secondary": "border border-warning hover:bg-warning hover:text-100",
+          "warning-secondary":
+            "border border-warning hover:bg-warning hover:text-100",
           alert:
             "bg-alert text-active hover:bg-opacity-70 bg-opacity-100 border-transparent",
-          "alert-secondary": "border border-alert hover:bg-alert"
+          "alert-secondary": "border border-alert hover:bg-alert",
         },
         size: {
           small: !icon ? "px-2.5 py-1" : "p-2",
           medium: !icon ? "px-3.5 py-2" : "p-2",
-          big: !icon ? "px-5 py-2.5" : "p-3"
+          big: !icon ? "px-5 py-2" : "p-3",
         },
         positions: {
           left: "text-left justify-start",
           center: "text-center justify-center",
-          right: "text-right justify-end"
-        }
+          right: "text-right justify-end",
+        },
       },
       compoundVariants: [{ intent: "primary", size: "medium" }],
       defaultVariants: {
         intent: "primary",
-        size: "medium"
-      }
-    }
+        size: "medium",
+      },
+    },
   )
 
   const DynamicElement: any = !props.href ? "button" : Link
@@ -89,8 +92,8 @@ const Button = forwardRef<
         buttonVars({
           positions: position,
           intent: variant,
-          size: size
-        })
+          size: size,
+        }),
       )}
       {...eventHandlers}
       // This is to prevent conflicts from custom "prefix" and "suffix" props
