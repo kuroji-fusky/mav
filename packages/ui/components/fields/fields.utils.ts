@@ -1,16 +1,12 @@
-import { useMemo } from "react"
+import { useId, useMemo } from "react"
 import { kebabCase } from "lodash"
 
 /**
  * Used for targetting accessibility tools
  */
 export const useMemoizeA11yLabel = (propName?: string) => {
-  return useMemo(() => {
-    const rndString = crypto.randomUUID()
+  const _id = useId()
+  const kebabedPropName = kebabCase(propName)
 
-    const kebabedPropName = kebabCase(propName)
-    const ariaLabelledBy = `${kebabedPropName}-${rndString}`
-
-    return { ariaLabelledBy, kebabedPropName }
-  }, [propName])
+  return `${kebabedPropName || "field"}-${_id}`
 }

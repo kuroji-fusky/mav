@@ -58,7 +58,7 @@ const InputField = forwardRef<HTMLInputElement, Partial<InputFieldProps>>(
       ...eventHandlers
     } = props
 
-    const a11yMemo = useMemoizeA11yLabel(inputName)
+    const uniqueId = useMemoizeA11yLabel(inputName)
 
     const [isFocused, setIsFocused] = useState(false)
     const internalRef = useRef<ElementRef<"input">>(null)
@@ -82,17 +82,15 @@ const InputField = forwardRef<HTMLInputElement, Partial<InputFieldProps>>(
 
     const DynamicElement = !noLabel ? LABEL_TAG : DIV_TAG
 
-    const ariaA11yLabel = `input-${a11yMemo.ariaLabelledBy}`
-
     return (
-      <div data-mav-input-field="" className="w-full">
-        <span className="sr-only empty:hidden" id={ariaA11yLabel}>
+      <div data-mav-input-field="" data-is-focused={isFocused} className="w-full">
+        <span className="sr-only empty:hidden" id={uniqueId}>
           {inputName}
         </span>
         <DynamicElement
           className="flex flex-col gap-y-1.5"
-          htmlFor={!noLabel ? a11yMemo.kebabedPropName : undefined}
-          aria-labelledby={inputName ? ariaA11yLabel : undefined}
+          htmlFor={!noLabel ? uniqueId : undefined}
+          aria-labelledby={inputName ? uniqueId : undefined}
         >
           {!noLabel && <FieldLabel label={inputName} isRequired={required} />}
           <div
@@ -104,13 +102,13 @@ const InputField = forwardRef<HTMLInputElement, Partial<InputFieldProps>>(
             {prefix && <InputPrefixLabel label={prefix} />}
             <input
               ref={internalRef}
-              aria-labelledby={inputName ? ariaA11yLabel : undefined}
+              aria-labelledby={inputName ? uniqueId : undefined}
               className={cn(
                 "text-700 w-full border-0 bg-transparent px-3.5 py-2 text-sm focus:ring-0",
                 error ? "border-alert" : null
               )}
-              id={a11yMemo.kebabedPropName}
-              name={a11yMemo.kebabedPropName ?? undefined}
+              id={uniqueId}
+              name={uniqueId ?? undefined}
               type={type}
               readOnly={readOnly}
               placeholder={placeholder}
